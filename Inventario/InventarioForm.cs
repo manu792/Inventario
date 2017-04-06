@@ -16,5 +16,10 @@ namespace Inventario
         {
             InitializeComponent();
         }
+
+        private void InventarioForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
