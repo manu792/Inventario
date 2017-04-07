@@ -27,15 +27,27 @@ namespace Inventario.Servicios
         public void Modificar(int indice, Proyecto proyecto)
         {
             int id = Proyectos[indice].Id;
+            Proyectos[indice] = proyecto;
             Repositorio.ModificarProyecto(id, proyecto);
         }
 
         public List<Proyecto> ObtenerProyectos()
         {
-            return Repositorio.ObtenerProyectos();
+            Proyectos = Repositorio.ObtenerProyectos();
+            return Proyectos;
         }
+
+        public Proyecto ObtenerProyecto(int indice)
+        {
+            if (Proyectos.Count > 0)
+                return Proyectos[indice];
+
+            return null;
+        }
+
         public void EliminarProyecto(int id)
         {
+            //falta eliminar de la lista
             Repositorio.EliminarProyecto(id);
         }
     }

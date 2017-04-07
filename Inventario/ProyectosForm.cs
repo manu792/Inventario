@@ -12,15 +12,13 @@ using System.Windows.Forms;
 
 namespace Inventario
 {
-    public partial class InventarioForm : Form
+    public partial class ProyectosForm : Form
     {
         private ServicioProyecto ServicioProyecto { get; set; }
-        private ServicioArticulo ServicioArticulo { get; set; }
 
-        public InventarioForm()
+        public ProyectosForm()
         {
             ServicioProyecto = new ServicioProyecto();
-            ServicioArticulo = new ServicioArticulo();
             InitializeComponent();
         }
 
@@ -37,7 +35,8 @@ namespace Inventario
         
         private void listaProyectos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if(listaProyectos.SelectedIndex > -1)
+                ServicioProyecto.ObtenerProyecto(listaProyectos.SelectedIndex);                    
         }
 
         private void agregarBtn_Click(object sender, EventArgs e)

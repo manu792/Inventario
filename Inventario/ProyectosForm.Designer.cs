@@ -1,6 +1,6 @@
 ﻿namespace Inventario
 {
-    partial class InventarioForm
+    partial class ProyectosForm
     {
         /// <summary>
         /// Required designer variable.

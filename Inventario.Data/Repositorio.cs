@@ -42,6 +42,10 @@ namespace Inventario.Data
         {
             return Proyectos.ObtenerProyectos();
         }
+        public Proyecto ObtenerProyecto(int id)
+        {
+            return Proyectos.ObtenerProyecto(id);
+        }
         public void AgregarProyecto(Proyecto proyecto)
         {
             Proyectos.Guardar(proyecto);    
