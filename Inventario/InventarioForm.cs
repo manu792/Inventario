@@ -35,7 +35,8 @@ namespace Inventario
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ServicioArticulo.AgregarArticulo(1, "Manuel", 200, 2500, "Articulo de prueba");
+            //ServicioArticulo.AgregarArticulo(1, "Manuel", 200, 2500, "Articulo de prueba");
+            ServicioArticulo.EliminarArticulo(3);
         }
     }
 }

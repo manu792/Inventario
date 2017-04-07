@@ -26,5 +26,9 @@ namespace Inventario.Servicios
         {
             return Repositorio.ObtenerProyectos();
         }
+        public void EliminarProyecto(int id)
+        {
+
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Inventario.Servicios
         }
         public void EliminarArticulo(int id)
         {
-
+            Repositorio.EliminarArticulo(id);
         }
     }
 }

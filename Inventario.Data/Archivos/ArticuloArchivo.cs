@@ -13,6 +13,7 @@ namespace Inventario.Data
         private StreamWriter writer;
         private StreamReader reader;
         private const string direccion = "Archivos/Articulo.txt";
+        private const string direccionTemp = "Archivos/ArticuloTemp.txt";
 
         public ArticuloArchivo()
         {
@@ -59,6 +60,24 @@ namespace Inventario.Data
             {
                 writer.WriteLine(articulo.ToString());
             }
+        }
+        public void EliminarArticulo(int id)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[0]) != id)
+                            writer.WriteLine(registro);
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, "Archivos/temp.bk");
         }
     }
 }

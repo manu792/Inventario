@@ -20,5 +20,10 @@ namespace Inventario.Commons.Modelos
             Fecha = fecha;
             Comentario = comentario;
         }
+
+        public override string ToString()
+        {
+            return Id + "#" + IdProyecto + "#" + Fecha + "#" + Comentario;
+        }
     }
 }

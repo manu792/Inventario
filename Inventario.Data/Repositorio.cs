@@ -28,6 +28,11 @@ namespace Inventario.Data
             Articulos.Guardar(articulo);
         }
 
+        public void EliminarArticulo(int id)
+        {
+            Articulos.EliminarArticulo(id);
+        }
+
         public List<Proyecto> ObtenerProyectos()
         {
             return Proyectos.ObtenerProyectos();
