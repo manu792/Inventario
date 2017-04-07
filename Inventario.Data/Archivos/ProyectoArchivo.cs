@@ -55,6 +55,26 @@ namespace Inventario.Data
 
             return null;
         }
+        public void ModificarProyecto(int id, Proyecto proyecto)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[0]) != proyecto.Id)
+                            writer.WriteLine(registro);
+                        else
+                            writer.WriteLine(proyecto.ToString());
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, "Archivos/ProyectoTemp.bk");
+        }
         public void Guardar(Proyecto proyecto)
         {
             using(writer = File.AppendText(direccion))

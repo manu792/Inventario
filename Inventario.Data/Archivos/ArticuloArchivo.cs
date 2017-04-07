@@ -54,6 +54,26 @@ namespace Inventario.Data
 
             return null;
         }
+        public void ModificarArticulo(Articulo articulo)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[0]) != articulo.Id)
+                            writer.WriteLine(registro);
+                        else
+                            writer.WriteLine(articulo.ToString());
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, "Archivos/ProyectoTemp.bk");
+        }
         public void Guardar(Articulo articulo)
         {
             using (writer = File.AppendText(direccion))

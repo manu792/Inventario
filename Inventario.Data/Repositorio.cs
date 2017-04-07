@@ -16,7 +16,19 @@ namespace Inventario.Data
         private DetalleEntradaArchivo DetalleEntrada { get; set; }
         private DetalleSalidaArchivo DetalleSalida { get; set; }
 
-        public Repositorio()
+        private static Repositorio instancia;
+        public static Repositorio Instancia 
+        {
+            get
+            {
+                if (instancia == null)
+                    instancia = new Repositorio();
+
+                return instancia;
+            }
+        }
+
+        private Repositorio()
         {
             Proyectos = new ProyectoArchivo();
             Articulos = new ArticuloArchivo();
@@ -26,9 +38,23 @@ namespace Inventario.Data
             DetalleSalida = new DetalleSalidaArchivo();
         }
 
+        public List<Proyecto> ObtenerProyectos()
+        {
+            return Proyectos.ObtenerProyectos();
+        }
         public void AgregarProyecto(Proyecto proyecto)
         {
             Proyectos.Guardar(proyecto);    
+        }
+
+        public void ModificarProyecto(int id, Proyecto proyecto)
+        {
+            Proyectos.ModificarProyecto(id, proyecto);
+        }
+
+        public void EliminarProyecto(int id)
+        {
+            Proyectos.EliminarProyecto(id);
         }
 
         public void AgregarArticulo(Articulo articulo)
@@ -36,14 +62,14 @@ namespace Inventario.Data
             Articulos.Guardar(articulo);
         }
 
+        public void ModificarArticulo(Articulo articulo)
+        {
+            Articulos.ModificarArticulo(articulo);
+        }
+
         public void EliminarArticulo(int id)
         {
             Articulos.EliminarArticulo(id);
-        }
-
-        public List<Proyecto> ObtenerProyectos()
-        {
-            return Proyectos.ObtenerProyectos();
         }
     }
 }

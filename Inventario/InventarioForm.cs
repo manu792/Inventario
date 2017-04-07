@@ -1,4 +1,5 @@
-﻿using Inventario.Servicios;
+﻿using Inventario.Commons.Modelos;
+using Inventario.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,18 +26,31 @@ namespace Inventario
 
         private void InventarioForm_Load(object sender, EventArgs e)
         {
+            CargarComboBoxProyectos(ServicioProyecto.ObtenerProyectos());
+        }
+
+        private void CargarComboBoxProyectos(List<Proyecto> proyectos)
+        {
+            foreach (Proyecto proyecto in proyectos)
+                listaProyectos.Items.Add(proyecto.Nombre);
+        }
+        
+        private void listaProyectos_SelectedIndexChanged(object sender, EventArgs e)
+        {
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void agregarBtn_Click(object sender, EventArgs e)
         {
-            ServicioProyecto.AgregarProyecto(1, "Proyecto Los Lagos", "Manuel Roman", "Alajuelita", "Un proyecto nuevo", DateTime.Now, DateTime.Now.AddDays(10));
+            if (EsDataValida())
+                ServicioProyecto.AgregarProyecto(Int32.Parse(idTxt.Text), proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private bool EsDataValida()
         {
-            //ServicioArticulo.AgregarArticulo(1, "Manuel", 200, 2500, "Articulo de prueba");
-            ServicioArticulo.EliminarArticulo(2);
+            if (proyectoTxt.Text != string.Empty && encargadoTxt.Text != string.Empty && direccionTxt.Text != string.Empty && descripcionTxt.Text != string.Empty)
+                return true;
+
+            return false;
         }
     }
 }

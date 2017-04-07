@@ -14,7 +14,7 @@ namespace Inventario.Servicios
         
         public ServicioArticulo()
         {
-            Repositorio = new Repositorio();
+            Repositorio = Repositorio.Instancia;
         }
 
         public void AgregarArticulo(int id, string nombre, int unidad, double precio, string descripcion)
