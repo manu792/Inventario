@@ -22,5 +22,10 @@ namespace Inventario.Commons.Modelos
             Cantidad = cantidad;
             Total = total;
         }
+
+        public override string ToString()
+        {
+            return IdDetalleSalida + "#" + IdSalida + "#" + IdArticulo + "#" + Cantidad + "#" + Total;
+        }
     }
 }

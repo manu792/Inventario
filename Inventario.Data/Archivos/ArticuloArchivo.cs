@@ -77,7 +77,7 @@ namespace Inventario.Data
                     }
                 }
             }
-            File.Replace(direccionTemp, direccion, "Archivos/temp.bk");
+            File.Replace(direccionTemp, direccion, "Archivos/ArticuloTemp.bk");
         }
     }
 }

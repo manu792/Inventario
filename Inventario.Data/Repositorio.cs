@@ -11,11 +11,19 @@ namespace Inventario.Data
     {
         private ProyectoArchivo Proyectos { get; set; }
         private ArticuloArchivo Articulos { get; set; }
+        private OrdenEntradaArchivo OrdenEntrada { get; set; }
+        private OrdenSalidaArchivo OrdenSalida { get; set; }
+        private DetalleEntradaArchivo DetalleEntrada { get; set; }
+        private DetalleSalidaArchivo DetalleSalida { get; set; }
 
         public Repositorio()
         {
             Proyectos = new ProyectoArchivo();
             Articulos = new ArticuloArchivo();
+            OrdenEntrada = new OrdenEntradaArchivo();
+            OrdenSalida = new OrdenSalidaArchivo();
+            DetalleEntrada = new DetalleEntradaArchivo();
+            DetalleSalida = new DetalleSalidaArchivo();
         }
 
         public void AgregarProyecto(Proyecto proyecto)

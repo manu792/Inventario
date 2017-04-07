@@ -13,6 +13,7 @@ namespace Inventario.Data
         private StreamWriter writer;
         private StreamReader reader;
         private const string direccion = "Archivos/OrdenEntrada.txt";
+        private const string direccionTemp = "Archivos/OrdenEntradaTemp.txt";
 
         public OrdenEntradaArchivo()
         {
@@ -73,9 +74,9 @@ namespace Inventario.Data
                         if (Int32.Parse(campos[0]) != id)
                             writer.WriteLine(registro);
                     }
-                    File.Replace("temp.txt", direccion, "temp.bk");
                 }
             }
+            File.Replace(direccionTemp, direccion, "OrdenEntradaTemp.bk");
         }
     }
 }
