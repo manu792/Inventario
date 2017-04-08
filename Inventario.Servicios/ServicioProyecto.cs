@@ -19,22 +19,19 @@ namespace Inventario.Servicios
             Repositorio = Repositorio.Instancia;
         }
         
-        public void AgregarProyecto(int id, string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
+        public string[] AgregarProyecto(string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
         {
-            Repositorio.AgregarProyecto(new Proyecto(id, nombre, encargado, direccion, descripcion, fechaInicio, fechaFin));
+            return Repositorio.AgregarProyecto(new Proyecto(nombre, encargado, direccion, descripcion, fechaInicio, fechaFin));
         }
 
-        public void Modificar(int indice, Proyecto proyecto)
+        public void Modificar(int id, Proyecto proyecto)
         {
-            int id = Proyectos[indice].Id;
-            Proyectos[indice] = proyecto;
             Repositorio.ModificarProyecto(id, proyecto);
         }
 
         public List<Proyecto> ObtenerProyectos()
         {
-            Proyectos = Repositorio.ObtenerProyectos();
-            return Proyectos;
+            return Repositorio.ObtenerProyectos();
         }
 
         public Proyecto ObtenerProyecto(int indice)

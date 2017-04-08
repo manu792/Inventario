@@ -14,6 +14,14 @@ namespace Inventario.Commons.Modelos
         public double Precio { get; set; }
         public string Descripcion { get; set; }
 
+        public Articulo(string nombre, int unidad, double precio, string descripcion)
+        {
+            Nombre = nombre;
+            Unidad = unidad;
+            Precio = precio;
+            Descripcion = descripcion;
+        }
+
         public Articulo(int id, string nombre, int unidad, double precio, string descripcion)
         {
             Id = id;

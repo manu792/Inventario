@@ -24,25 +24,28 @@ namespace Inventario
 
         private void InventarioForm_Load(object sender, EventArgs e)
         {
-            CargarComboBoxProyectos(ServicioProyecto.ObtenerProyectos());
+            List<string[]> listaProyectos = ConvertirAArray(ServicioProyecto.ObtenerProyectos());
+            CargarProyectos(listaProyectos);
         }
 
-        private void CargarComboBoxProyectos(List<Proyecto> proyectos)
+        private List<string[]> ConvertirAArray(List<Proyecto> proyectos)
         {
+            List<string[]> listaProyectos = new List<string[]>();
+
             foreach (Proyecto proyecto in proyectos)
-                listaProyectos.Items.Add(proyecto.Nombre);
-        }
-        
-        private void listaProyectos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(listaProyectos.SelectedIndex > -1)
-                ServicioProyecto.ObtenerProyecto(listaProyectos.SelectedIndex);                    
+                listaProyectos.Add(proyecto.ConvertirAArray());
+
+            return listaProyectos;
         }
 
-        private void agregarBtn_Click(object sender, EventArgs e)
+        private void CargarProyectos(List<string[]> proyectos)
         {
-            if (EsDataValida())
-                ServicioProyecto.AgregarProyecto(Int32.Parse(idTxt.Text), proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
+            foreach (string[] proyecto in proyectos)
+            {
+                ListViewItem item = new ListViewItem(proyecto, 0);
+                proyectosListView.Items.Add(item);
+            }
+            proyectosListView.View = View.Tile;
         }
         private bool EsDataValida()
         {
@@ -50,6 +53,72 @@ namespace Inventario
                 return true;
 
             return false;
+        }
+
+        private void agregarBtn_Click_1(object sender, EventArgs e)
+        {
+            if (EsDataValida())
+            {
+                string[] campos = ServicioProyecto.AgregarProyecto(proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
+                
+                ListViewItem item = new ListViewItem(campos, 0);
+                proyectosListView.Items.Add(item);
+            }
+        }
+
+        private void eliminarBtn_Click(object sender, EventArgs e)
+        {
+            if (EsDataValida())
+            {
+                ServicioProyecto.EliminarProyecto(Int32.Parse(idTxt.Text));
+
+                proyectosListView.SelectedItems[0].Remove();
+                Limpiar();
+            }
+        }
+        private void Limpiar()
+        {
+            idTxt.Clear();
+            proyectoTxt.Clear();
+            encargadoTxt.Clear();
+            direccionTxt.Clear();
+            descripcionTxt.Clear();
+            fechaInicio.Value = DateTime.Now;
+            fechaFin.Value = DateTime.Now;
+        }
+
+        private void modificatBtn_Click(object sender, EventArgs e)
+        {
+            if (EsDataValida())
+            {
+                Proyecto proyecto = new Proyecto(Int32.Parse(idTxt.Text), proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
+                ServicioProyecto.Modificar(Int32.Parse(idTxt.Text), proyecto);
+
+                ListViewItem i = proyectosListView.SelectedItems[0];
+                i.SubItems[0].Text = idTxt.Text;
+                i.SubItems[1].Text = proyectoTxt.Text;
+                i.SubItems[2].Text = encargadoTxt.Text;
+                i.SubItems[3].Text = direccionTxt.Text;
+                i.SubItems[4].Text = descripcionTxt.Text;
+                i.SubItems[5].Text = fechaInicio.Value.ToString();
+                i.SubItems[6].Text = fechaFin.Value.ToString();
+            }
+        }
+
+        private void proyectosListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (proyectosListView.SelectedItems.Count > 0)
+            {
+                ListViewItem i;
+                i = proyectosListView.SelectedItems[0];
+                idTxt.Text = i.SubItems[0].Text;
+                proyectoTxt.Text = i.SubItems[1].Text;
+                encargadoTxt.Text = i.SubItems[2].Text;
+                direccionTxt.Text = i.SubItems[3].Text;
+                descripcionTxt.Text = i.SubItems[4].Text;
+                fechaInicio.Value = DateTime.Parse(i.SubItems[5].Text);
+                fechaFin.Value = DateTime.Parse(i.SubItems[6].Text);
+            }
         }
     }
 }

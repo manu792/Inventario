@@ -16,6 +16,16 @@ namespace Inventario.Commons.Modelos
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
+        public Proyecto(string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
+        {
+            Nombre = nombre;
+            Encargado = encargado;
+            Direccion = direccion;
+            Descripcion = descripcion;
+            FechaInicio = fechaInicio;
+            FechaFin = fechaFin;
+        }
+
         public Proyecto(int id, string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
         {
             Id = id;
@@ -29,7 +39,23 @@ namespace Inventario.Commons.Modelos
 
         public override string ToString()
         {
+            return Nombre;
+        }
+        public string ConvertirAString()
+        {
             return Id + "#" + Nombre + "#" + Encargado + "#" + Direccion + "#" + Descripcion + "#" + FechaInicio + "#" + FechaFin;
+        }
+        public string[] ConvertirAArray()
+        {
+            string[] campos = new string[7];
+            campos[0] = Id.ToString();
+            campos[1] = Nombre;
+            campos[2] = Encargado;
+            campos[3] = Direccion;
+            campos[4] = Descripcion;
+            campos[5] = FechaInicio.ToString();
+            campos[6] = FechaFin.ToString();
+            return campos;
         }
     }
 }

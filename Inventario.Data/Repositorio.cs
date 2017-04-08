@@ -46,9 +46,9 @@ namespace Inventario.Data
         {
             return Proyectos.ObtenerProyecto(id);
         }
-        public void AgregarProyecto(Proyecto proyecto)
+        public string[] AgregarProyecto(Proyecto proyecto)
         {
-            Proyectos.Guardar(proyecto);    
+            return Proyectos.Guardar(proyecto);
         }
 
         public void ModificarProyecto(int id, Proyecto proyecto)
@@ -61,14 +61,19 @@ namespace Inventario.Data
             Proyectos.EliminarProyecto(id);
         }
 
-        public void AgregarArticulo(Articulo articulo)
+        public List<string[]> ObtenerArticulos()
         {
-            Articulos.Guardar(articulo);
+            return Articulos.ObtenerArticulos();
         }
 
-        public void ModificarArticulo(Articulo articulo)
+        public string[] AgregarArticulo(Articulo articulo)
         {
-            Articulos.ModificarArticulo(articulo);
+            return Articulos.Guardar(articulo);
+        }
+
+        public void ModificarArticulo(int id, Articulo articulo)
+        {
+            Articulos.ModificarArticulo(id, articulo);
         }
 
         public void EliminarArticulo(int id)

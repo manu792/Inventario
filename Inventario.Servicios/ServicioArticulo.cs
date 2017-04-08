@@ -17,23 +17,23 @@ namespace Inventario.Servicios
             Repositorio = Repositorio.Instancia;
         }
 
-        public void AgregarArticulo(int id, string nombre, int unidad, double precio, string descripcion)
+        public string[] Agregar(string nombre, int unidad, double precio, string descripcion)
         {
-            Repositorio.AgregarArticulo(new Articulo(id, nombre, unidad, precio, descripcion));
+            return Repositorio.AgregarArticulo(new Articulo(nombre, unidad, precio, descripcion));
         }
-        public void ModificarArticulo(int id)
+        public void Modificar(int id, Articulo articulo)
         {
-
+            Repositorio.ModificarArticulo(id, articulo);
         }
-        public void ObtenerArticulos()
+        public List<string[]> ObtenerArticulos()
         {
-
+            return Repositorio.ObtenerArticulos();
         }
         public void BuscarArticulo(int id)
         {
 
         }
-        public void EliminarArticulo(int id)
+        public void Eliminar(int id)
         {
             Repositorio.EliminarArticulo(id);
         }

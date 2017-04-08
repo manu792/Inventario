@@ -14,16 +14,22 @@ namespace Inventario.Data
         private StreamReader reader;
         private const string direccion = "Archivos/Articulo.txt";
         private const string direccionTemp = "Archivos/ArticuloTemp.txt";
+        private int id;
 
         public ArticuloArchivo()
         {
             if (!File.Exists(direccion))
+            {
                 File.Create(direccion).Close();
+                id = 0;
+            }
+            else
+                ObtenerUltimoId();
         }
 
-        public List<Articulo> ObtenerArticulos()
+        public List<string[]> ObtenerArticulos()
         {
-            List<Articulo> articulos = new List<Articulo>();
+            List<string[]> articulos = new List<string[]>();
 
             using (reader = File.OpenText(direccion))
             {
@@ -31,7 +37,7 @@ namespace Inventario.Data
                 {
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
-                    articulos.Add(new Articulo(Int32.Parse(campos[0]), campos[1], Int32.Parse(campos[2]), Double.Parse(campos[3]), campos[4]));
+                    articulos.Add(campos);
                 }
             }
 
@@ -54,7 +60,7 @@ namespace Inventario.Data
 
             return null;
         }
-        public void ModificarArticulo(Articulo articulo)
+        public void ModificarArticulo(int id, Articulo articulo)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -65,7 +71,7 @@ namespace Inventario.Data
                         string registro = reader.ReadLine();
                         string[] campos = registro.Split('#');
 
-                        if (Int32.Parse(campos[0]) != articulo.Id)
+                        if (Int32.Parse(campos[0]) != id)
                             writer.WriteLine(registro);
                         else
                             writer.WriteLine(articulo.ToString());
@@ -74,12 +80,24 @@ namespace Inventario.Data
             }
             File.Replace(direccionTemp, direccion, "Archivos/ProyectoTemp.bk");
         }
-        public void Guardar(Articulo articulo)
+        public string[] Guardar(Articulo articulo)
         {
+            string[] campos = new string[5];
+
+            id += 1;
+            articulo.Id = id;
+
             using (writer = File.AppendText(direccion))
             {
                 writer.WriteLine(articulo.ToString());
             }
+
+            campos[0] = articulo.Id.ToString();
+            campos[1] = articulo.Nombre;
+            campos[2] = articulo.Unidad.ToString();
+            campos[3] = articulo.Precio.ToString();
+            campos[4] = articulo.Descripcion;
+            return campos;
         }
         public void EliminarArticulo(int id)
         {
@@ -98,6 +116,18 @@ namespace Inventario.Data
                 }
             }
             File.Replace(direccionTemp, direccion, "Archivos/ArticuloTemp.bk");
+        }
+        private void ObtenerUltimoId()
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string registro = reader.ReadLine();
+                    string[] campos = registro.Split('#');
+                    id = Int32.Parse(campos[0]);
+                }
+            }
         }
     }
 }

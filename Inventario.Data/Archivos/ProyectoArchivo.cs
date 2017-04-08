@@ -14,11 +14,17 @@ namespace Inventario.Data
         private StreamReader reader;
         private const string direccion = "Archivos/Proyecto.txt";
         private const string direccionTemp = "Archivos/ProyectoTemp.txt";
+        private int id;
 
         public ProyectoArchivo()
         {
             if (!File.Exists(direccion))
+            {
                 File.Create(direccion).Close();
+                id = 0;
+            }
+            else
+                ObtenerUltimoId();
         }
 
 
@@ -69,18 +75,31 @@ namespace Inventario.Data
                         if (Int32.Parse(campos[0]) != proyecto.Id)
                             writer.WriteLine(registro);
                         else
-                            writer.WriteLine(proyecto.ToString());
+                            writer.WriteLine(proyecto.ConvertirAString());
                     }
                 }
             }
             File.Replace(direccionTemp, direccion, "Archivos/ProyectoTemp.bk");
         }
-        public void Guardar(Proyecto proyecto)
+        public string[] Guardar(Proyecto proyecto)
         {
+            string[] campos = new string[7];
+
+            id += 1;
+            proyecto.Id = id;
             using(writer = File.AppendText(direccion))
             {
-                writer.WriteLine(proyecto.ToString());
+                writer.WriteLine(proyecto.ConvertirAString());
             }
+
+            campos[0] = proyecto.Id.ToString();
+            campos[1] = proyecto.Nombre;
+            campos[2] = proyecto.Encargado;
+            campos[3] = proyecto.Direccion;
+            campos[4] = proyecto.Descripcion;
+            campos[5] = proyecto.FechaInicio.ToString();
+            campos[6] = proyecto.FechaFin.ToString();
+            return campos;
         }
         public void EliminarProyecto(int id)
         {
@@ -99,6 +118,18 @@ namespace Inventario.Data
                 }
             }
             File.Replace(direccionTemp, direccion, "Archivos/ProyectoTemp.bk");
+        }
+        private void ObtenerUltimoId()
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string registro = reader.ReadLine();
+                    string[] campos = registro.Split('#');
+                    id = Int32.Parse(campos[0]);
+                }
+            }
         }
     }
 }
