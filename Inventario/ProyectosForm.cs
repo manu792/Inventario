@@ -59,7 +59,8 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                string[] campos = ServicioProyecto.AgregarProyecto(proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
+                Proyecto proyecto = new Proyecto(proyectoTxt.Text, encargadoTxt.Text, direccionTxt.Text, descripcionTxt.Text, fechaInicio.Value, fechaFin.Value);
+                string[] campos = ServicioProyecto.Agregar(proyecto);
                 
                 ListViewItem item = new ListViewItem(campos, 0);
                 proyectosListView.Items.Add(item);
@@ -70,7 +71,7 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                ServicioProyecto.EliminarProyecto(Int32.Parse(idTxt.Text));
+                ServicioProyecto.Eliminar(Int32.Parse(idTxt.Text));
 
                 proyectosListView.SelectedItems[0].Remove();
                 Limpiar();

@@ -10,32 +10,32 @@ namespace Inventario.Servicios
 {
     public class ServicioArticulo
     {
-        private Repositorio Repositorio { get; set; }
+        private ArticuloArchivo ArticuloArchivo { get; set; }
         
         public ServicioArticulo()
         {
-            Repositorio = Repositorio.Instancia;
+            ArticuloArchivo = new ArticuloArchivo();
         }
 
-        public string[] Agregar(string nombre, int unidad, double precio, string descripcion)
+        public string[] Agregar(Articulo articulo)
         {
-            return Repositorio.AgregarArticulo(new Articulo(nombre, unidad, precio, descripcion));
+            return ArticuloArchivo.Guardar(articulo);
         }
         public void Modificar(int id, Articulo articulo)
         {
-            Repositorio.ModificarArticulo(id, articulo);
+            ArticuloArchivo.Modificar(id, articulo);
         }
         public List<string[]> ObtenerArticulos()
         {
-            return Repositorio.ObtenerArticulos();
+            return ArticuloArchivo.ObtenerArticulos();
         }
-        public void BuscarArticulo(int id)
+        public Articulo BuscarArticulo(int id)
         {
-
+            return ArticuloArchivo.ObtenerArticulo(id);
         }
         public void Eliminar(int id)
         {
-            Repositorio.EliminarArticulo(id);
+            ArticuloArchivo.Eliminar(id);
         }
     }
 }

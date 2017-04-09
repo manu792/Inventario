@@ -40,7 +40,8 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                string[] campos = ServicioArticulo.Agregar(articuloTxt.Text, Int32.Parse(unidadTxt.Text), Double.Parse(precioTxt.Text), descripcionTxt.Text);
+                Articulo articulo = new Articulo(articuloTxt.Text, Int32.Parse(unidadTxt.Text), Double.Parse(precioTxt.Text), descripcionTxt.Text);
+                string[] campos = ServicioArticulo.Agregar(articulo);
 
                 ListViewItem item = new ListViewItem(campos, 0);
                 articulosListView.Items.Add(item);

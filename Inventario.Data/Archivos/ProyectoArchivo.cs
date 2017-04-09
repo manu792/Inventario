@@ -61,7 +61,7 @@ namespace Inventario.Data
 
             return null;
         }
-        public void ModificarProyecto(int id, Proyecto proyecto)
+        public void Modificar(int id, Proyecto proyecto)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -101,7 +101,7 @@ namespace Inventario.Data
             campos[6] = proyecto.FechaFin.ToString();
             return campos;
         }
-        public void EliminarProyecto(int id)
+        public void Eliminar(int id)
         {
             using (reader = File.OpenText(direccion))
             {

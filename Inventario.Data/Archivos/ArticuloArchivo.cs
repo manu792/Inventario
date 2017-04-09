@@ -60,7 +60,7 @@ namespace Inventario.Data
 
             return null;
         }
-        public void ModificarArticulo(int id, Articulo articulo)
+        public void Modificar(int id, Articulo articulo)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -99,7 +99,7 @@ namespace Inventario.Data
             campos[4] = articulo.Descripcion;
             return campos;
         }
-        public void EliminarArticulo(int id)
+        public void Eliminar(int id)
         {
             using (reader = File.OpenText(direccion))
             {

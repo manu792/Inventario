@@ -10,42 +10,36 @@ namespace Inventario.Servicios
 {
     public class ServicioProyecto
     {
-        private List<Proyecto> Proyectos;
-        private Repositorio Repositorio { get; set; }
+        private ProyectoArchivo ProyectoArchivo { get; set; }
 
         public ServicioProyecto()
         {
-            Proyectos = new List<Proyecto>();
-            Repositorio = Repositorio.Instancia;
+            ProyectoArchivo = new ProyectoArchivo();
         }
         
-        public string[] AgregarProyecto(string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
+        public string[] Agregar(Proyecto proyecto)
         {
-            return Repositorio.AgregarProyecto(new Proyecto(nombre, encargado, direccion, descripcion, fechaInicio, fechaFin));
+            return ProyectoArchivo.Guardar(proyecto);
         }
 
         public void Modificar(int id, Proyecto proyecto)
         {
-            Repositorio.ModificarProyecto(id, proyecto);
+            ProyectoArchivo.Modificar(id, proyecto);
         }
 
         public List<Proyecto> ObtenerProyectos()
         {
-            return Repositorio.ObtenerProyectos();
+            return ProyectoArchivo.ObtenerProyectos();
         }
 
-        public Proyecto ObtenerProyecto(int indice)
+        public Proyecto ObtenerProyecto(int id)
         {
-            if (Proyectos.Count > 0)
-                return Proyectos[indice];
-
-            return null;
+            return ProyectoArchivo.ObtenerProyecto(id);
         }
 
-        public void EliminarProyecto(int id)
+        public void Eliminar(int id)
         {
-            //falta eliminar de la lista
-            Repositorio.EliminarProyecto(id);
+            ProyectoArchivo.Eliminar(id);
         }
     }
 }
