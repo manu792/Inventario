@@ -61,24 +61,15 @@ namespace Inventario.Data
 
             return ordenesEntrada;
         }
-        public string[] Guardar(OrdenEntrada ordenEntrada)
+        public int Guardar(OrdenEntrada ordenEntrada)
         {
-            string[] campos = new string[7];
-
             id += 1;
             ordenEntrada.Id = id;
-
             using (writer = File.AppendText(direccion))
             {
                 writer.WriteLine(ordenEntrada.ToString());
             }
-
-            campos[0] = ordenEntrada.Id.ToString();
-            campos[1] = ordenEntrada.IdProyecto.ToString();
-            campos[2] = ordenEntrada.Fecha.ToString();
-            campos[3] = ordenEntrada.Comentario;
-            return campos;
-            
+            return id;
         }
         public void EliminarOrdenEntrada(int id)
         {

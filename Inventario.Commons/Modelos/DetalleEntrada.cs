@@ -14,6 +14,12 @@ namespace Inventario.Commons.Modelos
         public int Cantidad { get; set; }
         public double Total { get; set; }
 
+        public DetalleEntrada(int idArticulo, int cantidad, double total)
+        {
+            IdArticulo = idArticulo;
+            Cantidad = cantidad;
+            Total = total;
+        }
         public DetalleEntrada(int idDetalleEntrada, int idEntrada, int idArticulo, int cantidad, double total)
         {
             IdDetalleEntrada = idDetalleEntrada;

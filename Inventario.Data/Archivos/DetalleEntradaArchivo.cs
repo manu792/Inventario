@@ -14,11 +14,17 @@ namespace Inventario.Data
         private StreamReader reader;
         private const string direccion = "Archivos/DetalleEntrada.txt";
         private const string direccionTemp = "Archivos/DetalleEntradaTemp.txt";
+        private int id;
 
         public DetalleEntradaArchivo()
         {
             if (!File.Exists(direccion))
+            {
                 File.Create(direccion).Close();
+                id = 0;
+            }
+            else
+                ObtenerUltimoId();
         }
         public List<DetalleEntrada> ObtenerDetalleEntradas()
         {
@@ -55,6 +61,8 @@ namespace Inventario.Data
         }
         public void Guardar(DetalleEntrada detalleEntrada)
         {
+            id += 1;
+            detalleEntrada.IdDetalleEntrada = id;
             using (writer = File.AppendText(direccion))
             {
                 writer.WriteLine(detalleEntrada.ToString());
@@ -77,6 +85,18 @@ namespace Inventario.Data
                 }
             }
             File.Replace(direccionTemp, direccion, "DetalleEntradaTemp.bk");
+        }
+        private void ObtenerUltimoId()
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string registro = reader.ReadLine();
+                    string[] campos = registro.Split('#');
+                    id = Int32.Parse(campos[0]);
+                }
+            }
         }
     }
 }

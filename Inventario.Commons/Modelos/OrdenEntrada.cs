@@ -14,6 +14,12 @@ namespace Inventario.Commons.Modelos
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
 
+        public OrdenEntrada(int idProyecto, DateTime fecha, string comentario)
+        {
+            IdProyecto = idProyecto;
+            Fecha = fecha;
+            Comentario = comentario;
+        }
         public OrdenEntrada(int id, int idProyecto, DateTime fecha, string comentario)
         {
             Id = id;

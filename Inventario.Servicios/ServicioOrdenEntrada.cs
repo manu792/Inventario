@@ -11,10 +11,12 @@ namespace Inventario.Servicios
     public class ServicioOrdenEntrada
     {
         private OrdenEntradaArchivo OrdenEntradaArchivo { get; set; }
+        private DetalleEntradaArchivo DetalleEntradaArchivo { get; set; }
 
         public ServicioOrdenEntrada()
         {
             OrdenEntradaArchivo = new OrdenEntradaArchivo();
+            DetalleEntradaArchivo = new DetalleEntradaArchivo();
         }
 
         public List<string[]> ObtenerOrdenesEntrada(int idProyecto)
@@ -26,6 +28,16 @@ namespace Inventario.Servicios
                 listaOrdenesEntrada.Add(ordenEntrada.ConvertirAArray());
 
             return listaOrdenesEntrada;
+        }
+
+        public void Agregar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
+        {
+            int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
+            foreach(DetalleEntrada detalleEntrada in detallesEntrada)
+            {
+                detalleEntrada.IdEntrada = idEntrada;
+                DetalleEntradaArchivo.Guardar(detalleEntrada);
+            }
         }
     }
 }
