@@ -59,6 +59,12 @@
     <Compile Include="OrdenesEntrada.Designer.cs">
       <DependentUpon>OrdenesEntrada.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrdenesSalida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdenesSalida.Designer.cs">
+      <DependentUpon>OrdenesSalida.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProyectosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrdenesEntrada.resx">
       <DependentUpon>OrdenesEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdenesSalida.resx">
+      <DependentUpon>OrdenesSalida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProyectosForm.resx">
       <DependentUpon>ProyectosForm.cs</DependentUpon>

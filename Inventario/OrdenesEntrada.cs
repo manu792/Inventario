@@ -119,7 +119,7 @@ namespace Inventario
 
         private void agregarBtn_Click(object sender, EventArgs e)
         {
-            if(carritoDataGridView.Rows.Count > 0)
+            if(EsDataValida())
             {
                 List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
 
@@ -161,6 +161,13 @@ namespace Inventario
             //    //fechaInicio.Value = DateTime.Parse(i.SubItems[5].Text);
             //    //fechaFin.Value = DateTime.Parse(i.SubItems[6].Text);
             //}
+        }
+        private bool EsDataValida()
+        {
+            if (carritoDataGridView.Rows.Count > 0 && listaProyectos.SelectedIndex > -1)
+                return true;
+
+            return false;
         }
     }
 }
