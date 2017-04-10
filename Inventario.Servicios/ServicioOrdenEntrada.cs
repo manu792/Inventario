@@ -60,5 +60,10 @@ namespace Inventario.Servicios
                 DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
         }
+
+        public void Modificar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
+        {
+
+        }
     }
 }

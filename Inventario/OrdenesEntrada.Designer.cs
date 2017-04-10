@@ -339,7 +339,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(505, 271);
+            this.label10.Location = new System.Drawing.Point(471, 267);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 13);
             this.label10.TabIndex = 70;
@@ -352,9 +352,9 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.articulosListView.Location = new System.Drawing.Point(578, 271);
+            this.articulosListView.Location = new System.Drawing.Point(544, 267);
             this.articulosListView.Name = "articulosListView";
-            this.articulosListView.Size = new System.Drawing.Size(345, 164);
+            this.articulosListView.Size = new System.Drawing.Size(463, 164);
             this.articulosListView.TabIndex = 69;
             this.articulosListView.UseCompatibleStateImageBehavior = false;
             this.articulosListView.View = System.Windows.Forms.View.Details;
@@ -362,22 +362,26 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Nombre";
+            this.columnHeader1.Width = 120;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Precio";
+            this.columnHeader2.Width = 120;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Cantidad";
+            this.columnHeader3.Width = 120;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Total";
+            this.columnHeader4.Width = 120;
             // 
             // fechaVer
             // 
-            this.fechaVer.Location = new System.Drawing.Point(175, 302);
+            this.fechaVer.Location = new System.Drawing.Point(141, 298);
             this.fechaVer.Name = "fechaVer";
             this.fechaVer.Size = new System.Drawing.Size(297, 20);
             this.fechaVer.TabIndex = 68;
@@ -405,7 +409,7 @@
             // idTxt
             // 
             this.idTxt.Enabled = false;
-            this.idTxt.Location = new System.Drawing.Point(175, 268);
+            this.idTxt.Location = new System.Drawing.Point(141, 264);
             this.idTxt.Name = "idTxt";
             this.idTxt.Size = new System.Drawing.Size(297, 20);
             this.idTxt.TabIndex = 65;
@@ -413,7 +417,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(102, 271);
+            this.label11.Location = new System.Drawing.Point(68, 267);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 64;
@@ -421,7 +425,7 @@
             // 
             // comentarioVerTxt
             // 
-            this.comentarioVerTxt.Location = new System.Drawing.Point(175, 331);
+            this.comentarioVerTxt.Location = new System.Drawing.Point(141, 327);
             this.comentarioVerTxt.Multiline = true;
             this.comentarioVerTxt.Name = "comentarioVerTxt";
             this.comentarioVerTxt.Size = new System.Drawing.Size(345, 104);
@@ -430,7 +434,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(102, 334);
+            this.label12.Location = new System.Drawing.Point(68, 330);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(63, 13);
             this.label12.TabIndex = 61;
@@ -439,7 +443,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(102, 308);
+            this.label13.Location = new System.Drawing.Point(68, 304);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(40, 13);
             this.label13.TabIndex = 60;

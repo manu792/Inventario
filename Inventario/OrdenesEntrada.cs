@@ -14,14 +14,14 @@ namespace Inventario
 {
     public partial class OrdenesEntrada : Form
     {
-        private ServicioOrdenEntrada OrdenEntrada { get; set; }
+        private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
         private DataView dv;
 
         public OrdenesEntrada()
         {
-            OrdenEntrada = new ServicioOrdenEntrada();
+            ServicioOrdenEntrada = new ServicioOrdenEntrada();
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
             InitializeComponent();
@@ -57,9 +57,9 @@ namespace Inventario
         }
         private void CargarOrdenesEntrada(List<string[]> listaOrdenesEntrada)
         {
-            foreach(string[] ordenEntrada in listaOrdenesEntrada)
+            foreach(string[] ServicioOrdenEntrada in listaOrdenesEntrada)
             {
-                ListViewItem item = new ListViewItem(ordenEntrada, 0);
+                ListViewItem item = new ListViewItem(ServicioOrdenEntrada, 0);
                 ordenesEntradaListView.Items.Add(item);
             }
             ordenesEntradaListView.View = View.Details;
@@ -136,7 +136,7 @@ namespace Inventario
                     }
                 }
 
-                OrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
+                ServicioOrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Inventario
             {
                 ordenesEntradaListView.Items.Clear();
                 Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
-                CargarOrdenesEntrada(OrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
+                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
             }
         }
 
@@ -161,7 +161,7 @@ namespace Inventario
                 idTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<DetalleEntrada> detallesEntrada = OrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                List<DetalleEntrada> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
                 foreach(DetalleEntrada detalleEntrada in detallesEntrada)
                 {
                     string[] detalle = detalleEntrada.ConvertirAArray();
@@ -185,7 +185,13 @@ namespace Inventario
 
         private void modificarBtn_Click(object sender, EventArgs e)
         {
-
+            Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
+            OrdenEntrada ordenEntrada = new OrdenEntrada(Int32.Parse(idTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
+            List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
+            foreach(ListViewItem item in articulosListView.Items)
+            {
+                //DetalleEntrada detalleEntrada = new DetalleEntrada(ordenEntrada.Id, new Articulo(item.SubItems[0].Text));        
+            }
         }
     }
 }
