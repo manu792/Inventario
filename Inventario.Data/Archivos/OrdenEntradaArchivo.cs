@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Inventario.Commons.Modelos;
+using Inventario.Data.Modelos;
 
 namespace Inventario.Data
 {
@@ -42,7 +43,7 @@ namespace Inventario.Data
 
             return ordenEntrada;
         }
-        public List<OrdenEntrada> ObtenerOrdenesEntrada(int idProyecto)
+        public List<OrdenEntrada> ObtenerOrdenesEntrada(int idProyecto, string nombreProyecto)
         {
             List<OrdenEntrada> ordenesEntrada = new List<OrdenEntrada>();
 
@@ -54,7 +55,7 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[1]) == idProyecto)
                     {
-                        ordenesEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), ObtenerNombreProyecto(idProyecto), DateTime.Parse(campos[2]), campos[3]));
+                        ordenesEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), DateTime.Parse(campos[2]), campos[3]));
                     }
                 }
             }
@@ -71,7 +72,7 @@ namespace Inventario.Data
             }
             return id;
         }
-        public void EliminarOrdenEntrada(int id)
+        public void Eliminar(int id)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -100,20 +101,6 @@ namespace Inventario.Data
                     id = Int32.Parse(campos[0]);
                 }
             }
-        }
-        private string ObtenerNombreProyecto(int idProyecto)
-        {
-            using (StreamReader reader = File.OpenText("Archivos/Proyecto.txt"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string registro = reader.ReadLine();
-                    string[] campos = registro.Split('#');
-                    if (Int32.Parse(campos[0]) == idProyecto)
-                        return campos[1];
-                }
-            }
-            return null;
         }
     }
 }

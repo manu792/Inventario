@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\DetalleEntradaVista.cs" />
+    <Compile Include="Modelos\OrdenEntradaVista.cs" />
     <Compile Include="ServicioArticulo.cs" />
     <Compile Include="ServicioOrdenEntrada.cs" />
     <Compile Include="ServicioOrdenSalida.cs" />

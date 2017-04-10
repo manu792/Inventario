@@ -29,7 +29,7 @@ namespace Inventario.Servicios
         {
             return ArticuloArchivo.ObtenerArticulos();
         }
-        public Articulo BuscarArticulo(int id)
+        public Articulo ObtenerArticulo(int id)
         {
             return ArticuloArchivo.ObtenerArticulo(id);
         }

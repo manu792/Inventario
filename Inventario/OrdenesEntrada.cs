@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventario.Commons.Modelos;
 using Inventario.Servicios;
+using Inventario.Servicios.Modelos;
 
 namespace Inventario
 {
@@ -121,16 +122,19 @@ namespace Inventario
         {
             if(EsDataValida())
             {
-                List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
+                List<DetalleEntradaVista> detallesEntrada = new List<DetalleEntradaVista>();
 
                 Proyecto proyecto = (Proyecto)listaProyectos.SelectedItem;
 
-                OrdenEntrada ordenEntrada = new OrdenEntrada(proyecto.Id, fecha.Value, comentarioTxt.Text);
+                OrdenEntradaVista ordenEntrada = new OrdenEntradaVista(proyecto, fecha.Value, comentarioTxt.Text);
 
                 foreach (DataGridViewRow fila in carritoDataGridView.Rows)
                 {
                     if (fila.Cells[0].Value != null)
-                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(fila.Cells[0].Value.ToString()), Int32.Parse(fila.Cells[3].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString())));
+                    {
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[0].Value.ToString()));
+                        detallesEntrada.Add(new DetalleEntradaVista(articulo, Int32.Parse(fila.Cells[3].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString())));
+                    }
                 }
 
                 OrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
@@ -149,18 +153,23 @@ namespace Inventario
 
         private void ordenesEntradaListView_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            //if (ordenesEntradaListView.SelectedItems.Count > 0)
-            //{
-            //    ListViewItem i;
-            //    i = ordenesEntradaListView.SelectedItems[0];
-            //    idTxt.Text = i.SubItems[0].Text;
-            //    //proyectoTxt.Text = i.SubItems[1].Text;
-            //    //encargadoTxt.Text = i.SubItems[2].Text;
-            //    //direccionTxt.Text = i.SubItems[3].Text;
-            //    //descripcionTxt.Text = i.SubItems[4].Text;
-            //    //fechaInicio.Value = DateTime.Parse(i.SubItems[5].Text);
-            //    //fechaFin.Value = DateTime.Parse(i.SubItems[6].Text);
-            //}
+            if (ordenesEntradaListView.SelectedItems.Count > 0)
+            {
+                articulosListView.Items.Clear();
+
+                ListViewItem i;
+                i = ordenesEntradaListView.SelectedItems[0];
+                idTxt.Text = i.SubItems[0].Text;
+                fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
+                comentarioVerTxt.Text = i.SubItems[3].Text;
+                List<DetalleEntradaVista> detallesEntrada = OrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                foreach(DetalleEntradaVista detalleEntrada in detallesEntrada)
+                {
+                    string[] detalle = detalleEntrada.ConvertirAArray();
+                    ListViewItem item = new ListViewItem(detalle);
+                    articulosListView.Items.Add(item);
+                }
+            }
         }
         private bool EsDataValida()
         {
@@ -168,6 +177,16 @@ namespace Inventario
                 return true;
 
             return false;
+        }
+
+        private void eliminarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void modificarBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

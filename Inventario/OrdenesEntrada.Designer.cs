@@ -56,17 +56,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.articulosListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.fechaVer = new System.Windows.Forms.DateTimePicker();
+            this.modificarBtn = new System.Windows.Forms.Button();
+            this.eliminarBtn = new System.Windows.Forms.Button();
+            this.idTxt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.comentarioVerTxt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.ordenesEntradaListView = new System.Windows.Forms.ListView();
@@ -316,13 +316,13 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.listView1);
-            this.tabPage2.Controls.Add(this.dateTimePicker3);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.articulosListView);
+            this.tabPage2.Controls.Add(this.fechaVer);
+            this.tabPage2.Controls.Add(this.modificarBtn);
+            this.tabPage2.Controls.Add(this.eliminarBtn);
+            this.tabPage2.Controls.Add(this.idTxt);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.comentarioVerTxt);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.ordenesEntradaListView);
@@ -345,19 +345,19 @@
             this.label10.TabIndex = 70;
             this.label10.Text = "Articulos:";
             // 
-            // listView1
+            // articulosListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.articulosListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(578, 271);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(345, 164);
-            this.listView1.TabIndex = 69;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.articulosListView.Location = new System.Drawing.Point(578, 271);
+            this.articulosListView.Name = "articulosListView";
+            this.articulosListView.Size = new System.Drawing.Size(345, 164);
+            this.articulosListView.TabIndex = 69;
+            this.articulosListView.UseCompatibleStateImageBehavior = false;
+            this.articulosListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -375,38 +375,40 @@
             // 
             this.columnHeader4.Text = "Total";
             // 
-            // dateTimePicker3
+            // fechaVer
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(175, 302);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(297, 20);
-            this.dateTimePicker3.TabIndex = 68;
+            this.fechaVer.Location = new System.Drawing.Point(175, 302);
+            this.fechaVer.Name = "fechaVer";
+            this.fechaVer.Size = new System.Drawing.Size(297, 20);
+            this.fechaVer.TabIndex = 68;
             // 
-            // button1
+            // modificarBtn
             // 
-            this.button1.Location = new System.Drawing.Point(540, 460);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 67;
-            this.button1.Text = "Modificar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.modificarBtn.Location = new System.Drawing.Point(540, 460);
+            this.modificarBtn.Name = "modificarBtn";
+            this.modificarBtn.Size = new System.Drawing.Size(75, 23);
+            this.modificarBtn.TabIndex = 67;
+            this.modificarBtn.Text = "Modificar";
+            this.modificarBtn.UseVisualStyleBackColor = true;
+            this.modificarBtn.Click += new System.EventHandler(this.modificarBtn_Click);
             // 
-            // button2
+            // eliminarBtn
             // 
-            this.button2.Location = new System.Drawing.Point(459, 460);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 66;
-            this.button2.Text = "Eliminar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.eliminarBtn.Location = new System.Drawing.Point(459, 460);
+            this.eliminarBtn.Name = "eliminarBtn";
+            this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
+            this.eliminarBtn.TabIndex = 66;
+            this.eliminarBtn.Text = "Eliminar";
+            this.eliminarBtn.UseVisualStyleBackColor = true;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
-            // textBox3
+            // idTxt
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(175, 268);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(297, 20);
-            this.textBox3.TabIndex = 65;
+            this.idTxt.Enabled = false;
+            this.idTxt.Location = new System.Drawing.Point(175, 268);
+            this.idTxt.Name = "idTxt";
+            this.idTxt.Size = new System.Drawing.Size(297, 20);
+            this.idTxt.TabIndex = 65;
             // 
             // label11
             // 
@@ -417,13 +419,13 @@
             this.label11.TabIndex = 64;
             this.label11.Text = "Id:";
             // 
-            // textBox4
+            // comentarioVerTxt
             // 
-            this.textBox4.Location = new System.Drawing.Point(175, 331);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(345, 104);
-            this.textBox4.TabIndex = 62;
+            this.comentarioVerTxt.Location = new System.Drawing.Point(175, 331);
+            this.comentarioVerTxt.Multiline = true;
+            this.comentarioVerTxt.Name = "comentarioVerTxt";
+            this.comentarioVerTxt.Size = new System.Drawing.Size(345, 104);
+            this.comentarioVerTxt.TabIndex = 62;
             // 
             // label12
             // 
@@ -468,14 +470,17 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Proyecto";
+            this.columnHeader6.Width = 150;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Fecha";
+            this.columnHeader7.Width = 130;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Comentario";
+            this.columnHeader8.Width = 150;
             // 
             // imageListGrande
             // 
@@ -546,17 +551,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView articulosListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DateTimePicker fechaVer;
+        private System.Windows.Forms.Button modificarBtn;
+        private System.Windows.Forms.Button eliminarBtn;
+        private System.Windows.Forms.TextBox idTxt;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox comentarioVerTxt;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ListView ordenesEntradaListView;

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inventario.Commons.Modelos;
+using Inventario.Data.Modelos;
 
 namespace Inventario.Data
 {
@@ -26,9 +26,9 @@ namespace Inventario.Data
             else
                 ObtenerUltimoId();
         }
-        public List<DetalleEntrada> ObtenerDetalleEntradas()
+        public List<DetalleEntrada> ObtenerDetalleEntradas(int idOrdenEntrada)
         {
-            List<DetalleEntrada> detalleEntrada = new List<DetalleEntrada>();
+            List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
 
             using (reader = File.OpenText(direccion))
             {
@@ -36,11 +36,12 @@ namespace Inventario.Data
                 {
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
-                    detalleEntrada.Add(new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]), Double.Parse(campos[4])));
+                    if(Int32.Parse(campos[1]) == idOrdenEntrada)
+                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]), Double.Parse(campos[4])));
                 }
             }
 
-            return detalleEntrada;
+            return detallesEntrada;
         }
         public DetalleEntrada ObtenerDetalleEntrada(int id)
         {

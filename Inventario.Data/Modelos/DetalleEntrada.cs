@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventario.Commons.Modelos
+namespace Inventario.Data.Modelos
 {
     public class DetalleEntrada
     {
@@ -14,8 +14,9 @@ namespace Inventario.Commons.Modelos
         public int Cantidad { get; set; }
         public double Total { get; set; }
 
-        public DetalleEntrada(int idArticulo, int cantidad, double total)
+        public DetalleEntrada(int idEntrada, int idArticulo, int cantidad, double total)
         {
+            IdEntrada = idEntrada;
             IdArticulo = idArticulo;
             Cantidad = cantidad;
             Total = total;
