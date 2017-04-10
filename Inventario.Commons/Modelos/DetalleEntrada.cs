@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inventario.Commons.Modelos;
 
-namespace Inventario.Servicios.Modelos
+namespace Inventario.Commons.Modelos
 {
-    public class DetalleEntradaVista
+    public class DetalleEntrada
     {
         public int IdDetalleEntrada { get; set; }
         public int IdEntrada { get; set; }
@@ -15,20 +14,33 @@ namespace Inventario.Servicios.Modelos
         public int Cantidad { get; set; }
         public double Total { get; set; }
 
-        public DetalleEntradaVista(Articulo articulo, int cantidad, double total)
+        public DetalleEntrada(Articulo articulo, int cantidad, double total)
         {
             Articulo = articulo;
             Cantidad = cantidad;
             Total = total;
         }
-        public DetalleEntradaVista(int idDetallaEntrada, int idEntrada, Articulo articulo, int cantidad, double total)
+        public DetalleEntrada(int idEntrada, Articulo articulo, int cantidad, double total)
         {
-            IdDetalleEntrada = idDetallaEntrada;
             IdEntrada = idEntrada;
             Articulo = articulo;
             Cantidad = cantidad;
             Total = total;
         }
+        public DetalleEntrada(int idDetalleEntrada, int idEntrada, Articulo articulo, int cantidad, double total)
+        {
+            IdDetalleEntrada = idDetalleEntrada;
+            IdEntrada = idEntrada;
+            Articulo = articulo;
+            Cantidad = cantidad;
+            Total = total;
+        }
+
+        public override string ToString()
+        {
+            return IdDetalleEntrada + "#" + IdEntrada + "#" + Articulo.Id + "#" + Cantidad + "#" + Total;
+        }
+
         public string[] ConvertirAArray()
         {
             string[] campos = new string[4];

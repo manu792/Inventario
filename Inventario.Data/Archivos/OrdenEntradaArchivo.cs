@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Inventario.Commons.Modelos;
-using Inventario.Data.Modelos;
 
 namespace Inventario.Data
 {
@@ -37,13 +36,13 @@ namespace Inventario.Data
                 {
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
-                    ordenEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), DateTime.Parse(campos[2]), campos[3]));
+                    ordenEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]));
                 }
             }
 
             return ordenEntrada;
         }
-        public List<OrdenEntrada> ObtenerOrdenesEntrada(int idProyecto, string nombreProyecto)
+        public List<OrdenEntrada> ObtenerOrdenesEntrada(int idProyecto)
         {
             List<OrdenEntrada> ordenesEntrada = new List<OrdenEntrada>();
 
@@ -55,7 +54,7 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[1]) == idProyecto)
                     {
-                        ordenesEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), DateTime.Parse(campos[2]), campos[3]));
+                        ordenesEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), new Proyecto(idProyecto), DateTime.Parse(campos[2]), campos[3]));
                     }
                 }
             }

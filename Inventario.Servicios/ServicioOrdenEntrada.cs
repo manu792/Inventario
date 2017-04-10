@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Inventario.Commons.Modelos;
 using Inventario.Data;
-using Inventario.Data.Modelos;
-using Inventario.Servicios.Modelos;
 
 namespace Inventario.Servicios
 {
@@ -25,45 +23,41 @@ namespace Inventario.Servicios
             ServicioArticulo = new ServicioArticulo();
         }
         
-        public List<DetalleEntradaVista> ObtenerDetallesEntrada(int idOrdenEntrada)
+        public List<DetalleEntrada> ObtenerDetallesEntrada(int idOrdenEntrada)
         {
-            List<DetalleEntradaVista> detallesEntradaVista = new List<DetalleEntradaVista>();
-
             List<DetalleEntrada> detallesEntrada = DetalleEntradaArchivo.ObtenerDetalleEntradas(idOrdenEntrada);
             foreach(DetalleEntrada detalleEntrada in detallesEntrada)
             {
-                Articulo articulo = ServicioArticulo.ObtenerArticulo(detalleEntrada.IdArticulo);
-                DetalleEntradaVista detalleEntradaVista = new DetalleEntradaVista(detalleEntrada.IdDetalleEntrada, detalleEntrada.IdEntrada, articulo, detalleEntrada.Cantidad, detalleEntrada.Total);
-                detallesEntradaVista.Add(detalleEntradaVista);
+                Articulo articulo = ServicioArticulo.ObtenerArticulo(detalleEntrada.Articulo.Id);
+                detalleEntrada.Articulo = articulo;
             }
-            return detallesEntradaVista;
+            return detallesEntrada;
         }
 
         public List<string[]> ObtenerOrdenesEntrada(int idProyecto)
         {
             List<string[]> listaOrdenesEntrada = new List<string[]>();
-
-            Proyecto proyecto = ServicioProyecto.ObtenerProyecto(idProyecto);
-            List<OrdenEntrada> ordenesEntrada = OrdenEntradaArchivo.ObtenerOrdenesEntrada(idProyecto, proyecto.Nombre);
+            
+            List<OrdenEntrada> ordenesEntrada = OrdenEntradaArchivo.ObtenerOrdenesEntrada(idProyecto);
             foreach (OrdenEntrada ordenEntrada in ordenesEntrada)
             {
-                OrdenEntradaVista ordenEntradaVista = new OrdenEntradaVista(ordenEntrada.Id, proyecto, ordenEntrada.Fecha, ordenEntrada.Comentario);
-                listaOrdenesEntrada.Add(ordenEntradaVista.ConvertirAArray());
+                Proyecto proyecto = ServicioProyecto.ObtenerProyecto(ordenEntrada.Proyecto.Id);
+                ordenEntrada.Proyecto = proyecto;
+                listaOrdenesEntrada.Add(ordenEntrada.ConvertirAArray());
             }
 
             return listaOrdenesEntrada;
         }
 
-        public void Agregar(OrdenEntradaVista ordenEntrada, List<DetalleEntradaVista> detallesEntrada)
+        public void Agregar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
         {
-            //List<DetalleEntrada> detallesEntradaArchivo = new List<DetalleEntrada>();
-            OrdenEntrada ordenEntradaArchivo = new OrdenEntrada(ordenEntrada.Proyecto.Id, ordenEntrada.Fecha, ordenEntrada.Comentario);
-            int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntradaArchivo);
-            foreach(DetalleEntradaVista detalleEntrada in detallesEntrada)
+            int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
+            foreach(DetalleEntrada detalleEntrada in detallesEntrada)
             {
-                DetalleEntrada detalleEntradaArchivo = new DetalleEntrada(idEntrada, detalleEntrada.Articulo.Id, detalleEntrada.Cantidad, detalleEntrada.Total);
+                //DetalleEntrada detalleEntradaArchivo = new DetalleEntrada(idEntrada, detalleEntrada.Articulo.Id, detalleEntrada.Cantidad, detalleEntrada.Total);
                 //detallesEntradaArchivo.Add(detalleEntradaArchivo);
-                DetalleEntradaArchivo.Guardar(detalleEntradaArchivo);
+                detalleEntrada.IdEntrada = idEntrada;
+                DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
         }
     }

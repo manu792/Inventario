@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inventario.Commons.Modelos;
 
-namespace Inventario.Servicios.Modelos
+namespace Inventario.Commons.Modelos
 {
-    public class OrdenEntradaVista
+    public class OrdenEntrada
     {
         public int Id { get; set; }
         public Proyecto Proyecto { get; set; }
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
 
-        public OrdenEntradaVista(Proyecto proyecto, DateTime fecha, string comentario)
+        public OrdenEntrada(Proyecto proyecto, DateTime fecha, string comentario)
         {
             Proyecto = proyecto;
             Fecha = fecha;
             Comentario = comentario;
         }
-        public OrdenEntradaVista(int id, Proyecto proyecto, DateTime fecha, string comentario)
+        public OrdenEntrada(int id, Proyecto proyecto, DateTime fecha, string comentario)
         {
             Id = id;
             Proyecto = proyecto;
             Fecha = fecha;
             Comentario = comentario;
+        }
+
+        public override string ToString()
+        {
+            return Id + "#" + Proyecto.Id + "#" + Fecha + "#" + Comentario;
         }
 
         public string[] ConvertirAArray()

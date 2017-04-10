@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inventario.Data.Modelos;
+using Inventario.Commons.Modelos;
 
 namespace Inventario.Data
 {
@@ -37,7 +37,7 @@ namespace Inventario.Data
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
                     if(Int32.Parse(campos[1]) == idOrdenEntrada)
-                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]), Double.Parse(campos[4])));
+                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4])));
                 }
             }
 
@@ -53,7 +53,7 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[0]) == id)
                     {
-                        return new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]), Double.Parse(campos[4]));
+                        return new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]));
                     }
                 }
             }

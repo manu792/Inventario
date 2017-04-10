@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventario.Commons.Modelos;
 using Inventario.Servicios;
-using Inventario.Servicios.Modelos;
 
 namespace Inventario
 {
@@ -122,18 +121,18 @@ namespace Inventario
         {
             if(EsDataValida())
             {
-                List<DetalleEntradaVista> detallesEntrada = new List<DetalleEntradaVista>();
+                List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
 
                 Proyecto proyecto = (Proyecto)listaProyectos.SelectedItem;
 
-                OrdenEntradaVista ordenEntrada = new OrdenEntradaVista(proyecto, fecha.Value, comentarioTxt.Text);
+                OrdenEntrada ordenEntrada = new OrdenEntrada(proyecto, fecha.Value, comentarioTxt.Text);
 
                 foreach (DataGridViewRow fila in carritoDataGridView.Rows)
                 {
                     if (fila.Cells[0].Value != null)
                     {
                         Articulo articulo = new Articulo(Int32.Parse(fila.Cells[0].Value.ToString()));
-                        detallesEntrada.Add(new DetalleEntradaVista(articulo, Int32.Parse(fila.Cells[3].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString())));
+                        detallesEntrada.Add(new DetalleEntrada(articulo, Int32.Parse(fila.Cells[3].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString())));
                     }
                 }
 
@@ -162,8 +161,8 @@ namespace Inventario
                 idTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<DetalleEntradaVista> detallesEntrada = OrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
-                foreach(DetalleEntradaVista detalleEntrada in detallesEntrada)
+                List<DetalleEntrada> detallesEntrada = OrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                foreach(DetalleEntrada detalleEntrada in detallesEntrada)
                 {
                     string[] detalle = detalleEntrada.ConvertirAArray();
                     ListViewItem item = new ListViewItem(detalle);

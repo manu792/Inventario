@@ -16,6 +16,10 @@ namespace Inventario.Commons.Modelos
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
+        public Proyecto(int id)
+        {
+            Id = id;
+        }
         public Proyecto(string nombre, string encargado, string direccion, string descripcion, DateTime fechaInicio, DateTime fechaFin)
         {
             Nombre = nombre;
