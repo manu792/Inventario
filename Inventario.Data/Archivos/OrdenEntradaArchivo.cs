@@ -71,18 +71,38 @@ namespace Inventario.Data
             }
             return id;
         }
-        public void Eliminar(int id)
+        public void Modificar(OrdenEntrada ordenEntrada)
         {
             using (reader = File.OpenText(direccion))
             {
-                using (writer = File.AppendText("OrdenEntradaTemp.txt"))
+                using (writer = File.AppendText(direccionTemp))
                 {
                     while (!reader.EndOfStream)
                     {
                         string registro = reader.ReadLine();
                         string[] campos = registro.Split('#');
 
-                        if (Int32.Parse(campos[0]) != id)
+                        if (Int32.Parse(campos[0]) != ordenEntrada.Id)
+                            writer.WriteLine(registro);
+                        else
+                            writer.WriteLine(ordenEntrada.ToString());
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, "Archivos/OrdenEntradaTemp.bk");
+        }
+        public void Eliminar(int idOrdenEntrada)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[0]) != idOrdenEntrada)
                             writer.WriteLine(registro);
                     }
                 }

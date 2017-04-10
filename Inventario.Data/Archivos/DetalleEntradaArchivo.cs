@@ -69,7 +69,7 @@ namespace Inventario.Data
                 writer.WriteLine(detalleEntrada.ToString());
             }
         }
-        public void EliminarDetalleEntrada(int id)
+        public void Modificar(DetalleEntrada detalleEntrada)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -80,7 +80,27 @@ namespace Inventario.Data
                         string registro = reader.ReadLine();
                         string[] campos = registro.Split('#');
 
-                        if (Int32.Parse(campos[0]) != id)
+                        if (Int32.Parse(campos[1]) == detalleEntrada.IdEntrada && Int32.Parse(campos[2]) == detalleEntrada.Articulo.Id)
+                            writer.WriteLine(detalleEntrada.ToString());
+                        else
+                            writer.WriteLine(registro);
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, "Archivos/DetalleEntradaTemp.bk");
+        }
+        public void Eliminar(int idOrdenEntrada)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[1]) != idOrdenEntrada)
                             writer.WriteLine(registro);
                     }
                 }

@@ -63,7 +63,17 @@ namespace Inventario.Servicios
 
         public void Modificar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
         {
+            OrdenEntradaArchivo.Modificar(ordenEntrada);
+            foreach (DetalleEntrada detalleEntrada in detallesEntrada)
+            {
+                DetalleEntradaArchivo.Modificar(detalleEntrada);
+            }
+        }
 
+        public void Eliminar(int idOrdenEntrada)
+        {
+            DetalleEntradaArchivo.Eliminar(idOrdenEntrada);
+            OrdenEntradaArchivo.Eliminar(idOrdenEntrada);
         }
     }
 }
