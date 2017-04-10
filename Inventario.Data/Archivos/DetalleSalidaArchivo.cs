@@ -14,6 +14,7 @@ namespace Inventario.Data
         private StreamReader reader;
         private const string direccion = "Archivos/DetalleSalida.txt";
         private const string direccionTemp = "Archivos/DetalleSalidaTemp.txt";
+        private const string direccionBackup = "Archivos/Backups/DetalleSalida.bk";
 
         public DetalleSalidaArchivo()
         {
@@ -77,7 +78,7 @@ namespace Inventario.Data
                     }
                 }
             }
-            File.Replace(direccionTemp, direccion, "DetalleSalidaTemp.bk");
+            File.Replace(direccionTemp, direccion, direccionBackup);
         }
     }
 }

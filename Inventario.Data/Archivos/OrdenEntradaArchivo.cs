@@ -14,6 +14,7 @@ namespace Inventario.Data
         private StreamReader reader;
         private const string direccion = "Archivos/OrdenEntrada.txt";
         private const string direccionTemp = "Archivos/OrdenEntradaTemp.txt";
+        private const string direccionBackup = "Archivos/Backups/OrdenEntrada.bk";
         private int id;
 
         public OrdenEntradaArchivo()
@@ -89,7 +90,7 @@ namespace Inventario.Data
                     }
                 }
             }
-            File.Replace(direccionTemp, direccion, "Archivos/OrdenEntradaTemp.bk");
+            File.Replace(direccionTemp, direccion, direccionBackup);
         }
         public void Eliminar(int idOrdenEntrada)
         {
@@ -107,7 +108,7 @@ namespace Inventario.Data
                     }
                 }
             }
-            File.Replace(direccionTemp, direccion, "OrdenEntradaTemp.bk");
+            File.Replace(direccionTemp, direccion, direccionBackup);
         }
         private void ObtenerUltimoId()
         {
