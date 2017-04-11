@@ -42,6 +42,7 @@
     <Compile Include="Archivos\ArticuloArchivo.cs" />
     <Compile Include="Archivos\DetalleEntradaArchivo.cs" />
     <Compile Include="Archivos\DetalleSalidaArchivo.cs" />
+    <Compile Include="Archivos\InventarioArchivo.cs" />
     <Compile Include="Archivos\OrdenEntradaArchivo.cs" />
     <Compile Include="Archivos\OrdenSalidaArchivo.cs" />
     <Compile Include="Archivos\ProyectoArchivo.cs" />

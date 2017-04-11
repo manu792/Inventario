@@ -42,6 +42,7 @@
     <Compile Include="Modelos\Articulo.cs" />
     <Compile Include="Modelos\DetalleEntrada.cs" />
     <Compile Include="Modelos\DetalleSalida.cs" />
+    <Compile Include="Modelos\Inventario.cs" />
     <Compile Include="Modelos\OrdenEntrada.cs" />
     <Compile Include="Modelos\OrdenSalida.cs" />
     <Compile Include="Modelos\Proyecto.cs" />

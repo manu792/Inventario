@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ServicioArticulo.cs" />
+    <Compile Include="ServicioInventario.cs" />
     <Compile Include="ServicioOrdenEntrada.cs" />
     <Compile Include="ServicioOrdenSalida.cs" />
     <Compile Include="ServicioProyecto.cs" />

@@ -14,6 +14,7 @@ namespace Inventario.Servicios
         private DetalleEntradaArchivo DetalleEntradaArchivo { get; set; }
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
+        private ServicioInventario ServicioInventario { get; set; } 
 
         public ServicioOrdenEntrada()
         {
@@ -21,6 +22,7 @@ namespace Inventario.Servicios
             DetalleEntradaArchivo = new DetalleEntradaArchivo();
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
+            ServicioInventario = new ServicioInventario();
         }
         
         public List<DetalleEntrada> ObtenerDetallesEntrada(int idOrdenEntrada)
@@ -54,11 +56,11 @@ namespace Inventario.Servicios
             int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
             foreach(DetalleEntrada detalleEntrada in detallesEntrada)
             {
-                //DetalleEntrada detalleEntradaArchivo = new DetalleEntrada(idEntrada, detalleEntrada.Articulo.Id, detalleEntrada.Cantidad, detalleEntrada.Total);
-                //detallesEntradaArchivo.Add(detalleEntradaArchivo);
                 detalleEntrada.IdEntrada = idEntrada;
                 DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
+
+            ServicioInventario.ActualizarInventario(ordenEntrada.Proyecto.Id, detallesEntrada);
         }
 
         public void Modificar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
