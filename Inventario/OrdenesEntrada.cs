@@ -34,6 +34,7 @@ namespace Inventario
                 listaProyectos.Items.Add(proyecto);
                 proyectosVerLista.Items.Add(proyecto);
             }
+            
         }
         private void CargarArticulosDataGrid(List<string[]> articulos)
         {
@@ -197,12 +198,12 @@ namespace Inventario
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
-            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 1)
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
             {
                 Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
                 ServicioOrdenEntrada.Eliminar(Int32.Parse(IdVerTxt.Text));
-                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
                 LimpiarControles();
+                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
             }
         }
         private void LimpiarControles()

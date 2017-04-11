@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Inventario.Commons.Modelos;
 
 namespace Inventario.Data.Archivos
 {
@@ -27,7 +28,7 @@ namespace Inventario.Data.Archivos
                 ObtenerUltimoId();
         }
 
-        public Inventario.Commons.Modelos.Inventario ArticuloEnProyecto(int idProyecto, int idArticulo)
+        public Inventario.Commons.Modelos.InventarioProyecto ArticuloEnProyecto(int idProyecto, int idArticulo)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -36,13 +37,13 @@ namespace Inventario.Data.Archivos
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[1]) == idProyecto && Int32.Parse(campos[2]) == idArticulo)
-                        return new Commons.Modelos.Inventario(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]));
+                        return new InventarioProyecto(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]));
                 }
             }
             return null;
         }
 
-        public void ActualizarCantidad(int idProyecto, int idArticulo, Inventario.Commons.Modelos.Inventario inventario)
+        public void ActualizarCantidad(int idProyecto, int idArticulo, InventarioProyecto inventario)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -63,7 +64,7 @@ namespace Inventario.Data.Archivos
             File.Replace(direccionTemp, direccion, direccionBackup);
         }
 
-        public void AgregarArticuloInventario(Inventario.Commons.Modelos.Inventario inventario)
+        public void AgregarArticuloInventario(InventarioProyecto inventario)
         {
             id += 1;
             inventario.Id = id;

@@ -364,7 +364,7 @@
             // 
             // eliminarBtn
             // 
-            this.eliminarBtn.Location = new System.Drawing.Point(551, 483);
+            this.eliminarBtn.Location = new System.Drawing.Point(528, 471);
             this.eliminarBtn.Name = "eliminarBtn";
             this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
             this.eliminarBtn.TabIndex = 81;
@@ -374,7 +374,7 @@
             // 
             // modificarBtn
             // 
-            this.modificarBtn.Location = new System.Drawing.Point(469, 483);
+            this.modificarBtn.Location = new System.Drawing.Point(446, 471);
             this.modificarBtn.Name = "modificarBtn";
             this.modificarBtn.Size = new System.Drawing.Size(75, 23);
             this.modificarBtn.TabIndex = 80;
