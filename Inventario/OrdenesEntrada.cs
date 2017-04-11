@@ -115,7 +115,7 @@ namespace Inventario
 
         private void agregarBtn_Click(object sender, EventArgs e)
         {
-            if(EsDataValida())
+            if (EsDataValida())
             {
                 List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
 
