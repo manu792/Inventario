@@ -120,18 +120,18 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
+                List<Detalle> detallesEntrada = new List<Detalle>();
 
                 Proyecto proyecto = (Proyecto)listaProyectos.SelectedItem;
 
-                OrdenEntrada ordenEntrada = new OrdenEntrada(proyecto, fechaOrdenEntrada.Value, comentarioOrdenEntradaTxt.Text);
+                Orden ordenEntrada = new Orden(proyecto, fechaOrdenEntrada.Value, comentarioOrdenEntradaTxt.Text);
 
                 foreach (DataGridViewRow fila in articulosDataGridView.Rows)
                 {
                     if (fila.Cells[0].Value != null)
                     {
                         Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
-                        detallesEntrada.Add(new DetalleEntrada(articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
+                        detallesEntrada.Add(new Detalle(articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
                 ServicioOrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
@@ -156,10 +156,10 @@ namespace Inventario
                 IdVerTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<DetalleEntrada> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
-                foreach (DetalleEntrada detalleEntrada in detallesEntrada)
+                List<Detalle> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                foreach (Detalle detalleEntrada in detallesEntrada)
                 {
-                    articulosVerLista.Rows.Add(detalleEntrada.IdDetalleEntrada, detalleEntrada.Articulo.Id, detalleEntrada.Articulo.Nombre, detalleEntrada.Articulo.Unidad, detalleEntrada.Articulo.Precio, detalleEntrada.Cantidad, detalleEntrada.Total);
+                    articulosVerLista.Rows.Add(detalleEntrada.IdDetalle, detalleEntrada.Articulo.Id, detalleEntrada.Articulo.Nombre, detalleEntrada.Articulo.Unidad, detalleEntrada.Articulo.Precio, detalleEntrada.Cantidad, detalleEntrada.Total);
                 }
             }
         }
@@ -178,18 +178,18 @@ namespace Inventario
         {
             if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
             {
-                List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
+                List<Detalle> detallesEntrada = new List<Detalle>();
 
                 Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
 
-                OrdenEntrada ordenEntrada = new OrdenEntrada(Int32.Parse(IdVerTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
+                Orden ordenEntrada = new Orden(Int32.Parse(IdVerTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
 
                 foreach (DataGridViewRow fila in articulosVerLista.Rows)
                 {
                     if (fila.Cells[0].Value != null)
                     {
                         Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
-                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
+                        detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
 

@@ -40,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\Articulo.cs" />
-    <Compile Include="Modelos\DetalleEntrada.cs" />
+    <Compile Include="Modelos\Detalle.cs" />
     <Compile Include="Modelos\DetalleSalida.cs" />
     <Compile Include="Modelos\InventarioProyecto.cs" />
-    <Compile Include="Modelos\OrdenEntrada.cs" />
+    <Compile Include="Modelos\Orden.cs" />
     <Compile Include="Modelos\OrdenSalida.cs" />
     <Compile Include="Modelos\Proyecto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

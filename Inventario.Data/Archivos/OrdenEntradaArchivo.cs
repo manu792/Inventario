@@ -27,9 +27,9 @@ namespace Inventario.Data
             else
                 ObtenerUltimoId();
         }
-        public List<OrdenEntrada> ObtenerOrdenEntradas()
+        public List<Orden> ObtenerOrdenEntradas()
         {
-            List<OrdenEntrada> ordenEntrada = new List<OrdenEntrada>();
+            List<Orden> ordenEntrada = new List<Orden>();
 
             using (reader = File.OpenText(direccion))
             {
@@ -37,15 +37,15 @@ namespace Inventario.Data
                 {
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
-                    ordenEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]));
+                    ordenEntrada.Add(new Orden(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]));
                 }
             }
 
             return ordenEntrada;
         }
-        public List<OrdenEntrada> ObtenerOrdenesEntrada(int idProyecto)
+        public List<Orden> ObtenerOrdenesEntrada(int idProyecto)
         {
-            List<OrdenEntrada> ordenesEntrada = new List<OrdenEntrada>();
+            List<Orden> ordenesEntrada = new List<Orden>();
 
             using (reader = File.OpenText(direccion))
             {
@@ -55,14 +55,14 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[1]) == idProyecto)
                     {
-                        ordenesEntrada.Add(new OrdenEntrada(Int32.Parse(campos[0]), new Proyecto(idProyecto), DateTime.Parse(campos[2]), campos[3]));
+                        ordenesEntrada.Add(new Orden(Int32.Parse(campos[0]), new Proyecto(idProyecto), DateTime.Parse(campos[2]), campos[3]));
                     }
                 }
             }
 
             return ordenesEntrada;
         }
-        public int Guardar(OrdenEntrada ordenEntrada)
+        public int Guardar(Orden ordenEntrada)
         {
             id += 1;
             ordenEntrada.Id = id;
@@ -72,7 +72,7 @@ namespace Inventario.Data
             }
             return id;
         }
-        public void Modificar(OrdenEntrada ordenEntrada)
+        public void Modificar(Orden ordenEntrada)
         {
             using (reader = File.OpenText(direccion))
             {

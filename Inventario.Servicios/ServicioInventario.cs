@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Inventario.Commons.Modelos;
 using Inventario.Data.Archivos;
+using Inventario.Servicios.OrdenEntradaEventArgs;
 
 namespace Inventario.Servicios
 {
@@ -23,7 +24,7 @@ namespace Inventario.Servicios
 
         public void ActualizarInventario(object sender, NuevaOrdenEntradaDetalles e)
         {
-            foreach(DetalleEntrada detalleEntrada in e.DetallesEntrada)
+            foreach(Detalle detalleEntrada in e.DetallesEntrada)
             {
                 InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
                 if (registro != null)
@@ -53,7 +54,7 @@ namespace Inventario.Servicios
 
         public void Modificar(object sender, OrdenEntradaModificadaDetalles e)
         {
-            foreach (DetalleEntrada detalleEntrada in e.DetallesEntrada)
+            foreach (Detalle detalleEntrada in e.DetallesEntrada)
             {
                 InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
                 if (registro != null)

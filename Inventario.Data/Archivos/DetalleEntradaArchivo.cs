@@ -27,9 +27,9 @@ namespace Inventario.Data
             else
                 ObtenerUltimoId();
         }
-        public List<DetalleEntrada> ObtenerDetalleEntradas(int idOrdenEntrada)
+        public List<Detalle> ObtenerDetalleEntradas(int idOrdenEntrada)
         {
-            List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
+            List<Detalle> detallesEntrada = new List<Detalle>();
 
             using (reader = File.OpenText(direccion))
             {
@@ -38,13 +38,13 @@ namespace Inventario.Data
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
                     if(Int32.Parse(campos[1]) == idOrdenEntrada)
-                        detallesEntrada.Add(new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4])));
+                        detallesEntrada.Add(new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4])));
                 }
             }
 
             return detallesEntrada;
         }
-        public DetalleEntrada ObtenerDetalleEntrada(int id)
+        public Detalle ObtenerDetalleEntrada(int id)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -54,23 +54,23 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[0]) == id)
                     {
-                        return new DetalleEntrada(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]));
+                        return new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]));
                     }
                 }
             }
 
             return null;
         }
-        public void Guardar(DetalleEntrada detalleEntrada)
+        public void Guardar(Detalle detalleEntrada)
         {
             id += 1;
-            detalleEntrada.IdDetalleEntrada = id;
+            detalleEntrada.IdDetalle = id;
             using (writer = File.AppendText(direccion))
             {
                 writer.WriteLine(detalleEntrada.ToString());
             }
         }
-        public string[] Modificar(DetalleEntrada detalleEntrada)
+        public string[] Modificar(Detalle detalleEntrada)
         {
             string[] registroModificado = null;
 
@@ -83,7 +83,7 @@ namespace Inventario.Data
                         string registro = reader.ReadLine();
                         string[] campos = registro.Split('#');
 
-                        if (Int32.Parse(campos[1]) == detalleEntrada.IdEntrada && Int32.Parse(campos[2]) == detalleEntrada.Articulo.Id)
+                        if (Int32.Parse(campos[1]) == detalleEntrada.IdOrden && Int32.Parse(campos[2]) == detalleEntrada.Articulo.Id)
                         {
                             writer.WriteLine(detalleEntrada.ToString());
                             registroModificado = campos;

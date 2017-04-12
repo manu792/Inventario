@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Inventario.Commons.Modelos
 {
-    public class DetalleEntrada
+    public class Detalle
     {
-        public int IdDetalleEntrada { get; set; }
-        public int IdEntrada { get; set; }
+        public int IdDetalle { get; set; }
+        public int IdOrden { get; set; }
         public Articulo Articulo { get; set; }
         public int Cantidad { get; set; }
         public double Total { get; set; }
 
-        public DetalleEntrada(Articulo articulo, int cantidad, double total)
+        public Detalle(Articulo articulo, int cantidad, double total)
         {
             Articulo = articulo;
             Cantidad = cantidad;
             Total = total;
         }
-        public DetalleEntrada(int idEntrada, Articulo articulo, int cantidad, double total)
+        public Detalle(int idEntrada, Articulo articulo, int cantidad, double total)
         {
-            IdEntrada = idEntrada;
+            IdOrden = idEntrada;
             Articulo = articulo;
             Cantidad = cantidad;
             Total = total;
         }
-        public DetalleEntrada(int idDetalleEntrada, int idEntrada, Articulo articulo, int cantidad, double total)
+        public Detalle(int idDetalleEntrada, int idEntrada, Articulo articulo, int cantidad, double total)
         {
-            IdDetalleEntrada = idDetalleEntrada;
-            IdEntrada = idEntrada;
+            IdDetalle = idDetalleEntrada;
+            IdOrden = idEntrada;
             Articulo = articulo;
             Cantidad = cantidad;
             Total = total;
@@ -38,7 +38,7 @@ namespace Inventario.Commons.Modelos
 
         public override string ToString()
         {
-            return IdDetalleEntrada + "#" + IdEntrada + "#" + Articulo.Id + "#" + Cantidad + "#" + Total;
+            return IdDetalle + "#" + IdOrden + "#" + Articulo.Id + "#" + Cantidad + "#" + Total;
         }
 
         public string[] ConvertirAArray()

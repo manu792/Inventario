@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Inventario.Commons.Modelos
 {
-    public class OrdenEntrada
+    public class Orden
     {
         public int Id { get; set; }
         public Proyecto Proyecto { get; set; }
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
 
-        public OrdenEntrada(Proyecto proyecto, DateTime fecha, string comentario)
+        public Orden(Proyecto proyecto, DateTime fecha, string comentario)
         {
             Proyecto = proyecto;
             Fecha = fecha;
             Comentario = comentario;
         }
-        public OrdenEntrada(int id, Proyecto proyecto, DateTime fecha, string comentario)
+        public Orden(int id, Proyecto proyecto, DateTime fecha, string comentario)
         {
             Id = id;
             Proyecto = proyecto;
