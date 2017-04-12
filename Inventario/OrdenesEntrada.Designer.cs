@@ -166,7 +166,7 @@
             this.agregarCarritoBtn.Name = "agregarCarritoBtn";
             this.agregarCarritoBtn.Size = new System.Drawing.Size(104, 23);
             this.agregarCarritoBtn.TabIndex = 61;
-            this.agregarCarritoBtn.Text = "Agregar al carrito";
+            this.agregarCarritoBtn.Text = "Agregar";
             this.agregarCarritoBtn.UseVisualStyleBackColor = true;
             this.agregarCarritoBtn.Click += new System.EventHandler(this.agregarCarritoBtn_Click);
             // 

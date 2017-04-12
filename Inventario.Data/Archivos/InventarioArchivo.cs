@@ -21,14 +21,14 @@ namespace Inventario.Data.Archivos
         {
             if (!File.Exists(direccion))
             {
-                File.Create(direccion);
+                File.Create(direccion).Close();
                 id = 0;
             }
             else
                 ObtenerUltimoId();
         }
 
-        public Inventario.Commons.Modelos.InventarioProyecto ArticuloEnProyecto(int idProyecto, int idArticulo)
+        public InventarioProyecto ArticuloEnProyecto(int idProyecto, int idArticulo)
         {
             using (reader = File.OpenText(direccion))
             {

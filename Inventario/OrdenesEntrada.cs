@@ -10,6 +10,7 @@ namespace Inventario
     public partial class OrdenesEntrada : Form
     {
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
+        private ServicioInventario ServicioInventario { get; set; }
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
         private DataView dv;
@@ -19,6 +20,7 @@ namespace Inventario
             ServicioOrdenEntrada = new ServicioOrdenEntrada();
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
+            ServicioInventario = new ServicioInventario(ServicioOrdenEntrada);
             InitializeComponent();
         }
 
@@ -174,7 +176,7 @@ namespace Inventario
 
         private void modificarBtn_Click(object sender, EventArgs e)
         {
-            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 1)
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
             {
                 List<DetalleEntrada> detallesEntrada = new List<DetalleEntrada>();
 

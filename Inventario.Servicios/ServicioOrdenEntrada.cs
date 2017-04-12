@@ -8,13 +8,44 @@ using Inventario.Data;
 
 namespace Inventario.Servicios
 {
+    public class NuevaOrdenEntradaDetalles : EventArgs
+    {
+        public int IdProyecto { get; set; }
+        public List<DetalleEntrada> DetallesEntrada { get; set; }
+
+        public NuevaOrdenEntradaDetalles(int idProyecto, List<DetalleEntrada> detallesEntrada)
+        {
+            IdProyecto = idProyecto;
+            DetallesEntrada = detallesEntrada;
+        }
+    }
+
+    public class OrdenEntradaModificadaDetalles : EventArgs
+    {
+        public int IdProyecto { get; set; }
+        public List<DetalleEntrada> DetallesEntrada { get; set; }
+        public List<string[]> RegistrosModificados { get; set; }
+
+        public OrdenEntradaModificadaDetalles(int idProyecto, List<DetalleEntrada> detallesEntrada, List<string[]> registrosModificados)
+        {
+            IdProyecto = idProyecto;
+            DetallesEntrada = detallesEntrada;
+            RegistrosModificados = registrosModificados;
+        }
+    }
+
+
+
+
     public class ServicioOrdenEntrada
     {
         private OrdenEntradaArchivo OrdenEntradaArchivo { get; set; }
         private DetalleEntradaArchivo DetalleEntradaArchivo { get; set; }
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
-        private ServicioInventario ServicioInventario { get; set; } 
+
+        public event EventHandler<NuevaOrdenEntradaDetalles> NuevaOrdeEntrada;
+        public event EventHandler<OrdenEntradaModificadaDetalles> OrdenEntradaModificada;
 
         public ServicioOrdenEntrada()
         {
@@ -22,7 +53,6 @@ namespace Inventario.Servicios
             DetalleEntradaArchivo = new DetalleEntradaArchivo();
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
-            ServicioInventario = new ServicioInventario();
         }
         
         public List<DetalleEntrada> ObtenerDetallesEntrada(int idOrdenEntrada)
@@ -54,28 +84,45 @@ namespace Inventario.Servicios
         public void Agregar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
         {
             int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
+
             foreach(DetalleEntrada detalleEntrada in detallesEntrada)
             {
                 detalleEntrada.IdEntrada = idEntrada;
                 DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
-
-            ServicioInventario.ActualizarInventario(ordenEntrada.Proyecto.Id, detallesEntrada);
+            
+            OnNuevaOrdenEntrada(new NuevaOrdenEntradaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada));
         }
 
         public void Modificar(OrdenEntrada ordenEntrada, List<DetalleEntrada> detallesEntrada)
         {
+            List<string[]> registrosModificados = new List<string[]>();
+
             OrdenEntradaArchivo.Modificar(ordenEntrada);
             foreach (DetalleEntrada detalleEntrada in detallesEntrada)
             {
-                DetalleEntradaArchivo.Modificar(detalleEntrada);
+                registrosModificados.Add(DetalleEntradaArchivo.Modificar(detalleEntrada));
             }
+
+            OnOrdenEntradaModificada(new OrdenEntradaModificadaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada, registrosModificados));
         }
 
         public void Eliminar(int idOrdenEntrada)
         {
             DetalleEntradaArchivo.Eliminar(idOrdenEntrada);
             OrdenEntradaArchivo.Eliminar(idOrdenEntrada);
+        }
+
+        protected void OnNuevaOrdenEntrada(NuevaOrdenEntradaDetalles e)
+        {
+            if (NuevaOrdeEntrada != null)
+                NuevaOrdeEntrada(this, e);
+        }
+
+        protected void OnOrdenEntradaModificada(OrdenEntradaModificadaDetalles e)
+        {
+            if (OrdenEntradaModificada != null)
+                OrdenEntradaModificada(this, e);
         }
     }
 }

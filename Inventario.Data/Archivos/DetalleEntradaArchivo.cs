@@ -70,8 +70,10 @@ namespace Inventario.Data
                 writer.WriteLine(detalleEntrada.ToString());
             }
         }
-        public void Modificar(DetalleEntrada detalleEntrada)
+        public string[] Modificar(DetalleEntrada detalleEntrada)
         {
+            string[] registroModificado = null;
+
             using (reader = File.OpenText(direccion))
             {
                 using (writer = File.AppendText(direccionTemp))
@@ -82,13 +84,18 @@ namespace Inventario.Data
                         string[] campos = registro.Split('#');
 
                         if (Int32.Parse(campos[1]) == detalleEntrada.IdEntrada && Int32.Parse(campos[2]) == detalleEntrada.Articulo.Id)
+                        {
                             writer.WriteLine(detalleEntrada.ToString());
+                            registroModificado = campos;
+                        }
                         else
                             writer.WriteLine(registro);
                     }
                 }
             }
             File.Replace(direccionTemp, direccion, direccionBackup);
+            
+            return registroModificado;
         }
         public void Eliminar(int idOrdenEntrada)
         {
