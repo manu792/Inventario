@@ -13,13 +13,24 @@ namespace Inventario.Servicios
     {
         private InventarioArchivo InventarioArchivo { get; set; }
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
+        private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
+        private ServicioArticulo ServicioArticulo { get; set; }
 
-        public ServicioInventario(ServicioOrdenEntrada servicioOrdenEntrada)
+        public ServicioInventario()
         {
             InventarioArchivo = new InventarioArchivo();
+            ServicioArticulo = new ServicioArticulo();
+        }
+
+        public ServicioInventario(ServicioOrdenEntrada servicioOrdenEntrada) : this()
+        {
             ServicioOrdenEntrada = servicioOrdenEntrada;
             ServicioOrdenEntrada.NuevaOrdeEntrada += ActualizarInventario;
             ServicioOrdenEntrada.OrdenEntradaModificada += Modificar;
+        }
+        public ServicioInventario(ServicioOrdenSalida servicioOrdenSalida) : this()
+        {
+            ServicioOrdenSalida = servicioOrdenSalida;
         }
 
         public void ActualizarInventario(object sender, NuevaOrdenEntradaDetalles e)
@@ -33,7 +44,7 @@ namespace Inventario.Servicios
                     InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleEntrada.Articulo.Id, registro);
                 }
                 else
-                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(e.IdProyecto, detalleEntrada.Articulo.Id, detalleEntrada.Cantidad));
+                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad));
             }
         }
 
@@ -59,7 +70,7 @@ namespace Inventario.Servicios
                 InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
                 if (registro != null)
                 {
-                    string[] campos = e.RegistrosModificados.Where(x => Int32.Parse(x[2]) == registro.IdArticulo).FirstOrDefault();
+                    string[] campos = e.RegistrosModificados.Where(x => Int32.Parse(x[2]) == registro.Articulo.Id).FirstOrDefault();
                     if (campos != null)
                     {
                         registro.Cantidad -= Int32.Parse(campos[3]);
@@ -69,8 +80,17 @@ namespace Inventario.Servicios
                     }
                 }
                 else
-                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(e.IdProyecto, detalleEntrada.Articulo.Id, detalleEntrada.Cantidad));
+                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad));
             }
+        }
+        public List<InventarioProyecto> ObtenerArticulosPorProyecto(int idProyecto)
+        {
+            List<InventarioProyecto> inventario = InventarioArchivo.ArticulosEnProyecto(idProyecto);
+            foreach(InventarioProyecto registro in inventario)
+            {
+                registro.Articulo = ServicioArticulo.ObtenerArticulo(registro.Articulo.Id);
+            }
+            return inventario;
         }
     }
 }

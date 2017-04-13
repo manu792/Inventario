@@ -28,6 +28,23 @@ namespace Inventario.Data.Archivos
                 ObtenerUltimoId();
         }
 
+        public List<InventarioProyecto> ArticulosEnProyecto(int idProyecto)
+        {
+            List<InventarioProyecto> inventario = new List<InventarioProyecto>();
+
+            using (reader = File.OpenText(direccion))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string registro = reader.ReadLine();
+                    string[] campos = registro.Split('#');
+                    if (Int32.Parse(campos[1]) == idProyecto)
+                        inventario.Add(new InventarioProyecto(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3])));
+                }
+            }
+            return inventario;
+        }
+
         public InventarioProyecto ArticuloEnProyecto(int idProyecto, int idArticulo)
         {
             using (reader = File.OpenText(direccion))
@@ -37,7 +54,7 @@ namespace Inventario.Data.Archivos
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[1]) == idProyecto && Int32.Parse(campos[2]) == idArticulo)
-                        return new InventarioProyecto(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]));
+                        return new InventarioProyecto(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]));
                 }
             }
             return null;

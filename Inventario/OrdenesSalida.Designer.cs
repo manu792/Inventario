@@ -30,7 +30,6 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.limpiarBtn = new System.Windows.Forms.Button();
             this.borrarBtn = new System.Windows.Forms.Button();
@@ -53,6 +52,7 @@
             this.agregarBtn = new System.Windows.Forms.Button();
             this.listaProyectos = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -72,16 +72,16 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.proyectosComboBox = new System.Windows.Forms.ComboBox();
+            this.listaProyectosVer = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.carritoDataGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -111,29 +111,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Agregar";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.listView1);
-            this.tabPage2.Controls.Add(this.dateTimePicker3);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.ordenesEntradaListView);
-            this.tabPage2.Controls.Add(this.proyectosComboBox);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1082, 530);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ver";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -193,6 +170,7 @@
             this.buscarTxt.Name = "buscarTxt";
             this.buscarTxt.Size = new System.Drawing.Size(284, 20);
             this.buscarTxt.TabIndex = 59;
+            this.buscarTxt.TextChanged += new System.EventHandler(this.buscarTxt_TextChanged);
             // 
             // groupBox3
             // 
@@ -316,6 +294,7 @@
             this.listaProyectos.Name = "listaProyectos";
             this.listaProyectos.Size = new System.Drawing.Size(247, 21);
             this.listaProyectos.TabIndex = 59;
+            this.listaProyectos.SelectedIndexChanged += new System.EventHandler(this.listaProyectos_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -325,6 +304,29 @@
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 58;
             this.label1.Text = "Proyecto:";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Controls.Add(this.dateTimePicker3);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.ordenesEntradaListView);
+            this.tabPage2.Controls.Add(this.listaProyectosVer);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1082, 530);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Ver";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -464,13 +466,13 @@
             // 
             this.columnHeader8.Text = "Comentario";
             // 
-            // proyectosComboBox
+            // listaProyectosVer
             // 
-            this.proyectosComboBox.FormattingEnabled = true;
-            this.proyectosComboBox.Location = new System.Drawing.Point(453, 33);
-            this.proyectosComboBox.Name = "proyectosComboBox";
-            this.proyectosComboBox.Size = new System.Drawing.Size(190, 21);
-            this.proyectosComboBox.TabIndex = 72;
+            this.listaProyectosVer.FormattingEnabled = true;
+            this.listaProyectosVer.Location = new System.Drawing.Point(453, 33);
+            this.listaProyectosVer.Name = "listaProyectosVer";
+            this.listaProyectosVer.Size = new System.Drawing.Size(190, 21);
+            this.listaProyectosVer.TabIndex = 72;
             // 
             // label14
             // 
@@ -493,14 +495,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.carritoDataGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -551,7 +553,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ComboBox proyectosComboBox;
+        private System.Windows.Forms.ComboBox listaProyectosVer;
         private System.Windows.Forms.Label label14;
     }
 }
