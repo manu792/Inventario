@@ -16,8 +16,8 @@ namespace Inventario.Servicios
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
 
-        public event EventHandler<NuevaOrdenEntradaDetalles> NuevaOrdeEntrada;
-        public event EventHandler<OrdenEntradaModificadaDetalles> OrdenEntradaModificada;
+        public event EventHandler<NuevaOrdenDetalles> NuevaOrdeEntrada;
+        public event EventHandler<OrdenModificadaDetalles> OrdenEntradaModificada;
 
         public ServicioOrdenEntrada()
         {
@@ -63,7 +63,7 @@ namespace Inventario.Servicios
                 DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
             
-            OnNuevaOrdenEntrada(new NuevaOrdenEntradaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada));
+            OnNuevaOrdenEntrada(new NuevaOrdenDetalles(ordenEntrada.Proyecto.Id, detallesEntrada));
         }
 
         public void Modificar(Orden ordenEntrada, List<Detalle> detallesEntrada)
@@ -76,7 +76,7 @@ namespace Inventario.Servicios
                 registrosModificados.Add(DetalleEntradaArchivo.Modificar(detalleEntrada));
             }
 
-            OnOrdenEntradaModificada(new OrdenEntradaModificadaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada, registrosModificados));
+            OnOrdenEntradaModificada(new OrdenModificadaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada, registrosModificados));
         }
 
         public void Eliminar(int idOrdenEntrada)
@@ -85,13 +85,13 @@ namespace Inventario.Servicios
             OrdenEntradaArchivo.Eliminar(idOrdenEntrada);
         }
 
-        protected void OnNuevaOrdenEntrada(NuevaOrdenEntradaDetalles e)
+        protected void OnNuevaOrdenEntrada(NuevaOrdenDetalles e)
         {
             if (NuevaOrdeEntrada != null)
                 NuevaOrdeEntrada(this, e);
         }
 
-        protected void OnOrdenEntradaModificada(OrdenEntradaModificadaDetalles e)
+        protected void OnOrdenEntradaModificada(OrdenModificadaDetalles e)
         {
             if (OrdenEntradaModificada != null)
                 OrdenEntradaModificada(this, e);

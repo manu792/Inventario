@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Inventario.Servicios.OrdenEntradaEventArgs
 {
-    public class NuevaOrdenEntradaDetalles : EventArgs
+    public class NuevaOrdenDetalles : EventArgs
     {
         public int IdProyecto { get; set; }
-        public List<Detalle> DetallesEntrada { get; set; }
+        public List<Detalle> Detalles { get; set; }
 
-        public NuevaOrdenEntradaDetalles(int idProyecto, List<Detalle> detallesEntrada)
+        public NuevaOrdenDetalles(int idProyecto, List<Detalle> detalles)
         {
             IdProyecto = idProyecto;
-            DetallesEntrada = detallesEntrada;
+            Detalles = detalles;
         }
     }
 }

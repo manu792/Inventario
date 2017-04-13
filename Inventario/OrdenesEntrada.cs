@@ -80,12 +80,12 @@ namespace Inventario
             {
                 foreach(DataGridViewRow fila in articulosDataGrid.SelectedRows)
                 {
-                    if(!ExisteFila(fila))
+                    if(!ExisteArticulo(fila))
                         articulosDataGridView.Rows.Add(0, fila.Cells[0].Value, fila.Cells[1].Value, fila.Cells[2].Value, fila.Cells[3].Value, 1, fila.Cells[3].Value);
                 }
             }
         }
-        private bool ExisteFila(DataGridViewRow fila)
+        private bool ExisteArticulo(DataGridViewRow fila)
         {
             foreach (DataGridViewRow filaCarrito in articulosDataGridView.Rows)
             {

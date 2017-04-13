@@ -40,13 +40,6 @@
             this.buscarTxt = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.articulosDataGridView = new System.Windows.Forms.DataGridView();
-            this.IdDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.articulosDataGrid = new System.Windows.Forms.DataGridView();
             this.fechaOrdenEntrada = new System.Windows.Forms.DateTimePicker();
@@ -84,6 +77,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.proyectosVerLista = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -200,10 +200,9 @@
             // articulosDataGridView
             // 
             this.articulosDataGridView.AllowUserToAddRows = false;
-            this.articulosDataGridView.AllowUserToDeleteRows = false;
             this.articulosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.articulosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdDetalle,
+            this.idDetalle,
             this.idColumn,
             this.nombreColumn,
             this.unidadColumn,
@@ -215,49 +214,6 @@
             this.articulosDataGridView.Size = new System.Drawing.Size(494, 179);
             this.articulosDataGridView.TabIndex = 1;
             this.articulosDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.carritoDataGridView_CellEndEdit);
-            // 
-            // IdDetalle
-            // 
-            this.IdDetalle.HeaderText = "IdDetalle";
-            this.IdDetalle.Name = "IdDetalle";
-            this.IdDetalle.ReadOnly = true;
-            this.IdDetalle.Visible = false;
-            // 
-            // idColumn
-            // 
-            this.idColumn.HeaderText = "IdEntrada";
-            this.idColumn.Name = "idColumn";
-            this.idColumn.ReadOnly = true;
-            this.idColumn.Visible = false;
-            // 
-            // nombreColumn
-            // 
-            this.nombreColumn.HeaderText = "Nombre";
-            this.nombreColumn.Name = "nombreColumn";
-            this.nombreColumn.ReadOnly = true;
-            // 
-            // unidadColumn
-            // 
-            this.unidadColumn.HeaderText = "Unidad";
-            this.unidadColumn.Name = "unidadColumn";
-            this.unidadColumn.ReadOnly = true;
-            // 
-            // precioColumn
-            // 
-            this.precioColumn.HeaderText = "Precio";
-            this.precioColumn.Name = "precioColumn";
-            this.precioColumn.ReadOnly = true;
-            // 
-            // cantidadColumn
-            // 
-            this.cantidadColumn.HeaderText = "Cantidad";
-            this.cantidadColumn.Name = "cantidadColumn";
-            // 
-            // totalColumn
-            // 
-            this.totalColumn.HeaderText = "Total";
-            this.totalColumn.Name = "totalColumn";
-            this.totalColumn.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -271,6 +227,8 @@
             // 
             // articulosDataGrid
             // 
+            this.articulosDataGrid.AllowUserToAddRows = false;
+            this.articulosDataGrid.AllowUserToDeleteRows = false;
             this.articulosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.articulosDataGrid.Location = new System.Drawing.Point(6, 15);
             this.articulosDataGrid.Name = "articulosDataGrid";
@@ -580,6 +538,49 @@
             this.label12.TabIndex = 68;
             this.label12.Text = "Proyecto:";
             // 
+            // idDetalle
+            // 
+            this.idDetalle.HeaderText = "IdDetalle";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            // 
+            // idColumn
+            // 
+            this.idColumn.HeaderText = "IdEntrada";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.ReadOnly = true;
+            this.idColumn.Visible = false;
+            // 
+            // nombreColumn
+            // 
+            this.nombreColumn.HeaderText = "Nombre";
+            this.nombreColumn.Name = "nombreColumn";
+            this.nombreColumn.ReadOnly = true;
+            // 
+            // unidadColumn
+            // 
+            this.unidadColumn.HeaderText = "Unidad";
+            this.unidadColumn.Name = "unidadColumn";
+            this.unidadColumn.ReadOnly = true;
+            // 
+            // precioColumn
+            // 
+            this.precioColumn.HeaderText = "Precio";
+            this.precioColumn.Name = "precioColumn";
+            this.precioColumn.ReadOnly = true;
+            // 
+            // cantidadColumn
+            // 
+            this.cantidadColumn.HeaderText = "Cantidad";
+            this.cantidadColumn.Name = "cantidadColumn";
+            // 
+            // totalColumn
+            // 
+            this.totalColumn.HeaderText = "Total";
+            this.totalColumn.Name = "totalColumn";
+            this.totalColumn.ReadOnly = true;
+            // 
             // OrdenesEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,13 +631,6 @@
         private System.Windows.Forms.Button limpiarBtn;
         private System.Windows.Forms.Button borrarBtn;
         private System.Windows.Forms.DataGridView articulosDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdDetalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unidadColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView articulosVerLista;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -662,5 +656,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button modificarBtn;
         private System.Windows.Forms.Button eliminarBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unidadColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
     }
 }

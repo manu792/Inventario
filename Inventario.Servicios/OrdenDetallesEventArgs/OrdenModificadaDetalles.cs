@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Inventario.Servicios.OrdenEntradaEventArgs
 {
-    public class OrdenEntradaModificadaDetalles : EventArgs
+    public class OrdenModificadaDetalles : EventArgs
     {
         public int IdProyecto { get; set; }
-        public List<Detalle> DetallesEntrada { get; set; }
+        public List<Detalle> Detalles { get; set; }
         public List<string[]> RegistrosModificados { get; set; }
 
-        public OrdenEntradaModificadaDetalles(int idProyecto, List<Detalle> detallesEntrada, List<string[]> registrosModificados)
+        public OrdenModificadaDetalles(int idProyecto, List<Detalle> detalles, List<string[]> registrosModificados)
         {
             IdProyecto = idProyecto;
-            DetallesEntrada = detallesEntrada;
+            Detalles = detalles;
             RegistrosModificados = registrosModificados;
         }
     }

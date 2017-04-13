@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Inventario.Servicios.OrdenEntradaEventArgs;
 
 namespace Inventario.Servicios
 {
@@ -15,8 +16,8 @@ namespace Inventario.Servicios
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
 
-        //public event EventHandler<NuevaOrdenEntradaDetalles> NuevaOrdeEntrada;
-        //public event EventHandler<OrdenEntradaModificadaDetalles> OrdenEntradaModificada;
+        public event EventHandler<NuevaOrdenDetalles> NuevaOrdenSalida;
+        public event EventHandler<OrdenModificadaDetalles> OrdenSalidaModificada;
 
         public ServicioOrdenSalida()
         {
@@ -62,7 +63,7 @@ namespace Inventario.Servicios
                 DetalleSalidaArchivo.Guardar(detalleSalida);
             }
 
-            //OnNuevaOrdenEntrada(new NuevaOrdenEntradaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada));
+            OnNuevaOrdenSalida(new NuevaOrdenDetalles(ordenSalida.Proyecto.Id, detallesSalida));
         }
 
         public void Modificar(Orden ordenSalida, List<Detalle> detallesSalida)
@@ -75,7 +76,7 @@ namespace Inventario.Servicios
                 registrosModificados.Add(DetalleSalidaArchivo.Modificar(detalleSalida));
             }
 
-            //OnOrdenEntradaModificada(new OrdenEntradaModificadaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada, registrosModificados));
+            OnOrdenSalidaModificada(new OrdenModificadaDetalles(ordenSalida.Proyecto.Id, detallesSalida, registrosModificados));
         }
 
         public void Eliminar(int idOrdenSalida)
@@ -84,16 +85,16 @@ namespace Inventario.Servicios
             OrdenSalidaArchivo.Eliminar(idOrdenSalida);
         }
 
-        //protected void OnNuevaOrdenEntrada(NuevaOrdenEntradaDetalles e)
-        //{
-        //    if (NuevaOrdeEntrada != null)
-        //        NuevaOrdeEntrada(this, e);
-        //}
+        protected void OnNuevaOrdenSalida(NuevaOrdenDetalles e)
+        {
+            if (NuevaOrdenSalida != null)
+                NuevaOrdenSalida(this, e);
+        }
 
-        //protected void OnOrdenEntradaModificada(OrdenEntradaModificadaDetalles e)
-        //{
-        //    if (OrdenEntradaModificada != null)
-        //        OrdenEntradaModificada(this, e);
-        //}
+        protected void OnOrdenSalidaModificada(OrdenModificadaDetalles e)
+        {
+            if (OrdenSalidaModificada != null)
+                OrdenSalidaModificada(this, e);
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Inventario.Servicios
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
 
-        public ServicioInventario()
+        private ServicioInventario()
         {
             InventarioArchivo = new InventarioArchivo();
             ServicioArticulo = new ServicioArticulo();
@@ -25,17 +25,19 @@ namespace Inventario.Servicios
         public ServicioInventario(ServicioOrdenEntrada servicioOrdenEntrada) : this()
         {
             ServicioOrdenEntrada = servicioOrdenEntrada;
-            ServicioOrdenEntrada.NuevaOrdeEntrada += ActualizarInventario;
+            ServicioOrdenEntrada.NuevaOrdeEntrada += AgregarAlInventario;
             ServicioOrdenEntrada.OrdenEntradaModificada += Modificar;
         }
         public ServicioInventario(ServicioOrdenSalida servicioOrdenSalida) : this()
         {
             ServicioOrdenSalida = servicioOrdenSalida;
+            ServicioOrdenSalida.NuevaOrdenSalida += RemoverDelInventario;
+            servicioOrdenSalida.OrdenSalidaModificada += Modificar;
         }
 
-        public void ActualizarInventario(object sender, NuevaOrdenEntradaDetalles e)
+        public void AgregarAlInventario(object sender, NuevaOrdenDetalles e)
         {
-            foreach(Detalle detalleEntrada in e.DetallesEntrada)
+            foreach(Detalle detalleEntrada in e.Detalles)
             {
                 InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
                 if (registro != null)
@@ -48,24 +50,24 @@ namespace Inventario.Servicios
             }
         }
 
-        public void ActualizarInventario(int idProyecto, List<DetalleSalida> detallesSalida)
+        public void RemoverDelInventario(object sender, NuevaOrdenDetalles e)
         {
-            foreach (DetalleSalida detalleSalida in detallesSalida)
+            foreach (Detalle detalleSalida in e.Detalles)
             {
-                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(idProyecto, detalleSalida.IdArticulo);
+                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleSalida.Articulo.Id);
                 if (registro != null)
                 {
                     registro.Cantidad -= detalleSalida.Cantidad;
-                    InventarioArchivo.ActualizarCantidad(idProyecto, detalleSalida.IdArticulo, registro);
+                    InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleSalida.Articulo.Id, registro);
                 }
                 else
-                    throw new Exception("El articulo no existe para el proyecto con id: " + idProyecto);
+                    throw new Exception("El articulo no existe para el proyecto con id: " + e.IdProyecto);
             }
         }
 
-        public void Modificar(object sender, OrdenEntradaModificadaDetalles e)
+        public void Modificar(object sender, OrdenModificadaDetalles e)
         {
-            foreach (Detalle detalleEntrada in e.DetallesEntrada)
+            foreach (Detalle detalleEntrada in e.Detalles)
             {
                 InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
                 if (registro != null)
