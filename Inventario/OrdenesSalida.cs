@@ -56,7 +56,7 @@ namespace Inventario
             table.Columns.Add("Cantidad");
 
             foreach (InventarioProyecto registro in inventario)
-                table.Rows.Add(registro.Id, registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad);
+                table.Rows.Add(registro.Articulo.Id, registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad);
 
             articulosDataGrid.DataSource = table;
             dv = new DataView(table);
@@ -161,6 +161,16 @@ namespace Inventario
                 return true;
 
             return false;
+        }
+
+        private void modificarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eliminarBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

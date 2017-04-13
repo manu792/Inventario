@@ -91,6 +91,25 @@ namespace Inventario.Data.Archivos
             }
         }
 
+        public void EliminarArticuloInventario(int id)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                using (writer = File.AppendText(direccionTemp))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string registro = reader.ReadLine();
+                        string[] campos = registro.Split('#');
+
+                        if (Int32.Parse(campos[0]) != id)
+                            writer.WriteLine(registro);
+                    }
+                }
+            }
+            File.Replace(direccionTemp, direccion, direccionBackup);
+        }
+
         private void ObtenerUltimoId()
         {
             using (reader = File.OpenText(direccion))
