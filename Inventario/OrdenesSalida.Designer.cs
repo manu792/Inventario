@@ -72,6 +72,8 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
+            this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
             this.proyectosVerLista = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,8 +83,7 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
-            this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
+            this.cantidadInventarioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -378,7 +379,8 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            this.dataGridViewTextBoxColumn7,
+            this.cantidadInventarioColumn});
             this.articulosVerLista.Location = new System.Drawing.Point(6, 19);
             this.articulosVerLista.Name = "articulosVerLista";
             this.articulosVerLista.Size = new System.Drawing.Size(557, 179);
@@ -501,6 +503,18 @@
             this.columnHeader8.Text = "Comentario";
             this.columnHeader8.Width = 150;
             // 
+            // imageListGrande
+            // 
+            this.imageListGrande.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListGrande.ImageStream")));
+            this.imageListGrande.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListGrande.Images.SetKeyName(0, "notebook.png");
+            // 
+            // imageListPeque
+            // 
+            this.imageListPeque.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListPeque.ImageStream")));
+            this.imageListPeque.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListPeque.Images.SetKeyName(0, "pencil.png");
+            // 
             // proyectosVerLista
             // 
             this.proyectosVerLista.FormattingEnabled = true;
@@ -563,17 +577,11 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
-            // imageListGrande
+            // cantidadInventarioColumn
             // 
-            this.imageListGrande.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListGrande.ImageStream")));
-            this.imageListGrande.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListGrande.Images.SetKeyName(0, "notebook.png");
-            // 
-            // imageListPeque
-            // 
-            this.imageListPeque.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListPeque.ImageStream")));
-            this.imageListPeque.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListPeque.Images.SetKeyName(0, "pencil.png");
+            this.cantidadInventarioColumn.HeaderText = "Cantidad Inventario";
+            this.cantidadInventarioColumn.Name = "cantidadInventarioColumn";
+            this.cantidadInventarioColumn.ReadOnly = true;
             // 
             // OrdenesSalida
             // 
@@ -647,6 +655,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView articulosVerLista;
+        private System.Windows.Forms.ImageList imageListGrande;
+        private System.Windows.Forms.ImageList imageListPeque;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -654,7 +664,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.ImageList imageListGrande;
-        private System.Windows.Forms.ImageList imageListPeque;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadInventarioColumn;
     }
 }

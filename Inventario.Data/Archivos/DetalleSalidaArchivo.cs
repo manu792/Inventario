@@ -38,7 +38,8 @@ namespace Inventario.Data
                 {
                     string registro = reader.ReadLine();
                     string[] campos = registro.Split('#');
-                    detalleSalida.Add((new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]))));
+                    if (Int32.Parse(campos[1]) == idOrdenSalida)
+                        detalleSalida.Add((new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]))));
                 }
             }
 

@@ -18,12 +18,14 @@ namespace Inventario
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
         private ServicioInventario ServicioInventario { get; set; }
         private DataView dv;
+        private List<int> cantidades;
 
         public OrdenesSalida()
         {
             ServicioProyecto = new ServicioProyecto();
             ServicioOrdenSalida = new ServicioOrdenSalida();
             ServicioInventario = new ServicioInventario(ServicioOrdenSalida);
+            cantidades = new List<int>();
             InitializeComponent();
         }
 
@@ -133,10 +135,15 @@ namespace Inventario
         private void articulosVerLista_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView data = sender as DataGridView;
-            int cantidadMaxima = Int32.Parse(data.Rows[e.RowIndex].Cells[7].Value.ToString());
+            Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+            int cantidadMaxima = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, Int32.Parse(data.Rows[e.RowIndex].Cells[1].Value.ToString())) + cantidades[e.RowIndex];
+
+            if (data.Rows[e.RowIndex].Cells[5].Value == null || data.Rows[e.RowIndex].Cells[5].Value.ToString() == string.Empty || Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) == 0)
+                data.Rows[e.RowIndex].Cells[5].Value = 1;
+
             if (Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) > cantidadMaxima)
             {
-                MessageBox.Show("La cantidad de articulos a eliminar debe ser menor a la cantidad en inventario");
+                MessageBox.Show("La cantidad de articulos a eliminar debe ser menor o igual a la cantidad que se ingresaron en la orden de entrada");
                 data.Rows[e.RowIndex].Cells[5].Value = 1;
             }
             data.Rows[e.RowIndex].Cells[6].Value = Double.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) * Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString());
@@ -187,6 +194,8 @@ namespace Inventario
                     }
                 }
                 ServicioOrdenSalida.Agregar(ordenSalida, detallesSalida);
+
+                MessageBox.Show("Orden de salida ingresada correctamente");
             }
         }
         private bool EsDataValida()
@@ -211,13 +220,15 @@ namespace Inventario
                 {
                     if (fila.Cells[0].Value != null)
                     {
-                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString()));
                         detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
 
                 ServicioOrdenSalida.Modificar(ordenEntrada, detallesEntrada);
                 CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+
+                MessageBox.Show("Orden de salida modificada correctamente");
             }
         }
 
@@ -261,6 +272,8 @@ namespace Inventario
 
         private void ordenesEntradaVerLista_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cantidades.Clear();
+
             if (ordenesSalidaVerLista.SelectedItems.Count > 0)
             {
                 articulosVerLista.Rows.Clear();
@@ -274,13 +287,15 @@ namespace Inventario
                 foreach (Detalle detalleSalida in detallesSalida)
                 {
                     Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-                    //int cantidadEnInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleSalida.Articulo.Id);
+                    int cantidadEnInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleSalida.Articulo.Id);
 
-                    articulosVerLista.Rows.Add(detalleSalida.IdDetalle, detalleSalida.Articulo.Id, detalleSalida.Articulo.Nombre, detalleSalida.Articulo.Unidad, detalleSalida.Articulo.Precio, detalleSalida.Cantidad, detalleSalida.Total);
-                    //if (cantidadEnInventario == 0)
-                    //    articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
-                    //else
-                    //    articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
+                    articulosVerLista.Rows.Add(detalleSalida.IdDetalle, detalleSalida.Articulo.Id, detalleSalida.Articulo.Nombre, detalleSalida.Articulo.Unidad, detalleSalida.Articulo.Precio, detalleSalida.Cantidad, detalleSalida.Total, cantidadEnInventario);
+                    if (cantidadEnInventario == 0)
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
+                    else
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
+
+                    cantidades.Add(detalleSalida.Cantidad);
                 }
             }
         }

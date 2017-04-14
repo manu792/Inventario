@@ -156,6 +156,7 @@ namespace Inventario
                     }
                 }
                 ServicioOrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
+                MessageBox.Show("Orden de entrada ingresada correctamente");
             }
         }
         private bool EsDataValida()
@@ -180,7 +181,15 @@ namespace Inventario
                 List<Detalle> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
                 foreach (Detalle detalleEntrada in detallesEntrada)
                 {
+                    Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+                    int cantidadInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleEntrada.Articulo.Id);
+
                     articulosVerLista.Rows.Add(detalleEntrada.IdDetalle, detalleEntrada.Articulo.Id, detalleEntrada.Articulo.Nombre, detalleEntrada.Articulo.Unidad, detalleEntrada.Articulo.Precio, detalleEntrada.Cantidad, detalleEntrada.Total);
+
+                    if (cantidadInventario > 0)
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
+                    else
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
                 }
             }
         }
@@ -209,13 +218,15 @@ namespace Inventario
                 {
                     if (fila.Cells[0].Value != null)
                     {
-                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString()));
                         detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
 
                 ServicioOrdenEntrada.Modificar(ordenEntrada, detallesEntrada);
                 CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
+
+                MessageBox.Show("Orden de entrada modificada correctamente");
             }
         }
 

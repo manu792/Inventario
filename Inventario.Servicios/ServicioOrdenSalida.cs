@@ -75,7 +75,6 @@ namespace Inventario.Servicios
             {
                 registrosModificados.Add(DetalleSalidaArchivo.Modificar(detalleSalida));
             }
-
             OnOrdenSalidaModificada(new OrdenModificadaDetalles(ordenSalida.Proyecto.Id, detallesSalida, registrosModificados));
         }
 
