@@ -53,6 +53,12 @@
     <Compile Include="ArticulosForm.Designer.cs">
       <DependentUpon>ArticulosForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventarioForm.Designer.cs">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrdenesEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ArticulosForm.resx">
       <DependentUpon>ArticulosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventarioForm.resx">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdenesEntrada.resx">
       <DependentUpon>OrdenesEntrada.cs</DependentUpon>
