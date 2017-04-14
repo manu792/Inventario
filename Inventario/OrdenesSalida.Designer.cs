@@ -54,27 +54,32 @@
             this.listaProyectos = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.articulosVerLista = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.fechaVer = new System.Windows.Forms.DateTimePicker();
             this.modificarBtn = new System.Windows.Forms.Button();
             this.eliminarBtn = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.IdVerTxt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.comentarioVerTxt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.ordenesEntradaListView = new System.Windows.Forms.ListView();
+            this.ordenesSalidaVerLista = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listaProyectosVer = new System.Windows.Forms.ComboBox();
+            this.proyectosVerLista = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadInventario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -83,6 +88,8 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -127,7 +134,7 @@
             this.groupBox1.Size = new System.Drawing.Size(1024, 284);
             this.groupBox1.TabIndex = 65;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Articulos en Inventario";
+            this.groupBox1.Text = "Articulos";
             // 
             // limpiarBtn
             // 
@@ -201,7 +208,8 @@
             this.articulosDataGridView.Name = "articulosDataGridView";
             this.articulosDataGridView.Size = new System.Drawing.Size(494, 179);
             this.articulosDataGridView.TabIndex = 1;
-            this.articulosDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.articulosDataGridView_CellEndEdit);
+            this.articulosDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ArticulosDataGridView_EditingControlShowing);
+            this.articulosDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ArticulosDataGridView_CellEndEdit);
             // 
             // idColumn
             // 
@@ -247,7 +255,7 @@
             this.groupBox2.Size = new System.Drawing.Size(475, 172);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lista de Articulos";
+            this.groupBox2.Text = "Articulos en Inventario";
             // 
             // articulosDataGrid
             // 
@@ -324,18 +332,18 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.listView1);
-            this.tabPage2.Controls.Add(this.dateTimePicker3);
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.fechaVer);
             this.tabPage2.Controls.Add(this.modificarBtn);
             this.tabPage2.Controls.Add(this.eliminarBtn);
-            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.IdVerTxt);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.comentarioVerTxt);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.ordenesEntradaListView);
-            this.tabPage2.Controls.Add(this.listaProyectosVer);
+            this.tabPage2.Controls.Add(this.ordenesSalidaVerLista);
+            this.tabPage2.Controls.Add(this.proyectosVerLista);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -345,55 +353,55 @@
             this.tabPage2.Text = "Ver";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // groupBox5
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(534, 286);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 83;
-            this.label10.Text = "Articulos:";
+            this.groupBox5.Controls.Add(this.articulosVerLista);
+            this.groupBox5.Location = new System.Drawing.Point(494, 260);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(569, 203);
+            this.groupBox5.TabIndex = 85;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Articulos";
             // 
-            // listView1
+            // articulosVerLista
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(607, 286);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(345, 164);
-            this.listView1.TabIndex = 82;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.articulosVerLista.AllowUserToAddRows = false;
+            this.articulosVerLista.AllowUserToDeleteRows = false;
+            this.articulosVerLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.articulosVerLista.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.cantidadInventario});
+            this.articulosVerLista.Location = new System.Drawing.Point(6, 19);
+            this.articulosVerLista.Name = "articulosVerLista";
+            this.articulosVerLista.Size = new System.Drawing.Size(557, 179);
+            this.articulosVerLista.TabIndex = 1;
+            this.articulosVerLista.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.articulosVerLista_CellEndEdit);
             // 
-            // columnHeader1
+            // label8
             // 
-            this.columnHeader1.Text = "Nombre";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(252, 79);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 84;
+            this.label8.Text = "Ordenes de Salida:";
             // 
-            // columnHeader2
+            // fechaVer
             // 
-            this.columnHeader2.Text = "Precio";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Cantidad";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Total";
-            // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(204, 317);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(297, 20);
-            this.dateTimePicker3.TabIndex = 81;
+            this.fechaVer.Location = new System.Drawing.Point(125, 310);
+            this.fechaVer.Name = "fechaVer";
+            this.fechaVer.Size = new System.Drawing.Size(297, 20);
+            this.fechaVer.TabIndex = 81;
             // 
             // modificarBtn
             // 
-            this.modificarBtn.Location = new System.Drawing.Point(494, 469);
+            this.modificarBtn.Location = new System.Drawing.Point(453, 469);
             this.modificarBtn.Name = "modificarBtn";
             this.modificarBtn.Size = new System.Drawing.Size(75, 23);
             this.modificarBtn.TabIndex = 80;
@@ -403,7 +411,7 @@
             // 
             // eliminarBtn
             // 
-            this.eliminarBtn.Location = new System.Drawing.Point(575, 469);
+            this.eliminarBtn.Location = new System.Drawing.Point(534, 469);
             this.eliminarBtn.Name = "eliminarBtn";
             this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
             this.eliminarBtn.TabIndex = 79;
@@ -411,35 +419,35 @@
             this.eliminarBtn.UseVisualStyleBackColor = true;
             this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
-            // textBox3
+            // IdVerTxt
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(204, 283);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(297, 20);
-            this.textBox3.TabIndex = 78;
+            this.IdVerTxt.Enabled = false;
+            this.IdVerTxt.Location = new System.Drawing.Point(125, 276);
+            this.IdVerTxt.Name = "IdVerTxt";
+            this.IdVerTxt.Size = new System.Drawing.Size(297, 20);
+            this.IdVerTxt.TabIndex = 78;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(131, 286);
+            this.label11.Location = new System.Drawing.Point(52, 279);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 77;
             this.label11.Text = "Id:";
             // 
-            // textBox4
+            // comentarioVerTxt
             // 
-            this.textBox4.Location = new System.Drawing.Point(204, 346);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(345, 104);
-            this.textBox4.TabIndex = 76;
+            this.comentarioVerTxt.Location = new System.Drawing.Point(125, 339);
+            this.comentarioVerTxt.Multiline = true;
+            this.comentarioVerTxt.Name = "comentarioVerTxt";
+            this.comentarioVerTxt.Size = new System.Drawing.Size(345, 104);
+            this.comentarioVerTxt.TabIndex = 76;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(131, 349);
+            this.label12.Location = new System.Drawing.Point(52, 342);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(63, 13);
             this.label12.TabIndex = 75;
@@ -448,26 +456,27 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(131, 323);
+            this.label13.Location = new System.Drawing.Point(52, 316);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(40, 13);
             this.label13.TabIndex = 74;
             this.label13.Text = "Fecha:";
             // 
-            // ordenesEntradaListView
+            // ordenesSalidaVerLista
             // 
-            this.ordenesEntradaListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ordenesSalidaVerLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8});
-            this.ordenesEntradaListView.FullRowSelect = true;
-            this.ordenesEntradaListView.Location = new System.Drawing.Point(251, 60);
-            this.ordenesEntradaListView.MultiSelect = false;
-            this.ordenesEntradaListView.Name = "ordenesEntradaListView";
-            this.ordenesEntradaListView.Size = new System.Drawing.Size(578, 172);
-            this.ordenesEntradaListView.TabIndex = 73;
-            this.ordenesEntradaListView.UseCompatibleStateImageBehavior = false;
+            this.ordenesSalidaVerLista.FullRowSelect = true;
+            this.ordenesSalidaVerLista.Location = new System.Drawing.Point(363, 79);
+            this.ordenesSalidaVerLista.MultiSelect = false;
+            this.ordenesSalidaVerLista.Name = "ordenesSalidaVerLista";
+            this.ordenesSalidaVerLista.Size = new System.Drawing.Size(375, 134);
+            this.ordenesSalidaVerLista.TabIndex = 73;
+            this.ordenesSalidaVerLista.UseCompatibleStateImageBehavior = false;
+            this.ordenesSalidaVerLista.SelectedIndexChanged += new System.EventHandler(this.ordenesEntradaVerLista_SelectedIndexChanged);
             // 
             // columnHeader5
             // 
@@ -485,13 +494,14 @@
             // 
             this.columnHeader8.Text = "Comentario";
             // 
-            // listaProyectosVer
+            // proyectosVerLista
             // 
-            this.listaProyectosVer.FormattingEnabled = true;
-            this.listaProyectosVer.Location = new System.Drawing.Point(453, 33);
-            this.listaProyectosVer.Name = "listaProyectosVer";
-            this.listaProyectosVer.Size = new System.Drawing.Size(190, 21);
-            this.listaProyectosVer.TabIndex = 72;
+            this.proyectosVerLista.FormattingEnabled = true;
+            this.proyectosVerLista.Location = new System.Drawing.Point(453, 33);
+            this.proyectosVerLista.Name = "proyectosVerLista";
+            this.proyectosVerLista.Size = new System.Drawing.Size(190, 21);
+            this.proyectosVerLista.TabIndex = 72;
+            this.proyectosVerLista.SelectedIndexChanged += new System.EventHandler(this.proyectosVerLista_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -501,6 +511,55 @@
             this.label14.Size = new System.Drawing.Size(52, 13);
             this.label14.TabIndex = 71;
             this.label14.Text = "Proyecto:";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "IdDetalle";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "IdArticulo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Unidad";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Precio";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Cantidad";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Total";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // cantidadInventario
+            // 
+            this.cantidadInventario.HeaderText = "Cantidad en Inventario";
+            this.cantidadInventario.Name = "cantidadInventario";
+            this.cantidadInventario.ReadOnly = true;
             // 
             // OrdenesSalida
             // 
@@ -522,6 +581,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -548,26 +609,20 @@
         private System.Windows.Forms.Button agregarBtn;
         private System.Windows.Forms.ComboBox listaProyectos;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker fechaVer;
         private System.Windows.Forms.Button modificarBtn;
         private System.Windows.Forms.Button eliminarBtn;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox IdVerTxt;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox comentarioVerTxt;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ListView ordenesEntradaListView;
+        private System.Windows.Forms.ListView ordenesSalidaVerLista;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ComboBox listaProyectosVer;
+        private System.Windows.Forms.ComboBox proyectosVerLista;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreColumn;
@@ -575,5 +630,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.DataGridView articulosVerLista;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadInventario;
     }
 }

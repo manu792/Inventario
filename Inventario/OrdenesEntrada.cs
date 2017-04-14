@@ -94,10 +94,31 @@ namespace Inventario
             }
             return false;
         }
-        void carritoDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void carritoDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView grid = sender as DataGridView;
+
+            if (grid.Rows[e.RowIndex].Cells[5].Value == null || grid.Rows[e.RowIndex].Cells[5].Value.ToString() == string.Empty || Int32.Parse(grid.Rows[e.RowIndex].Cells[5].Value.ToString()) == 0)
+                grid.Rows[e.RowIndex].Cells[5].Value = 1;
+
             grid.Rows[e.RowIndex].Cells[6].Value = Double.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString()) * Int32.Parse(grid.Rows[e.RowIndex].Cells[5].Value.ToString());
+        }
+
+        private void ArticulosDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox textBox = e.Control as TextBox;
+            if (textBox != null)
+            {
+                textBox.KeyPress += new KeyPressEventHandler(EditingControl_KeyPress);
+            }
+        }
+
+        private void EditingControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 8) //se permite utilizar la tecla backspace para borrar
+                e.Handled = false;
+            else if (!char.IsDigit(e.KeyChar)) //verifico que no se ingrese una letra
+                e.Handled = true;
         }
 
         private void borrarBtn_Click(object sender, EventArgs e)

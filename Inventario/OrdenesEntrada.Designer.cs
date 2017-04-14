@@ -40,6 +40,13 @@
             this.buscarTxt = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.articulosDataGridView = new System.Windows.Forms.DataGridView();
+            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.articulosDataGrid = new System.Windows.Forms.DataGridView();
             this.fechaOrdenEntrada = new System.Windows.Forms.DateTimePicker();
@@ -54,13 +61,6 @@
             this.modificarBtn = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.articulosVerLista = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdVerTxt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -77,13 +77,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.proyectosVerLista = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -213,7 +213,51 @@
             this.articulosDataGridView.Name = "articulosDataGridView";
             this.articulosDataGridView.Size = new System.Drawing.Size(494, 179);
             this.articulosDataGridView.TabIndex = 1;
+            this.articulosDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.ArticulosDataGridView_EditingControlShowing);
             this.articulosDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.carritoDataGridView_CellEndEdit);
+            // 
+            // idDetalle
+            // 
+            this.idDetalle.HeaderText = "IdDetalle";
+            this.idDetalle.Name = "idDetalle";
+            this.idDetalle.ReadOnly = true;
+            this.idDetalle.Visible = false;
+            // 
+            // idColumn
+            // 
+            this.idColumn.HeaderText = "IdEntrada";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.ReadOnly = true;
+            this.idColumn.Visible = false;
+            // 
+            // nombreColumn
+            // 
+            this.nombreColumn.HeaderText = "Nombre";
+            this.nombreColumn.Name = "nombreColumn";
+            this.nombreColumn.ReadOnly = true;
+            // 
+            // unidadColumn
+            // 
+            this.unidadColumn.HeaderText = "Unidad";
+            this.unidadColumn.Name = "unidadColumn";
+            this.unidadColumn.ReadOnly = true;
+            // 
+            // precioColumn
+            // 
+            this.precioColumn.HeaderText = "Precio";
+            this.precioColumn.Name = "precioColumn";
+            this.precioColumn.ReadOnly = true;
+            // 
+            // cantidadColumn
+            // 
+            this.cantidadColumn.HeaderText = "Cantidad";
+            this.cantidadColumn.Name = "cantidadColumn";
+            // 
+            // totalColumn
+            // 
+            this.totalColumn.HeaderText = "Total";
+            this.totalColumn.Name = "totalColumn";
+            this.totalColumn.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -369,49 +413,6 @@
             this.articulosVerLista.TabIndex = 1;
             this.articulosVerLista.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.carritoDataGridView_CellEndEdit);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "IdDetalle";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "IdEntrada";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Nombre";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Unidad";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Precio";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Cantidad";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Total";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
             // IdVerTxt
             // 
             this.IdVerTxt.Enabled = false;
@@ -538,48 +539,48 @@
             this.label12.TabIndex = 68;
             this.label12.Text = "Proyecto:";
             // 
-            // idDetalle
+            // dataGridViewTextBoxColumn1
             // 
-            this.idDetalle.HeaderText = "IdDetalle";
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            this.idDetalle.Visible = false;
+            this.dataGridViewTextBoxColumn1.HeaderText = "IdDetalle";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
             // 
-            // idColumn
+            // dataGridViewTextBoxColumn2
             // 
-            this.idColumn.HeaderText = "IdEntrada";
-            this.idColumn.Name = "idColumn";
-            this.idColumn.ReadOnly = true;
-            this.idColumn.Visible = false;
+            this.dataGridViewTextBoxColumn2.HeaderText = "IdArticulo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Visible = false;
             // 
-            // nombreColumn
+            // dataGridViewTextBoxColumn3
             // 
-            this.nombreColumn.HeaderText = "Nombre";
-            this.nombreColumn.Name = "nombreColumn";
-            this.nombreColumn.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // unidadColumn
+            // dataGridViewTextBoxColumn4
             // 
-            this.unidadColumn.HeaderText = "Unidad";
-            this.unidadColumn.Name = "unidadColumn";
-            this.unidadColumn.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Unidad";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // precioColumn
+            // dataGridViewTextBoxColumn5
             // 
-            this.precioColumn.HeaderText = "Precio";
-            this.precioColumn.Name = "precioColumn";
-            this.precioColumn.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Precio";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
-            // cantidadColumn
+            // dataGridViewTextBoxColumn6
             // 
-            this.cantidadColumn.HeaderText = "Cantidad";
-            this.cantidadColumn.Name = "cantidadColumn";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Cantidad";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // totalColumn
+            // dataGridViewTextBoxColumn7
             // 
-            this.totalColumn.HeaderText = "Total";
-            this.totalColumn.Name = "totalColumn";
-            this.totalColumn.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Total";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // OrdenesEntrada
             // 
@@ -633,13 +634,6 @@
         private System.Windows.Forms.DataGridView articulosDataGridView;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView articulosVerLista;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.TextBox IdVerTxt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -663,5 +657,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

@@ -36,7 +36,7 @@ namespace Inventario
             foreach(Proyecto proyecto in proyectos)
             {
                 listaProyectos.Items.Add(proyecto);
-                listaProyectosVer.Items.Add(proyecto);
+                proyectosVerLista.Items.Add(proyecto);
             }
         }
 
@@ -96,16 +96,49 @@ namespace Inventario
             return false;
         }
 
-        private void articulosDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void ArticulosDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox textBox = e.Control as TextBox;
+            if (textBox != null)
+            {
+                textBox.KeyPress += new KeyPressEventHandler(EditingControl_KeyPress);
+            }
+        }
+
+        private void EditingControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 8) //se permite utilizar la tecla backspace para borrar
+                e.Handled = false;
+            else if (!char.IsDigit(e.KeyChar)) //verifico que no se ingrese una letra
+                e.Handled = true;
+        }
+
+        private void ArticulosDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView data = sender as DataGridView;
             int cantidadMaxima = BuscarCantidadMaximaPermitida(Int32.Parse(data.Rows[e.RowIndex].Cells[0].Value.ToString()));
-            if(Int32.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) > cantidadMaxima)
+
+            if (data.Rows[e.RowIndex].Cells[4].Value == null || data.Rows[e.RowIndex].Cells[4].Value.ToString() == string.Empty || Int32.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) == 0)
+                data.Rows[e.RowIndex].Cells[4].Value = 1;
+
+            if (Int32.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) > cantidadMaxima)
             {
                 MessageBox.Show("La cantidad de articulos a eliminar debe ser menor a la cantidad en inventario");
                 data.Rows[e.RowIndex].Cells[4].Value = 1;
             }
             data.Rows[e.RowIndex].Cells[5].Value = Double.Parse(data.Rows[e.RowIndex].Cells[3].Value.ToString()) * Int32.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString());
+        }
+
+        private void articulosVerLista_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView data = sender as DataGridView;
+            int cantidadMaxima = Int32.Parse(data.Rows[e.RowIndex].Cells[7].Value.ToString());
+            if (Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) > cantidadMaxima)
+            {
+                MessageBox.Show("La cantidad de articulos a eliminar debe ser menor a la cantidad en inventario");
+                data.Rows[e.RowIndex].Cells[5].Value = 1;
+            }
+            data.Rows[e.RowIndex].Cells[6].Value = Double.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) * Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString());
         }
 
         private int BuscarCantidadMaximaPermitida(int idArticulo)
@@ -165,12 +198,90 @@ namespace Inventario
 
         private void modificarBtn_Click(object sender, EventArgs e)
         {
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesSalidaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
+            {
+                List<Detalle> detallesEntrada = new List<Detalle>();
 
+                Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+
+                Orden ordenEntrada = new Orden(Int32.Parse(IdVerTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
+
+                foreach (DataGridViewRow fila in articulosVerLista.Rows)
+                {
+                    if (fila.Cells[0].Value != null)
+                    {
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
+                        detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
+                    }
+                }
+
+                ServicioOrdenSalida.Modificar(ordenEntrada, detallesEntrada);
+                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+            }
         }
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesSalidaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
+            {
+                Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+                ServicioOrdenSalida.Eliminar(Int32.Parse(IdVerTxt.Text));
+                LimpiarControles();
+                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+            }
+        }
 
+        private void proyectosVerLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (proyectosVerLista.SelectedIndex > -1)
+            {
+                LimpiarControles();
+                Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+            }
+        }
+        private void LimpiarControles()
+        {
+            ordenesSalidaVerLista.Items.Clear();
+            IdVerTxt.Clear();
+            comentarioVerTxt.Clear();
+            articulosVerLista.Rows.Clear();
+        }
+        private void CargarOrdenesSalida(List<string[]> listaOrdenesEntrada)
+        {
+            ordenesSalidaVerLista.Items.Clear();
+            foreach (string[] ServicioOrdenEntrada in listaOrdenesEntrada)
+            {
+                ListViewItem item = new ListViewItem(ServicioOrdenEntrada, 0);
+                ordenesSalidaVerLista.Items.Add(item);
+            }
+            ordenesSalidaVerLista.View = View.Details;
+        }
+
+        private void ordenesEntradaVerLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ordenesSalidaVerLista.SelectedItems.Count > 0)
+            {
+                articulosVerLista.Rows.Clear();
+
+                ListViewItem i;
+                i = ordenesSalidaVerLista.SelectedItems[0];
+                IdVerTxt.Text = i.SubItems[0].Text;
+                fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
+                comentarioVerTxt.Text = i.SubItems[3].Text;
+                List<Detalle> detallesSalida = ServicioOrdenSalida.ObtenerDetallesSalida(Int32.Parse(i.SubItems[0].Text));
+                foreach (Detalle detalleSalida in detallesSalida)
+                {
+                    Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+                    int cantidadEnInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleSalida.Articulo.Id);
+
+                    articulosVerLista.Rows.Add(detalleSalida.IdDetalle, detalleSalida.Articulo.Id, detalleSalida.Articulo.Nombre, detalleSalida.Articulo.Unidad, detalleSalida.Articulo.Precio, detalleSalida.Cantidad, detalleSalida.Total, cantidadEnInventario);
+                    if (cantidadEnInventario == 0)
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
+                    else
+                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
+                }
+            }
         }
     }
 }

@@ -84,8 +84,8 @@ namespace Inventario.Servicios
                         InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleEntrada.Articulo.Id, registro);
                     }
                 }
-                else
-                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad));
+                //else
+                  //  InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad));
             }
         }
 
@@ -102,11 +102,12 @@ namespace Inventario.Servicios
                         registro.Cantidad += Int32.Parse(campos[3]);
                         registro.Cantidad -= detalleSalida.Cantidad;
 
-                        InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleSalida.Articulo.Id, registro);
+                        if(registro.Cantidad > 0)
+                            InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleSalida.Articulo.Id, registro);
+                        else
+                            InventarioArchivo.EliminarArticuloInventario(registro.Id);
                     }
                 }
-                else
-                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad));
             }
         }
 
@@ -118,6 +119,14 @@ namespace Inventario.Servicios
                 registro.Articulo = ServicioArticulo.ObtenerArticulo(registro.Articulo.Id);
             }
             return inventario;
+        }
+        public int ObtenerCantidadArticuloPorProyecto(int idProyecto, int idArticulo)
+        {
+            InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(idProyecto, idArticulo);
+            if (registro != null)
+                return registro.Cantidad;
+            else
+                return 0;
         }
     }
 }
