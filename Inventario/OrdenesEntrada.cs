@@ -151,7 +151,7 @@ namespace Inventario
                 {
                     if (fila.Cells[0].Value != null)
                     {
-                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()));
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString()));
                         detallesEntrada.Add(new Detalle(articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }

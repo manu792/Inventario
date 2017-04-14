@@ -53,10 +53,11 @@ namespace Inventario
             table.Columns.Add("Unidad");
             table.Columns.Add("Precio");
             table.Columns.Add("Descripcion");
-            table.Columns.Add("Cantidad");
+            table.Columns.Add("Cantidad Inventario");
+            table.Columns.Add("Total");
 
             foreach (InventarioProyecto registro in inventario)
-                table.Rows.Add(registro.Articulo.Id, registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad);
+                table.Rows.Add(registro.Articulo.Id, registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad, registro.Total);
 
             articulosDataGrid.DataSource = table;
             dv = new DataView(table);
@@ -181,7 +182,7 @@ namespace Inventario
                 {
                     if (fila.Cells[0].Value != null)
                     {
-                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[0].Value.ToString()));
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[0].Value.ToString()), Double.Parse(fila.Cells[3].Value.ToString()));
                         detallesSalida.Add(new Detalle(articulo, Int32.Parse(fila.Cells[4].Value.ToString()), Double.Parse(fila.Cells[5].Value.ToString())));
                     }
                 }
@@ -273,13 +274,13 @@ namespace Inventario
                 foreach (Detalle detalleSalida in detallesSalida)
                 {
                     Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-                    int cantidadEnInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleSalida.Articulo.Id);
+                    //int cantidadEnInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, detalleSalida.Articulo.Id);
 
-                    articulosVerLista.Rows.Add(detalleSalida.IdDetalle, detalleSalida.Articulo.Id, detalleSalida.Articulo.Nombre, detalleSalida.Articulo.Unidad, detalleSalida.Articulo.Precio, detalleSalida.Cantidad, detalleSalida.Total, cantidadEnInventario);
-                    if (cantidadEnInventario == 0)
-                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
-                    else
-                        articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
+                    articulosVerLista.Rows.Add(detalleSalida.IdDetalle, detalleSalida.Articulo.Id, detalleSalida.Articulo.Nombre, detalleSalida.Articulo.Unidad, detalleSalida.Articulo.Precio, detalleSalida.Cantidad, detalleSalida.Total);
+                    //if (cantidadEnInventario == 0)
+                    //    articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
+                    //else
+                    //    articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
                 }
             }
         }
