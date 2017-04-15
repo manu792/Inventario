@@ -26,8 +26,9 @@ namespace Inventario.Servicios
         {
             ServicioOrdenEntrada = servicioOrdenEntrada;
             ServicioOrdenEntrada.NuevaOrdeEntrada += AumentarInventario;
-            ServicioOrdenEntrada.OrdenEntradaModificada += Modificar;
+            ServicioOrdenEntrada.OrdenEntradaModificada += ServicioOrdenEntrada_OrdenEntradaModificada;
         }
+
         public ServicioInventario(ServicioOrdenSalida servicioOrdenSalida) : this()
         {
             ServicioOrdenSalida = servicioOrdenSalida;
@@ -69,8 +70,7 @@ namespace Inventario.Servicios
                     throw new Exception("El articulo no existe para el proyecto con id: " + e.IdProyecto);
             }
         }
-
-        private void Modificar(object sender, OrdenModificadaDetalles e)
+        private void ServicioOrdenEntrada_OrdenEntradaModificada(object sender, OrdenModificadaDetalles e)
         {
             foreach (Detalle detalleEntrada in e.Detalles)
             {
@@ -93,7 +93,6 @@ namespace Inventario.Servicios
                 }
             }
         }
-
         private void ServicioOrdenSalida_OrdenSalidaModificada(object sender, OrdenModificadaDetalles e)
         {
             foreach (Detalle detalleSalida in e.Detalles)
@@ -117,7 +116,6 @@ namespace Inventario.Servicios
                 }
             }
         }
-
         public List<InventarioProyecto> ObtenerArticulosPorProyecto(int idProyecto)
         {
             List<InventarioProyecto> inventario = InventarioArchivo.ArticulosEnProyecto(idProyecto);
