@@ -53,12 +53,12 @@ namespace Inventario
             articulosDataGrid.DataSource = table;
             dv = new DataView(table);
         }
-        private void CargarOrdenesEntrada(List<string[]> listaOrdenesEntrada)
+        private void CargarOrdenesEntrada(List<Orden> listaOrdenesEntrada)
         {
             ordenesEntradaVerLista.Items.Clear();
-            foreach (string[] ServicioOrdenEntrada in listaOrdenesEntrada)
+            foreach (Orden ServicioOrdenEntrada in listaOrdenesEntrada)
             {
-                ListViewItem item = new ListViewItem(ServicioOrdenEntrada, 0);
+                ListViewItem item = new ListViewItem(ServicioOrdenEntrada.ConvertirAArray(), 0);
                 ordenesEntradaVerLista.Items.Add(item);
             }
             ordenesEntradaVerLista.View = View.Details;

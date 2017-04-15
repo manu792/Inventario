@@ -259,12 +259,12 @@ namespace Inventario
             comentarioVerTxt.Clear();
             articulosVerLista.Rows.Clear();
         }
-        private void CargarOrdenesSalida(List<string[]> listaOrdenesEntrada)
+        private void CargarOrdenesSalida(List<Orden> listaOrdenesEntrada)
         {
             ordenesSalidaVerLista.Items.Clear();
-            foreach (string[] ServicioOrdenEntrada in listaOrdenesEntrada)
+            foreach (Orden ServicioOrdenEntrada in listaOrdenesEntrada)
             {
-                ListViewItem item = new ListViewItem(ServicioOrdenEntrada, 0);
+                ListViewItem item = new ListViewItem(ServicioOrdenEntrada.ConvertirAArray(), 0);
                 ordenesSalidaVerLista.Items.Add(item);
             }
             ordenesSalidaVerLista.View = View.Details;

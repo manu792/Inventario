@@ -38,19 +38,19 @@ namespace Inventario.Servicios
             return detallesEntrada;
         }
 
-        public List<string[]> ObtenerOrdenesEntrada(int idProyecto)
+        public List<Orden> ObtenerOrdenesEntrada(int idProyecto)
         {
-            List<string[]> listaOrdenesEntrada = new List<string[]>();
+            //List<string[]> listaOrdenesEntrada = new List<string[]>();
             
             List<Orden> ordenesEntrada = OrdenEntradaArchivo.ObtenerOrdenesEntrada(idProyecto);
             foreach (Orden ordenEntrada in ordenesEntrada)
             {
                 Proyecto proyecto = ServicioProyecto.ObtenerProyecto(ordenEntrada.Proyecto.Id);
                 ordenEntrada.Proyecto = proyecto;
-                listaOrdenesEntrada.Add(ordenEntrada.ConvertirAArray());
+                //listaOrdenesEntrada.Add(ordenEntrada.ConvertirAArray());
             }
 
-            return listaOrdenesEntrada;
+            return ordenesEntrada;
         }
 
         public void Agregar(Orden ordenEntrada, List<Detalle> detallesEntrada)

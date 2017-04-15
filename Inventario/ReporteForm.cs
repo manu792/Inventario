@@ -19,6 +19,7 @@ namespace Inventario
         private ServicioArticulo ServicioArticulo { get; set; }
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
+        private ServicioReporte ServicioReporte { get; set; }
 
         public ReporteForm()
         {
@@ -27,6 +28,7 @@ namespace Inventario
             ServicioArticulo = new ServicioArticulo();
             ServicioOrdenEntrada = new ServicioOrdenEntrada();
             ServicioOrdenSalida = new ServicioOrdenSalida();
+            ServicioReporte = new ServicioReporte();
             InitializeComponent();
         }
 
@@ -67,11 +69,11 @@ namespace Inventario
             articulosVerLista.Rows.Clear();
             CargarOrdenesEntradaListView(ServicioOrdenEntrada.ObtenerOrdenesEntrada(idProyecto));
         }
-        private void CargarOrdenesEntradaListView(List<string[]> ordenesEntrada)
+        private void CargarOrdenesEntradaListView(List<Orden> ordenesEntrada)
         {
-            foreach (string[] orden in ordenesEntrada)
+            foreach (Orden orden in ordenesEntrada)
             {
-                ListViewItem item = new ListViewItem(orden, 0);
+                ListViewItem item = new ListViewItem(orden.ConvertirAArray(), 0);
                 ordenesEntradaListView.Items.Add(item);
             }
             ordenesEntradaListView.View = View.Details;
@@ -82,11 +84,11 @@ namespace Inventario
             articulosOrdenSalida.Rows.Clear();
             CargarOrdenesSalidaListView(ServicioOrdenSalida.ObtenerOrdenesSalida(idProyecto));
         }
-        private void CargarOrdenesSalidaListView(List<string[]> ordenesSalida)
+        private void CargarOrdenesSalidaListView(List<Orden> ordenesSalida)
         {
-            foreach (string[] orden in ordenesSalida)
+            foreach (Orden orden in ordenesSalida)
             {
-                ListViewItem item = new ListViewItem(orden, 0);
+                ListViewItem item = new ListViewItem(orden.ConvertirAArray(), 0);
                 ordenesSalidaListView.Items.Add(item);
             }
             ordenesSalidaListView.View = View.Details;
@@ -139,7 +141,34 @@ namespace Inventario
 
         private void reporteBtn_Click(object sender, EventArgs e)
         {
+            Dictionary<int, List<Detalle>> detallesEntrada;
+            Dictionary<int, List<Detalle>> detallesSalida;
 
+            List<Reporte> reportes = new List<Reporte>();
+
+            List<Proyecto> proyectos = ServicioProyecto.ObtenerProyectos();
+            foreach(Proyecto proyecto in proyectos)
+            {
+                detallesEntrada = new Dictionary<int, List<Detalle>>();
+                detallesSalida = new Dictionary<int, List<Detalle>>();
+
+                List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
+                List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
+                foreach(Orden ordenEntrada in ordenesEntrada)
+                {
+                    List<Detalle> detalles = ServicioOrdenEntrada.ObtenerDetallesEntrada(ordenEntrada.Id);
+                    detallesEntrada.Add(ordenEntrada.Id, detalles);
+                }
+
+                List<Orden> ordenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
+                foreach (Orden ordenSalida in ordenesSalida)
+                {
+                    List<Detalle> detalles = ServicioOrdenSalida.ObtenerDetallesSalida(ordenSalida.Id);
+                    detallesSalida.Add(ordenSalida.Id, detalles);
+                }
+                reportes.Add(new Reporte(proyecto, inventario, new OrdenEntrada(ordenesEntrada, detallesEntrada), new OrdenSalida(ordenesSalida, detallesSalida)));
+            }
+            ServicioReporte.GenerarReporte(reportes);
         }
     }
 }
