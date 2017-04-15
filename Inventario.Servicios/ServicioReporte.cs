@@ -8,5 +8,9 @@ namespace Inventario.Servicios
 {
     public class ServicioReporte
     {
+        public void GenerarReporte()
+        {
+
+        }
     }
 }

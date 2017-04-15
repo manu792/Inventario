@@ -45,7 +45,7 @@ namespace Inventario.Data
 
             return detalleSalida;
         }
-        public DetalleSalida ObtenerDetalleSalida(int id)
+        public Detalle ObtenerDetalleSalida(int id)
         {
             using (reader = File.OpenText(direccion))
             {
@@ -55,7 +55,7 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[0]) == id)
                     {
-                        return new DetalleSalida(Int32.Parse(campos[0]), Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3]), Double.Parse(campos[4]));
+                        return new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]));
                     }
                 }
             }

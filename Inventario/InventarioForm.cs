@@ -43,8 +43,12 @@ namespace Inventario
         }
         private void proyectosComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
-            CargarArticulosPorProyectoDataGrid(ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id));
+            if(proyectosComboBox.SelectedIndex > -1)
+            {
+                articulosPorProyectoDataGrid.Rows.Clear();
+                Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
+                CargarArticulosPorProyectoDataGrid(ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id));
+            }
         }
         private void CargarArticulosPorProyectoDataGrid(List<InventarioProyecto> articulosPorProyecto)
         {
