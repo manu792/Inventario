@@ -45,6 +45,8 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.articulos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).BeginInit();
@@ -59,7 +61,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(556, 442);
+            this.tabControl1.Size = new System.Drawing.Size(663, 465);
             this.tabControl1.TabIndex = 0;
             // 
             // articulos
@@ -69,7 +71,7 @@
             this.articulos.Location = new System.Drawing.Point(4, 22);
             this.articulos.Name = "articulos";
             this.articulos.Padding = new System.Windows.Forms.Padding(3);
-            this.articulos.Size = new System.Drawing.Size(548, 416);
+            this.articulos.Size = new System.Drawing.Size(655, 439);
             this.articulos.TabIndex = 0;
             this.articulos.Text = "Todos los Articulos";
             this.articulos.UseVisualStyleBackColor = true;
@@ -77,7 +79,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 82);
+            this.label1.Location = new System.Drawing.Point(50, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 1;
@@ -93,9 +95,9 @@
             this.unidadColumn,
             this.precioColumn,
             this.descripcionColumn});
-            this.articulosDataGrid.Location = new System.Drawing.Point(31, 107);
+            this.articulosDataGrid.Location = new System.Drawing.Point(53, 111);
             this.articulosDataGrid.Name = "articulosDataGrid";
-            this.articulosDataGrid.Size = new System.Drawing.Size(483, 214);
+            this.articulosDataGrid.Size = new System.Drawing.Size(496, 214);
             this.articulosDataGrid.TabIndex = 0;
             // 
             // nombreColumn
@@ -131,7 +133,7 @@
             this.articulosPorProyecto.Location = new System.Drawing.Point(4, 22);
             this.articulosPorProyecto.Name = "articulosPorProyecto";
             this.articulosPorProyecto.Padding = new System.Windows.Forms.Padding(3);
-            this.articulosPorProyecto.Size = new System.Drawing.Size(548, 416);
+            this.articulosPorProyecto.Size = new System.Drawing.Size(655, 439);
             this.articulosPorProyecto.TabIndex = 1;
             this.articulosPorProyecto.Text = "Articulos por Proyecto";
             this.articulosPorProyecto.UseVisualStyleBackColor = true;
@@ -139,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(130, 51);
+            this.label3.Location = new System.Drawing.Point(161, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 5;
@@ -148,7 +150,7 @@
             // proyectosComboBox
             // 
             this.proyectosComboBox.FormattingEnabled = true;
-            this.proyectosComboBox.Location = new System.Drawing.Point(186, 48);
+            this.proyectosComboBox.Location = new System.Drawing.Point(217, 49);
             this.proyectosComboBox.Name = "proyectosComboBox";
             this.proyectosComboBox.Size = new System.Drawing.Size(185, 21);
             this.proyectosComboBox.TabIndex = 4;
@@ -157,7 +159,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 117);
+            this.label2.Location = new System.Drawing.Point(6, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 3;
@@ -172,10 +174,12 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.articulosPorProyectoDataGrid.Location = new System.Drawing.Point(30, 142);
+            this.dataGridViewTextBoxColumn4,
+            this.cantidadColumn,
+            this.totalColumn});
+            this.articulosPorProyectoDataGrid.Location = new System.Drawing.Point(6, 133);
             this.articulosPorProyectoDataGrid.Name = "articulosPorProyectoDataGrid";
-            this.articulosPorProyectoDataGrid.Size = new System.Drawing.Size(483, 214);
+            this.articulosPorProyectoDataGrid.Size = new System.Drawing.Size(643, 214);
             this.articulosPorProyectoDataGrid.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
@@ -202,11 +206,23 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // cantidadColumn
+            // 
+            this.cantidadColumn.HeaderText = "Cantidad Inventario";
+            this.cantidadColumn.Name = "cantidadColumn";
+            this.cantidadColumn.ReadOnly = true;
+            // 
+            // totalColumn
+            // 
+            this.totalColumn.HeaderText = "Total";
+            this.totalColumn.Name = "totalColumn";
+            this.totalColumn.ReadOnly = true;
+            // 
             // InventarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 466);
+            this.ClientSize = new System.Drawing.Size(687, 489);
             this.Controls.Add(this.tabControl1);
             this.Name = "InventarioForm";
             this.Text = "Inventario";
@@ -241,5 +257,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
     }
 }

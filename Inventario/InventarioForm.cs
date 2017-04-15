@@ -53,7 +53,7 @@ namespace Inventario
         private void CargarArticulosPorProyectoDataGrid(List<InventarioProyecto> articulosPorProyecto)
         {
             foreach (InventarioProyecto registro in articulosPorProyecto)
-                articulosPorProyectoDataGrid.Rows.Add(registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion);
+                articulosPorProyectoDataGrid.Rows.Add(registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad, registro.Total);
         }
     }
 }
