@@ -19,6 +19,7 @@ namespace Inventario
         private ServicioInventario ServicioInventario { get; set; }
         private DataView dv;
         private List<int> cantidades;
+        private List<Orden> Ordenes;
 
         public OrdenesSalida()
         {
@@ -67,12 +68,9 @@ namespace Inventario
 
         private void buscarTxt_TextChanged(object sender, EventArgs e)
         {
-            if (articulosDataGrid.Rows.Count > 0)
-            {
-                dv.RowFilter = "[Nombre] LIKE '%" + buscarTxt.Text + "%'";
-                if (dv.Count > 0)
-                    articulosDataGrid.DataSource = dv;
-            }
+            dv.RowFilter = "[Nombre] LIKE '%" + buscarTxt.Text + "%'";
+            if (dv.Count > 0)
+                articulosDataGrid.DataSource = dv;
         }
 
         private void agregarCarritoBtn_Click(object sender, EventArgs e)
@@ -193,7 +191,8 @@ namespace Inventario
                         detallesSalida.Add(new Detalle(articulo, Int32.Parse(fila.Cells[4].Value.ToString()), Double.Parse(fila.Cells[5].Value.ToString())));
                     }
                 }
-                ServicioOrdenSalida.Agregar(ordenSalida, detallesSalida);
+                ordenSalida.Detalles = detallesSalida;
+                ServicioOrdenSalida.Agregar(ordenSalida);
 
                 MessageBox.Show("Orden de salida ingresada correctamente");
             }
@@ -210,23 +209,24 @@ namespace Inventario
         {
             if (proyectosVerLista.SelectedIndex > -1 && ordenesSalidaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
             {
-                List<Detalle> detallesEntrada = new List<Detalle>();
+                List<Detalle> detallesSalida = new List<Detalle>();
 
                 Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
 
-                Orden ordenEntrada = new Orden(Int32.Parse(IdVerTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
+                Orden ordenSalida = new Orden(Int32.Parse(IdVerTxt.Text), proyecto, fechaVer.Value, comentarioVerTxt.Text);
 
                 foreach (DataGridViewRow fila in articulosVerLista.Rows)
                 {
                     if (fila.Cells[0].Value != null)
                     {
                         Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString()));
-                        detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
+                        detallesSalida.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenSalida.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
+                ordenSalida.Detalles = detallesSalida;
 
-                ServicioOrdenSalida.Modificar(ordenEntrada, detallesEntrada);
-                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+                ServicioOrdenSalida.Modificar(ordenSalida);
+                ObtenerOrdenesSalida();
 
                 MessageBox.Show("Orden de salida modificada correctamente");
             }
@@ -234,12 +234,12 @@ namespace Inventario
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
-            if (proyectosVerLista.SelectedIndex > -1 && ordenesSalidaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesSalidaVerLista.SelectedIndices.Count > 0)
             {
                 Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
                 ServicioOrdenSalida.Eliminar(Int32.Parse(IdVerTxt.Text));
                 LimpiarControles();
-                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+                ObtenerOrdenesSalida();
             }
         }
 
@@ -248,9 +248,14 @@ namespace Inventario
             if (proyectosVerLista.SelectedIndex > -1)
             {
                 LimpiarControles();
-                Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-                CargarOrdenesSalida(ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id));
+                ObtenerOrdenesSalida();
             }
+        }
+        private void ObtenerOrdenesSalida()
+        {
+            Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+            Ordenes = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
+            CargarOrdenesSalida();
         }
         private void LimpiarControles()
         {
@@ -259,10 +264,10 @@ namespace Inventario
             comentarioVerTxt.Clear();
             articulosVerLista.Rows.Clear();
         }
-        private void CargarOrdenesSalida(List<Orden> listaOrdenesEntrada)
+        private void CargarOrdenesSalida()
         {
             ordenesSalidaVerLista.Items.Clear();
-            foreach (Orden ServicioOrdenEntrada in listaOrdenesEntrada)
+            foreach (Orden ServicioOrdenEntrada in Ordenes)
             {
                 ListViewItem item = new ListViewItem(ServicioOrdenEntrada.ConvertirAArray(), 0);
                 ordenesSalidaVerLista.Items.Add(item);
@@ -283,7 +288,7 @@ namespace Inventario
                 IdVerTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<Detalle> detallesSalida = ServicioOrdenSalida.ObtenerDetallesSalida(Int32.Parse(i.SubItems[0].Text));
+                List<Detalle> detallesSalida = Ordenes[ordenesSalidaVerLista.SelectedIndices[0]].Detalles;
                 foreach (Detalle detalleSalida in detallesSalida)
                 {
                     Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;

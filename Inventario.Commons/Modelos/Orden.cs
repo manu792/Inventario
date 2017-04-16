@@ -12,6 +12,7 @@ namespace Inventario.Commons.Modelos
         public Proyecto Proyecto { get; set; }
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
+        public List<Detalle> Detalles { get; set; }
 
         public Orden(Proyecto proyecto, DateTime fecha, string comentario)
         {

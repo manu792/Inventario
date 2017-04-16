@@ -47,6 +47,8 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refrescarBtn = new System.Windows.Forms.Button();
+            this.refrescar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.articulos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGrid)).BeginInit();
@@ -66,6 +68,7 @@
             // 
             // articulos
             // 
+            this.articulos.Controls.Add(this.refrescarBtn);
             this.articulos.Controls.Add(this.label1);
             this.articulos.Controls.Add(this.articulosDataGrid);
             this.articulos.Location = new System.Drawing.Point(4, 22);
@@ -126,6 +129,7 @@
             // 
             // articulosPorProyecto
             // 
+            this.articulosPorProyecto.Controls.Add(this.refrescar);
             this.articulosPorProyecto.Controls.Add(this.label3);
             this.articulosPorProyecto.Controls.Add(this.proyectosComboBox);
             this.articulosPorProyecto.Controls.Add(this.label2);
@@ -218,6 +222,26 @@
             this.totalColumn.Name = "totalColumn";
             this.totalColumn.ReadOnly = true;
             // 
+            // refrescarBtn
+            // 
+            this.refrescarBtn.Location = new System.Drawing.Point(265, 345);
+            this.refrescarBtn.Name = "refrescarBtn";
+            this.refrescarBtn.Size = new System.Drawing.Size(75, 23);
+            this.refrescarBtn.TabIndex = 2;
+            this.refrescarBtn.Text = "Refrescar";
+            this.refrescarBtn.UseVisualStyleBackColor = true;
+            this.refrescarBtn.Click += new System.EventHandler(this.refrescarBtn_Click);
+            // 
+            // refrescar
+            // 
+            this.refrescar.Location = new System.Drawing.Point(288, 367);
+            this.refrescar.Name = "refrescar";
+            this.refrescar.Size = new System.Drawing.Size(75, 23);
+            this.refrescar.TabIndex = 6;
+            this.refrescar.Text = "Refrescar";
+            this.refrescar.UseVisualStyleBackColor = true;
+            this.refrescar.Click += new System.EventHandler(this.refrescar_Click);
+            // 
             // InventarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,5 +283,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalColumn;
+        private System.Windows.Forms.Button refrescarBtn;
+        private System.Windows.Forms.Button refrescar;
     }
 }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using Inventario.Commons.Modelos;
 using Inventario.Servicios;
+using System.Linq;
 
 namespace Inventario
 {
@@ -14,6 +15,7 @@ namespace Inventario
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
         private DataView dv;
+        private List<Orden> Ordenes;
 
         public OrdenesEntrada()
         {
@@ -53,12 +55,12 @@ namespace Inventario
             articulosDataGrid.DataSource = table;
             dv = new DataView(table);
         }
-        private void CargarOrdenesEntrada(List<Orden> listaOrdenesEntrada)
+        private void CargarOrdenesEntrada()
         {
             ordenesEntradaVerLista.Items.Clear();
-            foreach (Orden ServicioOrdenEntrada in listaOrdenesEntrada)
+            foreach (Orden ordenEntrada in Ordenes)
             {
-                ListViewItem item = new ListViewItem(ServicioOrdenEntrada.ConvertirAArray(), 0);
+                ListViewItem item = new ListViewItem(ordenEntrada.ConvertirAArray(), 0);
                 ordenesEntradaVerLista.Items.Add(item);
             }
             ordenesEntradaVerLista.View = View.Details;
@@ -66,12 +68,9 @@ namespace Inventario
 
         private void buscarTxt_TextChanged(object sender, EventArgs e)
         {
-            if (articulosDataGrid.Rows.Count > 0)
-            {
-                dv.RowFilter = "[Nombre] LIKE '%" + buscarTxt.Text + "%'";
-                if (dv.Count > 0)
-                    articulosDataGrid.DataSource = dv;
-            }
+            dv.RowFilter = "[Nombre] LIKE '%" + buscarTxt.Text + "%'";
+            if (dv.Count > 0)
+                articulosDataGrid.DataSource = dv;
         }
 
         private void agregarCarritoBtn_Click(object sender, EventArgs e)
@@ -155,7 +154,8 @@ namespace Inventario
                         detallesEntrada.Add(new Detalle(articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
-                ServicioOrdenEntrada.Agregar(ordenEntrada, detallesEntrada);
+                ordenEntrada.Detalles = detallesEntrada;
+                ServicioOrdenEntrada.Agregar(ordenEntrada);
                 MessageBox.Show("Orden de entrada ingresada correctamente");
             }
         }
@@ -172,13 +172,12 @@ namespace Inventario
             if (ordenesEntradaVerLista.SelectedItems.Count > 0)
             {
                 articulosVerLista.Rows.Clear();
-
                 ListViewItem i;
                 i = ordenesEntradaVerLista.SelectedItems[0];
                 IdVerTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<Detalle> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                List<Detalle> detallesEntrada = Ordenes[ordenesEntradaVerLista.SelectedIndices[0]].Detalles;
                 foreach (Detalle detalleEntrada in detallesEntrada)
                 {
                     Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
@@ -199,9 +198,14 @@ namespace Inventario
             if (proyectosVerLista.SelectedIndex > -1)
             {
                 LimpiarControles();
-                Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
+                ObtenerOrdenesEntrada();
             }
+        }
+        private void ObtenerOrdenesEntrada()
+        {
+            Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
+            Ordenes = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
+            CargarOrdenesEntrada();
         }
 
         private void modificarBtn_Click(object sender, EventArgs e)
@@ -222,9 +226,10 @@ namespace Inventario
                         detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
                     }
                 }
+                ordenEntrada.Detalles = detallesEntrada;
 
-                ServicioOrdenEntrada.Modificar(ordenEntrada, detallesEntrada);
-                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
+                ServicioOrdenEntrada.Modificar(ordenEntrada);
+                ObtenerOrdenesEntrada();
 
                 MessageBox.Show("Orden de entrada modificada correctamente");
             }
@@ -232,12 +237,12 @@ namespace Inventario
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
-            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0 && articulosVerLista.Rows.Count > 0)
+            if (proyectosVerLista.SelectedIndex > -1 && ordenesEntradaVerLista.SelectedIndices.Count > 0)
             {
                 Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
                 ServicioOrdenEntrada.Eliminar(Int32.Parse(IdVerTxt.Text));
                 LimpiarControles();
-                CargarOrdenesEntrada(ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id));
+                ObtenerOrdenesEntrada();
             }
         }
         private void LimpiarControles()

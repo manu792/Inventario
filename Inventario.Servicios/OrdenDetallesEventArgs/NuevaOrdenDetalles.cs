@@ -9,13 +9,11 @@ namespace Inventario.Servicios.OrdenEntradaEventArgs
 {
     public class NuevaOrdenDetalles : EventArgs
     {
-        public int IdProyecto { get; set; }
-        public List<Detalle> Detalles { get; set; }
+        public Orden Orden { get; set; }
 
-        public NuevaOrdenDetalles(int idProyecto, List<Detalle> detalles)
+        public NuevaOrdenDetalles(Orden orden)
         {
-            IdProyecto = idProyecto;
-            Detalles = detalles;
+            Orden = orden;
         }
     }
 }

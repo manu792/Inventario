@@ -45,6 +45,8 @@ namespace Inventario
 
                 ListViewItem item = new ListViewItem(campos, 0);
                 articulosListView.Items.Add(item);
+
+                Limpiar();
             }
         }
 
@@ -72,6 +74,8 @@ namespace Inventario
                 i.SubItems[2].Text = unidadTxt.Text;
                 i.SubItems[3].Text = precioTxt.Text;
                 i.SubItems[4].Text = descripcionTxt.Text;
+
+                Limpiar();
             }
         }
         private bool EsDataValida()
@@ -102,6 +106,15 @@ namespace Inventario
                 precioTxt.Text = i.SubItems[3].Text;
                 descripcionTxt.Text = i.SubItems[4].Text;
             }
+        }
+
+        private void limpiarBtn_Click(object sender, EventArgs e)
+        {
+            idTxt.Clear();
+            articuloTxt.Clear();
+            unidadTxt.Clear();
+            precioTxt.Clear();
+            descripcionTxt.Clear();
         }
     }
 }

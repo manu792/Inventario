@@ -55,5 +55,21 @@ namespace Inventario
             foreach (InventarioProyecto registro in articulosPorProyecto)
                 articulosPorProyectoDataGrid.Rows.Add(registro.Articulo.Nombre, registro.Articulo.Unidad, registro.Articulo.Precio, registro.Articulo.Descripcion, registro.Cantidad, registro.Total);
         }
+
+        private void refrescarBtn_Click(object sender, EventArgs e)
+        {
+            articulosDataGrid.Rows.Clear();
+            CargarArticulosDataGrid(ServicioArticulo.ObtenerArticulos());
+        }
+
+        private void refrescar_Click(object sender, EventArgs e)
+        {
+            if(proyectosComboBox.SelectedIndex > -1)
+            {
+                articulosPorProyectoDataGrid.Rows.Clear();
+                Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
+                CargarArticulosPorProyectoDataGrid(ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id));
+            }
+        }
     }
 }

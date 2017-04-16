@@ -38,6 +38,8 @@
             this.unidadColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.precioColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.descripcionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
+            this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
             this.idTxt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.agregarBtn = new System.Windows.Forms.Button();
@@ -49,13 +51,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
-            this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
+            this.limpiarBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // modificatBtn
             // 
-            this.modificatBtn.Location = new System.Drawing.Point(334, 388);
+            this.modificatBtn.Location = new System.Drawing.Point(296, 386);
             this.modificatBtn.Name = "modificatBtn";
             this.modificatBtn.Size = new System.Drawing.Size(75, 23);
             this.modificatBtn.TabIndex = 50;
@@ -65,7 +66,7 @@
             // 
             // eliminarBtn
             // 
-            this.eliminarBtn.Location = new System.Drawing.Point(252, 388);
+            this.eliminarBtn.Location = new System.Drawing.Point(214, 386);
             this.eliminarBtn.Name = "eliminarBtn";
             this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
             this.eliminarBtn.TabIndex = 49;
@@ -111,6 +112,18 @@
             // 
             this.descripcionColumn.Text = "Descripcion";
             // 
+            // imageListGrande
+            // 
+            this.imageListGrande.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListGrande.ImageStream")));
+            this.imageListGrande.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListGrande.Images.SetKeyName(0, "notebook.png");
+            // 
+            // imageListPeque
+            // 
+            this.imageListPeque.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListPeque.ImageStream")));
+            this.imageListPeque.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListPeque.Images.SetKeyName(0, "pencil.png");
+            // 
             // idTxt
             // 
             this.idTxt.Enabled = false;
@@ -130,7 +143,7 @@
             // 
             // agregarBtn
             // 
-            this.agregarBtn.Location = new System.Drawing.Point(171, 388);
+            this.agregarBtn.Location = new System.Drawing.Point(133, 386);
             this.agregarBtn.Name = "agregarBtn";
             this.agregarBtn.Size = new System.Drawing.Size(75, 23);
             this.agregarBtn.TabIndex = 45;
@@ -202,23 +215,22 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Nombre:";
             // 
-            // imageListGrande
+            // limpiarBtn
             // 
-            this.imageListGrande.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListGrande.ImageStream")));
-            this.imageListGrande.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListGrande.Images.SetKeyName(0, "notebook.png");
-            // 
-            // imageListPeque
-            // 
-            this.imageListPeque.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListPeque.ImageStream")));
-            this.imageListPeque.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListPeque.Images.SetKeyName(0, "pencil.png");
+            this.limpiarBtn.Location = new System.Drawing.Point(377, 386);
+            this.limpiarBtn.Name = "limpiarBtn";
+            this.limpiarBtn.Size = new System.Drawing.Size(75, 23);
+            this.limpiarBtn.TabIndex = 51;
+            this.limpiarBtn.Text = "Limpiar";
+            this.limpiarBtn.UseVisualStyleBackColor = true;
+            this.limpiarBtn.Click += new System.EventHandler(this.limpiarBtn_Click);
             // 
             // ArticulosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 469);
+            this.Controls.Add(this.limpiarBtn);
             this.Controls.Add(this.modificatBtn);
             this.Controls.Add(this.eliminarBtn);
             this.Controls.Add(this.articulosListView);
@@ -264,5 +276,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ImageList imageListGrande;
         private System.Windows.Forms.ImageList imageListPeque;
+        private System.Windows.Forms.Button limpiarBtn;
     }
 }

@@ -38,43 +38,43 @@ namespace Inventario.Servicios
 
         private void AumentarInventario(object sender, NuevaOrdenDetalles e)
         {
-            foreach(Detalle detalleEntrada in e.Detalles)
+            foreach(Detalle detalleEntrada in e.Orden.Detalles)
             {
-                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
+                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.Orden.Proyecto.Id, detalleEntrada.Articulo.Id);
                 if (registro != null)
                 {
                     registro.Cantidad += detalleEntrada.Cantidad;
                     registro.Total = registro.Cantidad * detalleEntrada.Articulo.Precio;
-                    InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleEntrada.Articulo.Id, registro);
+                    InventarioArchivo.ActualizarCantidad(e.Orden.Proyecto.Id, detalleEntrada.Articulo.Id, registro);
                 }
                 else
-                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.IdProyecto), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad, detalleEntrada.Total));
+                    InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.Orden.Proyecto.Id), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad, detalleEntrada.Total));
             }
         }
 
         private void ReducirInventario(object sender, NuevaOrdenDetalles e)
         {
-            foreach (Detalle detalleSalida in e.Detalles)
+            foreach (Detalle detalleSalida in e.Orden.Detalles)
             {
-                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleSalida.Articulo.Id);
+                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.Orden.Proyecto.Id, detalleSalida.Articulo.Id);
                 if (registro != null)
                 {
                     registro.Cantidad -= detalleSalida.Cantidad;
                     registro.Total = registro.Cantidad * detalleSalida.Articulo.Precio;
                     if (registro.Cantidad > 0)
-                        InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleSalida.Articulo.Id, registro);
+                        InventarioArchivo.ActualizarCantidad(e.Orden.Proyecto.Id, detalleSalida.Articulo.Id, registro);
                     else
                         InventarioArchivo.EliminarArticuloInventario(registro.Id);
                 }
                 else
-                    throw new Exception("El articulo no existe para el proyecto con id: " + e.IdProyecto);
+                    throw new Exception("El articulo no existe para el proyecto con id: " + e.Orden.Proyecto.Id);
             }
         }
         private void ServicioOrdenEntrada_OrdenEntradaModificada(object sender, OrdenModificadaDetalles e)
         {
-            foreach (Detalle detalleEntrada in e.Detalles)
+            foreach (Detalle detalleEntrada in e.Orden.Detalles)
             {
-                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleEntrada.Articulo.Id);
+                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.Orden.Proyecto.Id, detalleEntrada.Articulo.Id);
                 if (registro != null)
                 {
                     string[] campos = e.RegistrosModificados.Where(x => Int32.Parse(x[2]) == registro.Articulo.Id).FirstOrDefault();
@@ -86,7 +86,7 @@ namespace Inventario.Servicios
                         registro.Total = registro.Cantidad * detalleEntrada.Articulo.Precio;
 
                         if (registro.Cantidad > 0)
-                            InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleEntrada.Articulo.Id, registro);
+                            InventarioArchivo.ActualizarCantidad(e.Orden.Proyecto.Id, detalleEntrada.Articulo.Id, registro);
                         else
                             InventarioArchivo.EliminarArticuloInventario(registro.Id);
                     }
@@ -95,9 +95,9 @@ namespace Inventario.Servicios
         }
         private void ServicioOrdenSalida_OrdenSalidaModificada(object sender, OrdenModificadaDetalles e)
         {
-            foreach (Detalle detalleSalida in e.Detalles)
+            foreach (Detalle detalleSalida in e.Orden.Detalles)
             {
-                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.IdProyecto, detalleSalida.Articulo.Id);
+                InventarioProyecto registro = InventarioArchivo.ArticuloEnProyecto(e.Orden.Proyecto.Id, detalleSalida.Articulo.Id);
                 if (registro != null)
                 {
                     string[] campos = e.RegistrosModificados.Where(x => Int32.Parse(x[2]) == registro.Articulo.Id).FirstOrDefault();
@@ -109,7 +109,7 @@ namespace Inventario.Servicios
                         registro.Total = registro.Cantidad * detalleSalida.Articulo.Precio;
 
                         if (registro.Cantidad > 0)
-                            InventarioArchivo.ActualizarCantidad(e.IdProyecto, detalleSalida.Articulo.Id, registro);
+                            InventarioArchivo.ActualizarCantidad(e.Orden.Proyecto.Id, detalleSalida.Articulo.Id, registro);
                         else
                             InventarioArchivo.EliminarArticuloInventario(registro.Id);
                     }

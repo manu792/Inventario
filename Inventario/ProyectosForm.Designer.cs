@@ -46,8 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.proyectosListView = new System.Windows.Forms.ListView();
-            this.eliminarBtn = new System.Windows.Forms.Button();
-            this.modificatBtn = new System.Windows.Forms.Button();
             this.idColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nombreColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.encargadoColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -57,6 +55,9 @@
             this.fechaFinColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
             this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
+            this.eliminarBtn = new System.Windows.Forms.Button();
+            this.modificatBtn = new System.Windows.Forms.Button();
+            this.limpiarBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // idTxt
@@ -78,7 +79,7 @@
             // 
             // agregarBtn
             // 
-            this.agregarBtn.Location = new System.Drawing.Point(168, 407);
+            this.agregarBtn.Location = new System.Drawing.Point(142, 406);
             this.agregarBtn.Name = "agregarBtn";
             this.agregarBtn.Size = new System.Drawing.Size(75, 23);
             this.agregarBtn.TabIndex = 27;
@@ -202,26 +203,6 @@
             this.proyectosListView.UseCompatibleStateImageBehavior = false;
             this.proyectosListView.SelectedIndexChanged += new System.EventHandler(this.proyectosListView_SelectedIndexChanged);
             // 
-            // eliminarBtn
-            // 
-            this.eliminarBtn.Location = new System.Drawing.Point(249, 407);
-            this.eliminarBtn.Name = "eliminarBtn";
-            this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
-            this.eliminarBtn.TabIndex = 31;
-            this.eliminarBtn.Text = "Eliminar";
-            this.eliminarBtn.UseVisualStyleBackColor = true;
-            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
-            // 
-            // modificatBtn
-            // 
-            this.modificatBtn.Location = new System.Drawing.Point(331, 407);
-            this.modificatBtn.Name = "modificatBtn";
-            this.modificatBtn.Size = new System.Drawing.Size(75, 23);
-            this.modificatBtn.TabIndex = 32;
-            this.modificatBtn.Text = "Modificar";
-            this.modificatBtn.UseVisualStyleBackColor = true;
-            this.modificatBtn.Click += new System.EventHandler(this.modificatBtn_Click);
-            // 
             // idColumn
             // 
             this.idColumn.Text = "Id";
@@ -262,11 +243,42 @@
             this.imageListPeque.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListPeque.Images.SetKeyName(0, "pencil.png");
             // 
+            // eliminarBtn
+            // 
+            this.eliminarBtn.Location = new System.Drawing.Point(223, 406);
+            this.eliminarBtn.Name = "eliminarBtn";
+            this.eliminarBtn.Size = new System.Drawing.Size(75, 23);
+            this.eliminarBtn.TabIndex = 31;
+            this.eliminarBtn.Text = "Eliminar";
+            this.eliminarBtn.UseVisualStyleBackColor = true;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
+            // 
+            // modificatBtn
+            // 
+            this.modificatBtn.Location = new System.Drawing.Point(305, 406);
+            this.modificatBtn.Name = "modificatBtn";
+            this.modificatBtn.Size = new System.Drawing.Size(75, 23);
+            this.modificatBtn.TabIndex = 32;
+            this.modificatBtn.Text = "Modificar";
+            this.modificatBtn.UseVisualStyleBackColor = true;
+            this.modificatBtn.Click += new System.EventHandler(this.modificatBtn_Click);
+            // 
+            // limpiarBtn
+            // 
+            this.limpiarBtn.Location = new System.Drawing.Point(386, 406);
+            this.limpiarBtn.Name = "limpiarBtn";
+            this.limpiarBtn.Size = new System.Drawing.Size(75, 23);
+            this.limpiarBtn.TabIndex = 33;
+            this.limpiarBtn.Text = "Limpiar";
+            this.limpiarBtn.UseVisualStyleBackColor = true;
+            this.limpiarBtn.Click += new System.EventHandler(this.limpiarBtn_Click);
+            // 
             // ProyectosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 469);
+            this.Controls.Add(this.limpiarBtn);
             this.Controls.Add(this.modificatBtn);
             this.Controls.Add(this.eliminarBtn);
             this.Controls.Add(this.proyectosListView);
@@ -322,6 +334,7 @@
         private System.Windows.Forms.ColumnHeader fechaFinColumn;
         private System.Windows.Forms.ImageList imageListGrande;
         private System.Windows.Forms.ImageList imageListPeque;
+        private System.Windows.Forms.Button limpiarBtn;
     }
 }
 

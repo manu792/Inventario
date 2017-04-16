@@ -16,16 +16,16 @@ namespace Inventario
     {
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioInventario ServicioInventario { get; set; }
-        private ServicioArticulo ServicioArticulo { get; set; }
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
         private ServicioReporte ServicioReporte { get; set; }
+        private List<Orden> OrdenesEntrada;
+        private List<Orden> OrdenesSalida;
 
         public ReporteForm()
         {
             ServicioProyecto = new ServicioProyecto();
             ServicioInventario = new ServicioInventario();
-            ServicioArticulo = new ServicioArticulo();
             ServicioOrdenEntrada = new ServicioOrdenEntrada();
             ServicioOrdenSalida = new ServicioOrdenSalida();
             ServicioReporte = new ServicioReporte();
@@ -67,11 +67,12 @@ namespace Inventario
         {
             ordenesEntradaListView.Items.Clear();
             articulosVerLista.Rows.Clear();
-            CargarOrdenesEntradaListView(ServicioOrdenEntrada.ObtenerOrdenesEntrada(idProyecto));
+            OrdenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(idProyecto);
+            CargarOrdenesEntradaListView();
         }
-        private void CargarOrdenesEntradaListView(List<Orden> ordenesEntrada)
+        private void CargarOrdenesEntradaListView()
         {
-            foreach (Orden orden in ordenesEntrada)
+            foreach (Orden orden in OrdenesEntrada)
             {
                 ListViewItem item = new ListViewItem(orden.ConvertirAArray(), 0);
                 ordenesEntradaListView.Items.Add(item);
@@ -82,11 +83,12 @@ namespace Inventario
         {
             ordenesSalidaListView.Items.Clear();
             articulosOrdenSalida.Rows.Clear();
-            CargarOrdenesSalidaListView(ServicioOrdenSalida.ObtenerOrdenesSalida(idProyecto));
+            OrdenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(idProyecto);
+            CargarOrdenesSalidaListView();
         }
-        private void CargarOrdenesSalidaListView(List<Orden> ordenesSalida)
+        private void CargarOrdenesSalidaListView()
         {
-            foreach (Orden orden in ordenesSalida)
+            foreach (Orden orden in OrdenesSalida)
             {
                 ListViewItem item = new ListViewItem(orden.ConvertirAArray(), 0);
                 ordenesSalidaListView.Items.Add(item);
@@ -105,7 +107,7 @@ namespace Inventario
                 IdVerTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<Detalle> detallesEntrada = ServicioOrdenEntrada.ObtenerDetallesEntrada(Int32.Parse(i.SubItems[0].Text));
+                List<Detalle> detallesEntrada = OrdenesEntrada[ordenesEntradaListView.SelectedIndices[0]].Detalles;
                 foreach (Detalle detalleEntrada in detallesEntrada)
                 {
                     Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
@@ -125,7 +127,7 @@ namespace Inventario
                 idSalidaTxt.Text = i.SubItems[0].Text;
                 fechaSalida.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioSalidaTxt.Text = i.SubItems[3].Text;
-                List<Detalle> detallesSalida = ServicioOrdenSalida.ObtenerDetallesSalida(Int32.Parse(i.SubItems[0].Text));
+                List<Detalle> detallesSalida = OrdenesSalida[ordenesSalidaListView.SelectedIndices[0]].Detalles;
                 foreach (Detalle detalleSalida in detallesSalida)
                 {
                     Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
@@ -136,37 +138,27 @@ namespace Inventario
 
         private void exportarBtn_Click(object sender, EventArgs e)
         {
+            List<Reporte> reportes = new List<Reporte>();
 
+            Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
+            List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
+            List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
+            List<Orden> ordenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
+            reportes.Add(new Reporte(proyecto, inventario, ordenesEntrada, ordenesSalida));
+            ServicioReporte.GenerarReporte(reportes);
         }
 
         private void reporteBtn_Click(object sender, EventArgs e)
         {
-            Dictionary<int, List<Detalle>> detallesEntrada;
-            Dictionary<int, List<Detalle>> detallesSalida;
-
             List<Reporte> reportes = new List<Reporte>();
 
             List<Proyecto> proyectos = ServicioProyecto.ObtenerProyectos();
             foreach(Proyecto proyecto in proyectos)
             {
-                detallesEntrada = new Dictionary<int, List<Detalle>>();
-                detallesSalida = new Dictionary<int, List<Detalle>>();
-
                 List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
                 List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
-                foreach(Orden ordenEntrada in ordenesEntrada)
-                {
-                    List<Detalle> detalles = ServicioOrdenEntrada.ObtenerDetallesEntrada(ordenEntrada.Id);
-                    detallesEntrada.Add(ordenEntrada.Id, detalles);
-                }
-
                 List<Orden> ordenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
-                foreach (Orden ordenSalida in ordenesSalida)
-                {
-                    List<Detalle> detalles = ServicioOrdenSalida.ObtenerDetallesSalida(ordenSalida.Id);
-                    detallesSalida.Add(ordenSalida.Id, detalles);
-                }
-                reportes.Add(new Reporte(proyecto, inventario, new OrdenEntrada(ordenesEntrada, detallesEntrada), new OrdenSalida(ordenesSalida, detallesSalida)));
+                reportes.Add(new Reporte(proyecto, inventario, ordenesEntrada, ordenesSalida));
             }
             ServicioReporte.GenerarReporte(reportes);
         }

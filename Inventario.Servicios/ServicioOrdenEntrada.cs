@@ -26,57 +26,52 @@ namespace Inventario.Servicios
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
         }
-        
-        public List<Detalle> ObtenerDetallesEntrada(int idOrdenEntrada)
-        {
-            List<Detalle> detallesEntrada = DetalleEntradaArchivo.ObtenerDetalleEntradas(idOrdenEntrada);
-            foreach(Detalle detalleEntrada in detallesEntrada)
-            {
-                Articulo articulo = ServicioArticulo.ObtenerArticulo(detalleEntrada.Articulo.Id);
-                detalleEntrada.Articulo = articulo;
-            }
-            return detallesEntrada;
-        }
 
         public List<Orden> ObtenerOrdenesEntrada(int idProyecto)
         {
-            //List<string[]> listaOrdenesEntrada = new List<string[]>();
-            
             List<Orden> ordenesEntrada = OrdenEntradaArchivo.ObtenerOrdenesEntrada(idProyecto);
             foreach (Orden ordenEntrada in ordenesEntrada)
             {
                 Proyecto proyecto = ServicioProyecto.ObtenerProyecto(ordenEntrada.Proyecto.Id);
                 ordenEntrada.Proyecto = proyecto;
-                //listaOrdenesEntrada.Add(ordenEntrada.ConvertirAArray());
+                ordenEntrada.Detalles = DetalleEntradaArchivo.ObtenerDetalleEntradas(ordenEntrada.Id);
+                ObtenerArticulosPorDetalle(ordenEntrada);
             }
 
             return ordenesEntrada;
         }
+        private void ObtenerArticulosPorDetalle(Orden ordenEntrada)
+        {
+            foreach (Detalle detalle in ordenEntrada.Detalles)
+            {
+                detalle.Articulo = ServicioArticulo.ObtenerArticulo(detalle.Articulo.Id);
+            }
+        }
 
-        public void Agregar(Orden ordenEntrada, List<Detalle> detallesEntrada)
+        public void Agregar(Orden ordenEntrada)
         {
             int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
 
-            foreach(Detalle detalleEntrada in detallesEntrada)
+            foreach(Detalle detalleEntrada in ordenEntrada.Detalles)
             {
                 detalleEntrada.IdOrden = idEntrada;
                 DetalleEntradaArchivo.Guardar(detalleEntrada);
             }
             
-            OnNuevaOrdenEntrada(new NuevaOrdenDetalles(ordenEntrada.Proyecto.Id, detallesEntrada));
+            OnNuevaOrdenEntrada(new NuevaOrdenDetalles(ordenEntrada));
         }
 
-        public void Modificar(Orden ordenEntrada, List<Detalle> detallesEntrada)
+        public void Modificar(Orden ordenEntrada)
         {
             List<string[]> registrosModificados = new List<string[]>();
 
             OrdenEntradaArchivo.Modificar(ordenEntrada);
-            foreach (Detalle detalleEntrada in detallesEntrada)
+            foreach (Detalle detalleEntrada in ordenEntrada.Detalles)
             {
                 registrosModificados.Add(DetalleEntradaArchivo.Modificar(detalleEntrada));
             }
 
-            OnOrdenEntradaModificada(new OrdenModificadaDetalles(ordenEntrada.Proyecto.Id, detallesEntrada, registrosModificados));
+            OnOrdenEntradaModificada(new OrdenModificadaDetalles(ordenEntrada, registrosModificados));
         }
 
         public void Eliminar(int idOrdenEntrada)

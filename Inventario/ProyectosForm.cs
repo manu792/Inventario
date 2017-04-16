@@ -64,6 +64,8 @@ namespace Inventario
                 
                 ListViewItem item = new ListViewItem(campos, 0);
                 proyectosListView.Items.Add(item);
+
+                Limpiar();
             }
         }
 
@@ -103,6 +105,8 @@ namespace Inventario
                 i.SubItems[4].Text = descripcionTxt.Text;
                 i.SubItems[5].Text = fechaInicio.Value.ToString();
                 i.SubItems[6].Text = fechaFin.Value.ToString();
+
+                Limpiar();
             }
         }
 
@@ -120,6 +124,15 @@ namespace Inventario
                 fechaInicio.Value = DateTime.Parse(i.SubItems[5].Text);
                 fechaFin.Value = DateTime.Parse(i.SubItems[6].Text);
             }
+        }
+
+        private void limpiarBtn_Click(object sender, EventArgs e)
+        {
+            idTxt.Clear();
+            proyectoTxt.Clear();
+            encargadoTxt.Clear();
+            direccionTxt.Clear();
+            descripcionTxt.Clear();
         }
     }
 }
