@@ -138,14 +138,17 @@ namespace Inventario
 
         private void exportarBtn_Click(object sender, EventArgs e)
         {
-            List<Reporte> reportes = new List<Reporte>();
+            if(proyectosComboBox.SelectedIndex > -1)
+            {
+                List<Reporte> reportes = new List<Reporte>();
 
-            Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
-            List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
-            List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
-            List<Orden> ordenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
-            reportes.Add(new Reporte(proyecto, inventario, ordenesEntrada, ordenesSalida));
-            ServicioReporte.GenerarReporte(reportes);
+                Proyecto proyecto = (Proyecto)proyectosComboBox.SelectedItem;
+                List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
+                List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
+                List<Orden> ordenesSalida = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
+                reportes.Add(new Reporte(proyecto, inventario, ordenesEntrada, ordenesSalida));
+                ServicioReporte.GenerarReporte(reportes);
+            }
         }
 
         private void reporteBtn_Click(object sender, EventArgs e)
