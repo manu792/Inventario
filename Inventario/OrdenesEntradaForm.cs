@@ -23,6 +23,7 @@ namespace Inventario
             ServicioProyecto = new ServicioProyecto();
             ServicioArticulo = new ServicioArticulo();
             ServicioInventario = new ServicioInventario(ServicioOrdenEntrada);
+            Ordenes = new List<Orden>();
             InitializeComponent();
         }
 
@@ -155,8 +156,9 @@ namespace Inventario
                     }
                 }
                 ordenEntrada.Detalles = detallesEntrada;
-                ServicioOrdenEntrada.Agregar(ordenEntrada);
-                MessageBox.Show("Orden de entrada ingresada correctamente");
+                int idOrden = ServicioOrdenEntrada.Agregar(ordenEntrada);
+                MessageBox.Show("Orden de entrada numero: " + idOrden + " agregada correctamente");
+                
             }
         }
         private bool EsDataValida()
@@ -232,6 +234,7 @@ namespace Inventario
                 ObtenerOrdenesEntrada();
 
                 MessageBox.Show("Orden de entrada modificada correctamente");
+                LimpiarControles();
             }
         }
 
@@ -251,6 +254,71 @@ namespace Inventario
             IdVerTxt.Clear();
             comentarioVerTxt.Clear();
             articulosVerLista.Rows.Clear();
+        }
+
+        private void buscarBtn_Click(object sender, EventArgs e)
+        {
+            Ordenes.Clear();
+            detallesEntradaDataGridView.Rows.Clear();
+            Ordenes.Add(ServicioOrdenEntrada.ObtenerOrdenEntradaPorId((int)idOrden.Value));
+            if (Ordenes[0] != null)
+            {
+                idOrdenEntradaTxt.Text = Ordenes[0].Id.ToString();
+                proyectoTxt.Text = Ordenes[0].Proyecto.Nombre;
+                fechaOrden.Value = Ordenes[0].Fecha;
+                comentarioOrdenTxt.Text = Ordenes[0].Comentario;
+                
+                foreach(Detalle detalle in Ordenes[0].Detalles)
+                {
+                    int cantidadInventario = ServicioInventario.ObtenerCantidadArticuloPorProyecto(Ordenes[0].Proyecto.Id, detalle.Articulo.Id);
+
+                    detallesEntradaDataGridView.Rows.Add(detalle.IdDetalle, detalle.Articulo.Id, detalle.Articulo.Nombre, detalle.Articulo.Unidad, detalle.Articulo.Precio, detalle.Cantidad, detalle.Total);
+
+                    if (cantidadInventario > 0)
+                        detallesEntradaDataGridView.Rows[detallesEntradaDataGridView.Rows.Count - 1].Cells[5].ReadOnly = false;
+                    else
+                        detallesEntradaDataGridView.Rows[detallesEntradaDataGridView.Rows.Count - 1].Cells[5].ReadOnly = true;
+                }
+            }
+            else
+                MessageBox.Show("La orden de entrada no existe o fue removida del sistema");
+        }
+        private void modificarOrdenBtn_Click(object sender, EventArgs e)
+        {
+            if (comentarioOrdenTxt.Text != string.Empty && detallesEntradaDataGridView.Rows.Count > 0)
+            {
+                List<Detalle> detallesEntrada = new List<Detalle>();
+
+                Orden ordenEntrada = new Orden(Int32.Parse(idOrdenEntradaTxt.Text), new Proyecto(Ordenes[0].Proyecto.Id), fechaOrden.Value, comentarioOrdenTxt.Text);
+
+                foreach (DataGridViewRow fila in detallesEntradaDataGridView.Rows)
+                {
+                    if (fila.Cells[0].Value != null)
+                    {
+                        Articulo articulo = new Articulo(Int32.Parse(fila.Cells[1].Value.ToString()), Double.Parse(fila.Cells[4].Value.ToString()));
+                        detallesEntrada.Add(new Detalle(Int32.Parse(fila.Cells[0].Value.ToString()), ordenEntrada.Id, articulo, Int32.Parse(fila.Cells[5].Value.ToString()), Double.Parse(fila.Cells[6].Value.ToString())));
+                    }
+                }
+                ordenEntrada.Detalles = detallesEntrada;
+                ServicioOrdenEntrada.Modificar(ordenEntrada);
+                MessageBox.Show("Orden de entrada modificada correctamente");
+                Limpiar();
+            }
+        }
+        private void eliminarOrdenBtn_Click(object sender, EventArgs e)
+        {
+            if (comentarioOrdenTxt.Text != string.Empty && detallesEntradaDataGridView.Rows.Count > 0)
+            {
+                ServicioOrdenEntrada.Eliminar(Int32.Parse(idOrdenEntradaTxt.Text));
+                Limpiar();
+            }
+        }
+        private void Limpiar()
+        {
+            idOrdenEntradaTxt.Clear();
+            proyectoTxt.Clear();
+            comentarioOrdenTxt.Clear();
+            detallesEntradaDataGridView.Rows.Clear();
         }
     }
 }

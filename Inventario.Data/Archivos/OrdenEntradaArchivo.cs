@@ -46,6 +46,22 @@ namespace Inventario.Data
 
             return ordenesEntrada;
         }
+        public Orden ObtenerOrdenEntradaPorId(int idOrden)
+        {
+            using (reader = File.OpenText(direccion))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string registro = reader.ReadLine();
+                    string[] campos = registro.Split('#');
+                    if (Int32.Parse(campos[0]) == idOrden)
+                    {
+                        return new Orden(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]);
+                    }
+                }
+            }
+            return null;
+        }
         public int Guardar(Orden ordenEntrada)
         {
             id += 1;

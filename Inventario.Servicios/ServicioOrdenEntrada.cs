@@ -40,6 +40,19 @@ namespace Inventario.Servicios
 
             return ordenesEntrada;
         }
+        public Orden ObtenerOrdenEntradaPorId(int idOrden)
+        {
+            Orden ordenEntrada = OrdenEntradaArchivo.ObtenerOrdenEntradaPorId(idOrden);
+            if(ordenEntrada != null)
+            {
+                Proyecto proyecto = ProyectoArchivo.ObtenerProyecto(ordenEntrada.Proyecto.Id);
+                ordenEntrada.Proyecto = proyecto;
+                ordenEntrada.Detalles = DetalleEntradaArchivo.ObtenerDetalleEntradas(ordenEntrada.Id);
+                ObtenerArticulosPorDetalle(ordenEntrada);
+            }
+
+            return ordenEntrada;
+        }
         private void ObtenerArticulosPorDetalle(Orden ordenEntrada)
         {
             foreach (Detalle detalle in ordenEntrada.Detalles)
@@ -47,7 +60,7 @@ namespace Inventario.Servicios
                 detalle.Articulo = ArticuloArchivo.ObtenerArticulo(detalle.Articulo.Id);
             }
         }
-        public void Agregar(Orden ordenEntrada)
+        public int Agregar(Orden ordenEntrada)
         {
             int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
 
@@ -58,6 +71,7 @@ namespace Inventario.Servicios
             }
             
             OnNuevaOrdenEntrada(new NuevaOrdenDetalles(ordenEntrada));
+            return idEntrada;
         }
         public void Modificar(Orden ordenEntrada)
         {

@@ -84,6 +84,29 @@
             this.label11 = new System.Windows.Forms.Label();
             this.proyectosVerLista = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.eliminarOrdenBtn = new System.Windows.Forms.Button();
+            this.modificarOrdenBtn = new System.Windows.Forms.Button();
+            this.idOrden = new System.Windows.Forms.NumericUpDown();
+            this.proyectoTxt = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.buscarBtn = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.detallesEntradaDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idOrdenEntradaTxt = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.fechaOrden = new System.Windows.Forms.DateTimePicker();
+            this.comentarioOrdenTxt = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,12 +117,17 @@
             this.tabPage2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.idOrden)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.detallesEntradaDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -361,7 +389,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1063, 521);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ver";
+            this.tabPage2.Text = "Buscar por Proyecto";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // eliminarBtn
@@ -583,6 +611,215 @@
             this.label12.TabIndex = 68;
             this.label12.Text = "Proyecto:";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.eliminarOrdenBtn);
+            this.tabPage3.Controls.Add(this.modificarOrdenBtn);
+            this.tabPage3.Controls.Add(this.idOrden);
+            this.tabPage3.Controls.Add(this.proyectoTxt);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.buscarBtn);
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Controls.Add(this.idOrdenEntradaTxt);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.fechaOrden);
+            this.tabPage3.Controls.Add(this.comentarioOrdenTxt);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1063, 521);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Buscar por ID de Orden";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // eliminarOrdenBtn
+            // 
+            this.eliminarOrdenBtn.Location = new System.Drawing.Point(526, 414);
+            this.eliminarOrdenBtn.Name = "eliminarOrdenBtn";
+            this.eliminarOrdenBtn.Size = new System.Drawing.Size(75, 23);
+            this.eliminarOrdenBtn.TabIndex = 92;
+            this.eliminarOrdenBtn.Text = "Eliminar";
+            this.eliminarOrdenBtn.UseVisualStyleBackColor = true;
+            this.eliminarOrdenBtn.Click += new System.EventHandler(this.eliminarOrdenBtn_Click);
+            // 
+            // modificarOrdenBtn
+            // 
+            this.modificarOrdenBtn.Location = new System.Drawing.Point(444, 414);
+            this.modificarOrdenBtn.Name = "modificarOrdenBtn";
+            this.modificarOrdenBtn.Size = new System.Drawing.Size(75, 23);
+            this.modificarOrdenBtn.TabIndex = 91;
+            this.modificarOrdenBtn.Text = "Modificar";
+            this.modificarOrdenBtn.UseVisualStyleBackColor = true;
+            this.modificarOrdenBtn.Click += new System.EventHandler(this.modificarOrdenBtn_Click);
+            // 
+            // idOrden
+            // 
+            this.idOrden.Location = new System.Drawing.Point(459, 59);
+            this.idOrden.Name = "idOrden";
+            this.idOrden.Size = new System.Drawing.Size(166, 20);
+            this.idOrden.TabIndex = 90;
+            // 
+            // proyectoTxt
+            // 
+            this.proyectoTxt.Enabled = false;
+            this.proyectoTxt.Location = new System.Drawing.Point(157, 184);
+            this.proyectoTxt.Name = "proyectoTxt";
+            this.proyectoTxt.Size = new System.Drawing.Size(259, 20);
+            this.proyectoTxt.TabIndex = 89;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(46, 187);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 13);
+            this.label14.TabIndex = 88;
+            this.label14.Text = "Proyecto:";
+            // 
+            // buscarBtn
+            // 
+            this.buscarBtn.Location = new System.Drawing.Point(631, 56);
+            this.buscarBtn.Name = "buscarBtn";
+            this.buscarBtn.Size = new System.Drawing.Size(75, 23);
+            this.buscarBtn.TabIndex = 87;
+            this.buscarBtn.Text = "Buscar";
+            this.buscarBtn.UseVisualStyleBackColor = true;
+            this.buscarBtn.Click += new System.EventHandler(this.buscarBtn_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.detallesEntradaDataGridView);
+            this.groupBox4.Location = new System.Drawing.Point(444, 152);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(569, 203);
+            this.groupBox4.TabIndex = 86;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Articulos";
+            // 
+            // detallesEntradaDataGridView
+            // 
+            this.detallesEntradaDataGridView.AllowUserToAddRows = false;
+            this.detallesEntradaDataGridView.AllowUserToDeleteRows = false;
+            this.detallesEntradaDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.detallesEntradaDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14});
+            this.detallesEntradaDataGridView.Location = new System.Drawing.Point(6, 19);
+            this.detallesEntradaDataGridView.Name = "detallesEntradaDataGridView";
+            this.detallesEntradaDataGridView.Size = new System.Drawing.Size(557, 179);
+            this.detallesEntradaDataGridView.TabIndex = 1;
+            this.detallesEntradaDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.carritoDataGridView_CellEndEdit);
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "IdDetalle";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "IdArticulo";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Unidad";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Precio";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Cantidad";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Total";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // idOrdenEntradaTxt
+            // 
+            this.idOrdenEntradaTxt.Enabled = false;
+            this.idOrdenEntradaTxt.Location = new System.Drawing.Point(157, 152);
+            this.idOrdenEntradaTxt.Name = "idOrdenEntradaTxt";
+            this.idOrdenEntradaTxt.Size = new System.Drawing.Size(259, 20);
+            this.idOrdenEntradaTxt.TabIndex = 85;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(46, 155);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(19, 13);
+            this.label4.TabIndex = 84;
+            this.label4.Text = "Id:";
+            // 
+            // fechaOrden
+            // 
+            this.fechaOrden.Location = new System.Drawing.Point(159, 218);
+            this.fechaOrden.Name = "fechaOrden";
+            this.fechaOrden.Size = new System.Drawing.Size(259, 20);
+            this.fechaOrden.TabIndex = 83;
+            // 
+            // comentarioOrdenTxt
+            // 
+            this.comentarioOrdenTxt.Location = new System.Drawing.Point(159, 247);
+            this.comentarioOrdenTxt.Multiline = true;
+            this.comentarioOrdenTxt.Name = "comentarioOrdenTxt";
+            this.comentarioOrdenTxt.Size = new System.Drawing.Size(259, 82);
+            this.comentarioOrdenTxt.TabIndex = 82;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(46, 250);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.TabIndex = 81;
+            this.label9.Text = "Comentario:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(46, 225);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(40, 13);
+            this.label13.TabIndex = 80;
+            this.label13.Text = "Fecha:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(362, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Id Orden Entrada:";
+            // 
             // OrdenesEntradaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,6 +842,11 @@
             this.tabPage2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.idOrden)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.detallesEntradaDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -665,5 +907,28 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button buscarBtn;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.DataGridView detallesEntradaDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.TextBox idOrdenEntradaTxt;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker fechaOrden;
+        private System.Windows.Forms.TextBox comentarioOrdenTxt;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox proyectoTxt;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown idOrden;
+        private System.Windows.Forms.Button eliminarOrdenBtn;
+        private System.Windows.Forms.Button modificarOrdenBtn;
     }
 }
