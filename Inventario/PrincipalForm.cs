@@ -38,14 +38,14 @@ namespace Inventario
 
         private void entradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OrdenesEntrada ordenesEntradaForm = new OrdenesEntrada();
+            OrdenesEntradaForm ordenesEntradaForm = new OrdenesEntradaForm();
             ordenesEntradaForm.MdiParent = this;
             ordenesEntradaForm.Show();
         }
 
         private void salidaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OrdenesSalida ordenesSalidaForm = new OrdenesSalida();
+            OrdenesSalidaForm ordenesSalidaForm = new OrdenesSalidaForm();
             ordenesSalidaForm.MdiParent = this;
             ordenesSalidaForm.Show();
         }

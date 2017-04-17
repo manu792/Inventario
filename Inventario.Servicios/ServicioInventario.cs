@@ -25,7 +25,7 @@ namespace Inventario.Servicios
         public ServicioInventario(ServicioOrdenEntrada servicioOrdenEntrada) : this()
         {
             ServicioOrdenEntrada = servicioOrdenEntrada;
-            ServicioOrdenEntrada.NuevaOrdeEntrada += AumentarInventario;
+            ServicioOrdenEntrada.NuevaOrdenEntrada += AumentarInventario;
             ServicioOrdenEntrada.OrdenEntradaModificada += ServicioOrdenEntrada_OrdenEntradaModificada;
         }
 

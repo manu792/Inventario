@@ -16,7 +16,7 @@ namespace Inventario.Servicios
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioArticulo ServicioArticulo { get; set; }
 
-        public event EventHandler<NuevaOrdenDetalles> NuevaOrdeEntrada;
+        public event EventHandler<NuevaOrdenDetalles> NuevaOrdenEntrada;
         public event EventHandler<OrdenModificadaDetalles> OrdenEntradaModificada;
 
         public ServicioOrdenEntrada()
@@ -82,8 +82,8 @@ namespace Inventario.Servicios
 
         protected void OnNuevaOrdenEntrada(NuevaOrdenDetalles e)
         {
-            if (NuevaOrdeEntrada != null)
-                NuevaOrdeEntrada(this, e);
+            if (NuevaOrdenEntrada != null)
+                NuevaOrdenEntrada(this, e);
         }
 
         protected void OnOrdenEntradaModificada(OrdenModificadaDetalles e)

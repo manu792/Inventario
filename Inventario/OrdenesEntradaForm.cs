@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Inventario
 {
-    public partial class OrdenesEntrada : Form
+    public partial class OrdenesEntradaForm : Form
     {
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
         private ServicioInventario ServicioInventario { get; set; }
@@ -17,7 +17,7 @@ namespace Inventario
         private DataView dv;
         private List<Orden> Ordenes;
 
-        public OrdenesEntrada()
+        public OrdenesEntradaForm()
         {
             ServicioOrdenEntrada = new ServicioOrdenEntrada();
             ServicioProyecto = new ServicioProyecto();

@@ -12,7 +12,7 @@ using Inventario.Servicios;
 
 namespace Inventario
 {
-    public partial class OrdenesSalida : Form
+    public partial class OrdenesSalidaForm : Form
     {
         private ServicioProyecto ServicioProyecto { get; set; }
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
@@ -21,7 +21,7 @@ namespace Inventario
         private List<int> cantidades;
         private List<Orden> Ordenes;
 
-        public OrdenesSalida()
+        public OrdenesSalidaForm()
         {
             ServicioProyecto = new ServicioProyecto();
             ServicioOrdenSalida = new ServicioOrdenSalida();

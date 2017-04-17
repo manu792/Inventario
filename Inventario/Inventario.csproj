@@ -59,17 +59,17 @@
     <Compile Include="InventarioForm.Designer.cs">
       <DependentUpon>InventarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdenesEntrada.cs">
+    <Compile Include="OrdenesEntradaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrdenesEntrada.Designer.cs">
-      <DependentUpon>OrdenesEntrada.cs</DependentUpon>
+    <Compile Include="OrdenesEntradaForm.Designer.cs">
+      <DependentUpon>OrdenesEntradaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdenesSalida.cs">
+    <Compile Include="OrdenesSalidaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrdenesSalida.Designer.cs">
-      <DependentUpon>OrdenesSalida.cs</DependentUpon>
+    <Compile Include="OrdenesSalidaForm.Designer.cs">
+      <DependentUpon>OrdenesSalidaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrincipalForm.cs">
       <SubType>Form</SubType>
@@ -97,11 +97,11 @@
     <EmbeddedResource Include="InventarioForm.resx">
       <DependentUpon>InventarioForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdenesEntrada.resx">
-      <DependentUpon>OrdenesEntrada.cs</DependentUpon>
+    <EmbeddedResource Include="OrdenesEntradaForm.resx">
+      <DependentUpon>OrdenesEntradaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdenesSalida.resx">
-      <DependentUpon>OrdenesSalida.cs</DependentUpon>
+    <EmbeddedResource Include="OrdenesSalidaForm.resx">
+      <DependentUpon>OrdenesSalidaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrincipalForm.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
