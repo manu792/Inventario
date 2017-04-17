@@ -583,13 +583,13 @@
             this.label12.TabIndex = 68;
             this.label12.Text = "Proyecto:";
             // 
-            // OrdenesEntrada
+            // OrdenesEntradaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 571);
             this.Controls.Add(this.tabControl1);
-            this.Name = "OrdenesEntrada";
+            this.Name = "OrdenesEntradaForm";
             this.Text = "Ordenes de Entrada";
             this.Load += new System.EventHandler(this.Ordenes_Load);
             this.tabControl1.ResumeLayout(false);

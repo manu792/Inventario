@@ -44,23 +44,6 @@ namespace Inventario.Data
 
             return detallesEntrada;
         }
-        public Detalle ObtenerDetalleEntrada(int id)
-        {
-            using (reader = File.OpenText(direccion))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string registro = reader.ReadLine();
-                    string[] campos = registro.Split('#');
-                    if (Int32.Parse(campos[0]) == id)
-                    {
-                        return new Detalle(Int32.Parse(campos[0]), Int32.Parse(campos[1]), new Articulo(Int32.Parse(campos[2])), Int32.Parse(campos[3]), Double.Parse(campos[4]));
-                    }
-                }
-            }
-
-            return null;
-        }
         public void Guardar(Detalle detalleEntrada)
         {
             id += 1;

@@ -27,22 +27,6 @@ namespace Inventario.Data
             else
                 ObtenerUltimoId();
         }
-        public List<Orden> ObtenerOrdenEntradas()
-        {
-            List<Orden> ordenEntrada = new List<Orden>();
-
-            using (reader = File.OpenText(direccion))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string registro = reader.ReadLine();
-                    string[] campos = registro.Split('#');
-                    ordenEntrada.Add(new Orden(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]));
-                }
-            }
-
-            return ordenEntrada;
-        }
         public List<Orden> ObtenerOrdenesEntrada(int idProyecto)
         {
             List<Orden> ordenesEntrada = new List<Orden>();

@@ -59,7 +59,6 @@ namespace Inventario.Data.Archivos
             }
             return null;
         }
-
         public void ActualizarCantidad(int idProyecto, int idArticulo, InventarioProyecto inventario)
         {
             using (reader = File.OpenText(direccion))
@@ -80,7 +79,6 @@ namespace Inventario.Data.Archivos
             }
             File.Replace(direccionTemp, direccion, direccionBackup);
         }
-
         public void AgregarArticuloInventario(InventarioProyecto inventario)
         {
             id += 1;
@@ -90,7 +88,6 @@ namespace Inventario.Data.Archivos
                 writer.WriteLine(inventario.ToString());
             }
         }
-
         public void EliminarArticuloInventario(int id)
         {
             using (reader = File.OpenText(direccion))
@@ -109,7 +106,6 @@ namespace Inventario.Data.Archivos
             }
             File.Replace(direccionTemp, direccion, direccionBackup);
         }
-
         private void ObtenerUltimoId()
         {
             using (reader = File.OpenText(direccion))

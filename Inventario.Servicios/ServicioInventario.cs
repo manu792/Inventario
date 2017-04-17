@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Inventario.Commons.Modelos;
+using Inventario.Data;
 using Inventario.Data.Archivos;
 using Inventario.Servicios.OrdenEntradaEventArgs;
 
@@ -12,14 +11,15 @@ namespace Inventario.Servicios
     public class ServicioInventario
     {
         private InventarioArchivo InventarioArchivo { get; set; }
+        private ArticuloArchivo ArticuloArchivo { get; set; }
+
         private ServicioOrdenEntrada ServicioOrdenEntrada { get; set; }
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
-        private ServicioArticulo ServicioArticulo { get; set; }
 
         public ServicioInventario()
         {
             InventarioArchivo = new InventarioArchivo();
-            ServicioArticulo = new ServicioArticulo();
+            ArticuloArchivo = new ArticuloArchivo();
         }
 
         public ServicioInventario(ServicioOrdenEntrada servicioOrdenEntrada) : this()
@@ -51,7 +51,6 @@ namespace Inventario.Servicios
                     InventarioArchivo.AgregarArticuloInventario(new InventarioProyecto(new Proyecto(e.Orden.Proyecto.Id), new Articulo(detalleEntrada.Articulo.Id), detalleEntrada.Cantidad, detalleEntrada.Total));
             }
         }
-
         private void ReducirInventario(object sender, NuevaOrdenDetalles e)
         {
             foreach (Detalle detalleSalida in e.Orden.Detalles)
@@ -121,7 +120,7 @@ namespace Inventario.Servicios
             List<InventarioProyecto> inventario = InventarioArchivo.ArticulosEnProyecto(idProyecto);
             foreach(InventarioProyecto registro in inventario)
             {
-                registro.Articulo = ServicioArticulo.ObtenerArticulo(registro.Articulo.Id);
+                registro.Articulo = ArticuloArchivo.ObtenerArticulo(registro.Articulo.Id);
             }
             return inventario;
         }

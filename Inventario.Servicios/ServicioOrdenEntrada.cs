@@ -13,8 +13,8 @@ namespace Inventario.Servicios
     {
         private OrdenEntradaArchivo OrdenEntradaArchivo { get; set; }
         private DetalleEntradaArchivo DetalleEntradaArchivo { get; set; }
-        private ServicioProyecto ServicioProyecto { get; set; }
-        private ServicioArticulo ServicioArticulo { get; set; }
+        private ProyectoArchivo ProyectoArchivo { get; set; }
+        private ArticuloArchivo ArticuloArchivo { get; set; }
 
         public event EventHandler<NuevaOrdenDetalles> NuevaOrdenEntrada;
         public event EventHandler<OrdenModificadaDetalles> OrdenEntradaModificada;
@@ -23,16 +23,16 @@ namespace Inventario.Servicios
         {
             OrdenEntradaArchivo = new OrdenEntradaArchivo();
             DetalleEntradaArchivo = new DetalleEntradaArchivo();
-            ServicioProyecto = new ServicioProyecto();
-            ServicioArticulo = new ServicioArticulo();
-        }
+            ProyectoArchivo = new ProyectoArchivo();
+            ArticuloArchivo = new ArticuloArchivo();
 
+        }
         public List<Orden> ObtenerOrdenesEntrada(int idProyecto)
         {
             List<Orden> ordenesEntrada = OrdenEntradaArchivo.ObtenerOrdenesEntrada(idProyecto);
             foreach (Orden ordenEntrada in ordenesEntrada)
             {
-                Proyecto proyecto = ServicioProyecto.ObtenerProyecto(ordenEntrada.Proyecto.Id);
+                Proyecto proyecto = ProyectoArchivo.ObtenerProyecto(ordenEntrada.Proyecto.Id);
                 ordenEntrada.Proyecto = proyecto;
                 ordenEntrada.Detalles = DetalleEntradaArchivo.ObtenerDetalleEntradas(ordenEntrada.Id);
                 ObtenerArticulosPorDetalle(ordenEntrada);
@@ -44,10 +44,9 @@ namespace Inventario.Servicios
         {
             foreach (Detalle detalle in ordenEntrada.Detalles)
             {
-                detalle.Articulo = ServicioArticulo.ObtenerArticulo(detalle.Articulo.Id);
+                detalle.Articulo = ArticuloArchivo.ObtenerArticulo(detalle.Articulo.Id);
             }
         }
-
         public void Agregar(Orden ordenEntrada)
         {
             int idEntrada = OrdenEntradaArchivo.Guardar(ordenEntrada);
@@ -60,7 +59,6 @@ namespace Inventario.Servicios
             
             OnNuevaOrdenEntrada(new NuevaOrdenDetalles(ordenEntrada));
         }
-
         public void Modificar(Orden ordenEntrada)
         {
             List<string[]> registrosModificados = new List<string[]>();
@@ -73,19 +71,16 @@ namespace Inventario.Servicios
 
             OnOrdenEntradaModificada(new OrdenModificadaDetalles(ordenEntrada, registrosModificados));
         }
-
         public void Eliminar(int idOrdenEntrada)
         {
             DetalleEntradaArchivo.Eliminar(idOrdenEntrada);
             OrdenEntradaArchivo.Eliminar(idOrdenEntrada);
         }
-
         protected void OnNuevaOrdenEntrada(NuevaOrdenDetalles e)
         {
             if (NuevaOrdenEntrada != null)
                 NuevaOrdenEntrada(this, e);
         }
-
         protected void OnOrdenEntradaModificada(OrdenModificadaDetalles e)
         {
             if (OrdenEntradaModificada != null)

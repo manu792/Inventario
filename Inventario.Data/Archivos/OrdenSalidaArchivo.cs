@@ -45,23 +45,6 @@ namespace Inventario.Data
 
             return ordenSalida;
         }
-        public Orden ObtenerOrdenSalida(int id)
-        {
-            using (reader = File.OpenText(direccion))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string registro = reader.ReadLine();
-                    string[] campos = registro.Split('#');
-                    if (Int32.Parse(campos[0]) == id)
-                    {
-                        return new Orden(Int32.Parse(campos[0]), new Proyecto(Int32.Parse(campos[1])), DateTime.Parse(campos[2]), campos[3]);
-                    }
-                }
-            }
-
-            return null;
-        }
         public int Guardar(Orden ordenSalida)
         {
             id += 1;
