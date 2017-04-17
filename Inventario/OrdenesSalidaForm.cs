@@ -18,15 +18,13 @@ namespace Inventario
         private ServicioOrdenSalida ServicioOrdenSalida { get; set; }
         private ServicioInventario ServicioInventario { get; set; }
         private DataView dv;
-        private List<int> cantidades;
-        private List<Orden> Ordenes;
+        private List<Orden> ordenes;
 
         public OrdenesSalidaForm()
         {
             ServicioProyecto = new ServicioProyecto();
             ServicioOrdenSalida = new ServicioOrdenSalida();
             ServicioInventario = new ServicioInventario(ServicioOrdenSalida);
-            cantidades = new List<int>();
             InitializeComponent();
         }
 
@@ -134,17 +132,21 @@ namespace Inventario
         {
             DataGridView data = sender as DataGridView;
             Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-            int cantidadMaxima = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, Int32.Parse(data.Rows[e.RowIndex].Cells[1].Value.ToString())) + cantidades[e.RowIndex];
-
-            if (data.Rows[e.RowIndex].Cells[5].Value == null || data.Rows[e.RowIndex].Cells[5].Value.ToString() == string.Empty || Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) == 0)
-                data.Rows[e.RowIndex].Cells[5].Value = 1;
-
-            if (Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) > cantidadMaxima)
+            Orden ordenSeleccionada = ordenes.Where(x => x.Id == Int32.Parse(IdVerTxt.Text)).FirstOrDefault();
+            if(ordenSeleccionada != null)
             {
-                MessageBox.Show("La cantidad de articulos a eliminar debe ser menor o igual a la cantidad que se ingresaron en la orden de entrada");
-                data.Rows[e.RowIndex].Cells[5].Value = 1;
+                int cantidadMaxima = ServicioInventario.ObtenerCantidadArticuloPorProyecto(proyecto.Id, Int32.Parse(data.Rows[e.RowIndex].Cells[1].Value.ToString())) + ordenSeleccionada.Detalles[e.RowIndex].Cantidad;
+
+                if (data.Rows[e.RowIndex].Cells[5].Value == null || data.Rows[e.RowIndex].Cells[5].Value.ToString() == string.Empty || Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) == 0)
+                    data.Rows[e.RowIndex].Cells[5].Value = 1;
+
+                if (Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString()) > cantidadMaxima)
+                {
+                    MessageBox.Show("La cantidad de articulos a eliminar debe ser menor o igual a la cantidad que se ingresaron en la orden de entrada");
+                    data.Rows[e.RowIndex].Cells[5].Value = 1;
+                }
+                data.Rows[e.RowIndex].Cells[6].Value = Double.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) * Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString());
             }
-            data.Rows[e.RowIndex].Cells[6].Value = Double.Parse(data.Rows[e.RowIndex].Cells[4].Value.ToString()) * Int32.Parse(data.Rows[e.RowIndex].Cells[5].Value.ToString());
         }
 
         private int BuscarCantidadMaximaPermitida(int idArticulo)
@@ -254,7 +256,7 @@ namespace Inventario
         private void ObtenerOrdenesSalida()
         {
             Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
-            Ordenes = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
+            ordenes = ServicioOrdenSalida.ObtenerOrdenesSalida(proyecto.Id);
             CargarOrdenesSalida();
         }
         private void LimpiarControles()
@@ -267,7 +269,7 @@ namespace Inventario
         private void CargarOrdenesSalida()
         {
             ordenesSalidaVerLista.Items.Clear();
-            foreach (Orden ServicioOrdenEntrada in Ordenes)
+            foreach (Orden ServicioOrdenEntrada in ordenes)
             {
                 ListViewItem item = new ListViewItem(ServicioOrdenEntrada.ConvertirAArray(), 0);
                 ordenesSalidaVerLista.Items.Add(item);
@@ -277,18 +279,14 @@ namespace Inventario
 
         private void ordenesEntradaVerLista_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cantidades.Clear();
-
             if (ordenesSalidaVerLista.SelectedItems.Count > 0)
             {
-                articulosVerLista.Rows.Clear();
-
                 ListViewItem i;
                 i = ordenesSalidaVerLista.SelectedItems[0];
                 IdVerTxt.Text = i.SubItems[0].Text;
                 fechaVer.Value = DateTime.Parse(i.SubItems[2].Text);
                 comentarioVerTxt.Text = i.SubItems[3].Text;
-                List<Detalle> detallesSalida = Ordenes[ordenesSalidaVerLista.SelectedIndices[0]].Detalles;
+                List<Detalle> detallesSalida = ordenes[ordenesSalidaVerLista.SelectedIndices[0]].Detalles;
                 foreach (Detalle detalleSalida in detallesSalida)
                 {
                     Proyecto proyecto = (Proyecto)proyectosVerLista.SelectedItem;
@@ -299,8 +297,6 @@ namespace Inventario
                         articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = true;
                     else
                         articulosVerLista.Rows[articulosVerLista.Rows.Count - 1].Cells[5].ReadOnly = false;
-
-                    cantidades.Add(detalleSalida.Cantidad);
                 }
             }
         }
