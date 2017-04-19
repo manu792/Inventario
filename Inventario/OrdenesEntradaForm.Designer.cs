@@ -657,9 +657,19 @@
             // idOrden
             // 
             this.idOrden.Location = new System.Drawing.Point(459, 59);
+            this.idOrden.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.idOrden.Name = "idOrden";
             this.idOrden.Size = new System.Drawing.Size(166, 20);
             this.idOrden.TabIndex = 90;
+            this.idOrden.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // proyectoTxt
             // 
