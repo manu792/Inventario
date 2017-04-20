@@ -54,7 +54,7 @@ namespace Inventario.Data
                     string[] campos = registro.Split('#');
                     if (Int32.Parse(campos[0]) == id)
                     {
-                        return new Articulo(Int32.Parse(campos[0]), campos[1], Int32.Parse(campos[2]), Double.Parse(campos[3]), campos[4]);
+                        return new Articulo(Int32.Parse(campos[0]), campos[1], campos[2], Double.Parse(campos[3]), campos[4]);
                     }
                 }
             }

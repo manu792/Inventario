@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public int Unidad { get; set; }
+        public string Unidad { get; set; }
         public double Precio { get; set; }
         public string Descripcion { get; set; }
         
@@ -19,7 +19,7 @@
             Precio = precio;
         }
 
-        public Articulo(string nombre, int unidad, double precio, string descripcion)
+        public Articulo(string nombre, string unidad, double precio, string descripcion)
         {
             Nombre = nombre;
             Unidad = unidad;
@@ -27,7 +27,7 @@
             Descripcion = descripcion;
         }
 
-        public Articulo(int id, string nombre, int unidad, double precio, string descripcion)
+        public Articulo(int id, string nombre, string unidad, double precio, string descripcion)
         {
             Id = id;
             Nombre = nombre;

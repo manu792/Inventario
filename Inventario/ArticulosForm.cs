@@ -40,7 +40,7 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                Articulo articulo = new Articulo(articuloTxt.Text, Int32.Parse(unidadTxt.Text), Double.Parse(precioTxt.Text), descripcionTxt.Text);
+                Articulo articulo = new Articulo(articuloTxt.Text, unidadTxt.Text, Double.Parse(precioTxt.Text), descripcionTxt.Text);
                 string[] campos = ServicioArticulo.Agregar(articulo);
 
                 ListViewItem item = new ListViewItem(campos, 0);
@@ -65,7 +65,7 @@ namespace Inventario
         {
             if (EsDataValida())
             {
-                Articulo articulo = new Articulo(Int32.Parse(idTxt.Text), articuloTxt.Text, Int32.Parse(unidadTxt.Text), Double.Parse(precioTxt.Text), descripcionTxt.Text);
+                Articulo articulo = new Articulo(Int32.Parse(idTxt.Text), articuloTxt.Text, unidadTxt.Text, Double.Parse(precioTxt.Text), descripcionTxt.Text);
                 ServicioArticulo.Modificar(Int32.Parse(idTxt.Text), articulo);
 
                 ListViewItem i = articulosListView.SelectedItems[0];
