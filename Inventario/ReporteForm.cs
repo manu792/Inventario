@@ -138,7 +138,11 @@ namespace Inventario
 
         private void exportarBtn_Click(object sender, EventArgs e)
         {
-            if(proyectosComboBox.SelectedIndex > -1)
+            Exportar();   
+        }
+        private void Exportar()
+        {
+            if (proyectosComboBox.SelectedIndex > -1)
             {
                 List<Reporte> reportes = new List<Reporte>();
 
@@ -153,10 +157,14 @@ namespace Inventario
 
         private void reporteBtn_Click(object sender, EventArgs e)
         {
+            GenerarReporte();   
+        }
+        private void GenerarReporte()
+        {
             List<Reporte> reportes = new List<Reporte>();
 
             List<Proyecto> proyectos = ServicioProyecto.ObtenerProyectos();
-            foreach(Proyecto proyecto in proyectos)
+            foreach (Proyecto proyecto in proyectos)
             {
                 List<InventarioProyecto> inventario = ServicioInventario.ObtenerArticulosPorProyecto(proyecto.Id);
                 List<Orden> ordenesEntrada = ServicioOrdenEntrada.ObtenerOrdenesEntrada(proyecto.Id);
@@ -164,6 +172,16 @@ namespace Inventario
                 reportes.Add(new Reporte(proyecto, inventario, ordenesEntrada, ordenesSalida));
             }
             ServicioReporte.GenerarReporte(reportes);
+        }
+
+        private void exportarAExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exportar();
+        }
+
+        private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenerarReporte();
         }
     }
 }

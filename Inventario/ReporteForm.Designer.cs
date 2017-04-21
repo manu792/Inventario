@@ -33,13 +33,13 @@
             this.proyectosComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.articulosDataGridView = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             this.nombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
             this.imageListGrande = new System.Windows.Forms.ImageList(this.components);
             this.imageListPeque = new System.Windows.Forms.ImageList(this.components);
             this.ordenesEntradaListView = new System.Windows.Forms.ListView();
@@ -53,7 +53,7 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.articulosVerLista = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +69,8 @@
             this.comentarioVerTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.articulosOrdenSalida = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,21 +88,24 @@
             this.label5 = new System.Windows.Forms.Label();
             this.exportarBtn = new System.Windows.Forms.Button();
             this.reporteBtn = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.reporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarAExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.articulosOrdenSalida)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // proyectosComboBox
             // 
             this.proyectosComboBox.FormattingEnabled = true;
-            this.proyectosComboBox.Location = new System.Drawing.Point(491, 24);
+            this.proyectosComboBox.Location = new System.Drawing.Point(468, 27);
             this.proyectosComboBox.Name = "proyectosComboBox";
             this.proyectosComboBox.Size = new System.Drawing.Size(213, 21);
             this.proyectosComboBox.TabIndex = 0;
@@ -109,7 +114,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(433, 27);
+            this.label1.Location = new System.Drawing.Point(410, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 1;
@@ -131,15 +136,6 @@
             this.articulosDataGridView.Name = "articulosDataGridView";
             this.articulosDataGridView.Size = new System.Drawing.Size(644, 150);
             this.articulosDataGridView.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(245, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Articulos:";
             // 
             // nombreColumn
             // 
@@ -176,6 +172,15 @@
             this.totalColumn.HeaderText = "Total";
             this.totalColumn.Name = "totalColumn";
             this.totalColumn.ReadOnly = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(245, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Articulos:";
             // 
             // imageListGrande
             // 
@@ -281,23 +286,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ordenes de Entrada";
             // 
-            // groupBox2
+            // label6
             // 
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Controls.Add(this.idSalidaTxt);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.fechaSalida);
-            this.groupBox2.Controls.Add(this.comentarioSalidaTxt);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.ordenesSalidaListView);
-            this.groupBox2.Location = new System.Drawing.Point(577, 246);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 490);
-            this.groupBox2.TabIndex = 79;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ordenes de Salida";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 87;
+            this.label6.Text = "Ordenes:";
             // 
             // groupBox5
             // 
@@ -422,6 +418,33 @@
             this.label11.Size = new System.Drawing.Size(40, 13);
             this.label11.TabIndex = 80;
             this.label11.Text = "Fecha:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Controls.Add(this.idSalidaTxt);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.fechaSalida);
+            this.groupBox2.Controls.Add(this.comentarioSalidaTxt);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.ordenesSalidaListView);
+            this.groupBox2.Location = new System.Drawing.Point(577, 246);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(559, 490);
+            this.groupBox2.TabIndex = 79;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Ordenes de Salida";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(19, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.TabIndex = 94;
+            this.label8.Text = "Ordenes:";
             // 
             // groupBox3
             // 
@@ -567,29 +590,44 @@
             this.reporteBtn.UseVisualStyleBackColor = true;
             this.reporteBtn.Click += new System.EventHandler(this.reporteBtn_Click);
             // 
-            // label6
+            // menuStrip1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 19);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
-            this.label6.TabIndex = 87;
-            this.label6.Text = "Ordenes:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reporteToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1168, 24);
+            this.menuStrip1.TabIndex = 84;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // label8
+            // reporteToolStripMenuItem
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 19);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
-            this.label8.TabIndex = 94;
-            this.label8.Text = "Ordenes:";
+            this.reporteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportarAExcelToolStripMenuItem,
+            this.generarReporteToolStripMenuItem});
+            this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
+            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.reporteToolStripMenuItem.Text = "Reporte";
+            // 
+            // exportarAExcelToolStripMenuItem
+            // 
+            this.exportarAExcelToolStripMenuItem.Name = "exportarAExcelToolStripMenuItem";
+            this.exportarAExcelToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.exportarAExcelToolStripMenuItem.Text = "Exportar a Excel";
+            this.exportarAExcelToolStripMenuItem.Click += new System.EventHandler(this.exportarAExcelToolStripMenuItem_Click);
+            // 
+            // generarReporteToolStripMenuItem
+            // 
+            this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
+            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.generarReporteToolStripMenuItem.Text = "Generar Reporte";
+            this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
             // 
             // ReporteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1168, 784);
+            this.ClientSize = new System.Drawing.Size(1168, 750);
             this.Controls.Add(this.reporteBtn);
             this.Controls.Add(this.exportarBtn);
             this.Controls.Add(this.groupBox2);
@@ -598,18 +636,22 @@
             this.Controls.Add(this.articulosDataGridView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.proyectosComboBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ReporteForm";
             this.Text = "Reporte";
             this.Load += new System.EventHandler(this.ReporteForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.articulosDataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.articulosVerLista)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.articulosOrdenSalida)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,5 +717,9 @@
         private System.Windows.Forms.Button reporteBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarAExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generarReporteToolStripMenuItem;
     }
 }
